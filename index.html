@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spafford Jam Chart</title>
+<style>
+:root {
+  --bg-color:#000;
+  --card-bg:#111;
+  --text-color:#f0f0f0;
+  --muted-color:#999;
+  --border-color:#222;
+  --yellow:#ffeb3b;
+  --accent-color:#b0b0b0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg-color);color:var(--text-color);min-height:100vh;}
+.container{max-width:1200px;margin:0 auto;padding:20px;}
+.site-header{text-align:center;padding:2rem 0;margin-bottom:2rem;}
+.site-header h1{font-size:2.5rem;margin-bottom:0.5rem;}
+.site-header p{color:var(--muted-color);}
+.site-disclaimer{font-size:0.85rem;font-style:italic;margin-top:0.5rem;}
+.search-container{display:flex;gap:1rem;margin-bottom:2rem;align-items:center;}
+#search-input{flex:1;padding:0.75rem;border-radius:8px;border:1px solid var(--border-color);background:var(--card-bg);color:var(--text-color);font-size:1rem;}
+#filter-select{padding:0.75rem;border-radius:8px;border:1px solid var(--border-color);background:var(--card-bg);color:var(--text-color);}
+.jam-table-container{background:var(--card-bg);border-radius:8px;border:1px solid var(--border-color);overflow-x:auto;}
+.jam-table{width:100%;border-collapse:collapse;font-size:0.9rem;}
+.jam-table th{background:#0a0a0a;color:var(--text-color);font-weight:600;padding:1rem 0.75rem;text-align:left;border-bottom:2px solid var(--border-color);cursor:pointer;user-select:none;}
+.jam-table th:hover{background:#151515;}
+.jam-table td{padding:0.75rem;border-bottom:1px solid var(--border-color);line-height:1.4;vertical-align:top;}
+.jam-table tr:hover{background:rgba(255,255,255,0.02);}
+.jam-entry{cursor:pointer;color:var(--yellow);}
+.jam-entry.highlighted{font-weight:bold;}
+.clickable-filter{cursor:pointer;transition:all 0.2s ease;}
+.clickable-filter:hover{text-decoration:underline;color:var(--accent-color);}
+.status-message{text-align:center;padding:0.5rem;border-radius:4px;font-weight:bold;}
+.status-message.success{color:#28a745;}
+.status-message.error{color:#dc3545;}
+.status-message.info{color:#17a2b8;}
+@media(max-width:768px){.container{padding:15px;}.site-header h1{font-size:2rem;}}
+</style>
+</head>
+<body>
+<header class="site-header">
+<div class="container">
+<h1>Spafford Jam Chart</h1>
+<p>🎸 🎹 🥁 🎵 The Definitive Archive</p>
+<p class="site-disclaimer">Personal database. Only contains shows with notable jams.</p>
+</div>
+</header>
+<main class="container">
+<div class="search-container">
+<input type="text" id="search-input" placeholder="Search songs, venues, dates..." onkeyup="renderFilteredJams()">
+<select id="filter-select" onchange="renderFilteredJams()">
+  <option value="all">All Jams</option>
+  <option value="highlighted">Highlighted</option>
+</select>
+</div>
+<div class="jam-table-container">
+<table class="jam-table">
+<thead>
+<tr>
+<th onclick="sortTable('date')">Date <span id="date-sort">▼</span></th>
+<th onclick="sortTable('song')">Song <span id="song-sort"></span></th>
+<th onclick="sortTable('timing')">Timing <span id="timing-sort"></span></th>
+<th onclick="sortTable('venue')">Venue <span id="venue-sort"></span></th>
+<th onclick="sortTable('notes')">Notes <span id="notes-sort"></span></th>
+</tr>
+</thead>
+<tbody id="jam-table-body"></tbody>
+</table>
+</div>
+</main>
+<script>
+let allJams = [];
+let currentSort = {column:'date',direction:'desc'};
+const tableBody = document.getElementById('jam-table-body');
+
+function loadJams(){
+  fetch('jams.json')
+  .then(r=>r.json())
+  .then(data=>{
+    allJams = data.map(entry=>{
+      entry.date = entry.date||'';
+      entry.song = entry.song||'';
+      entry.timing = entry.timing||'';
+      entry.venue = entry.venue||'';
+      entry.notes = entry.notes||'';
+      entry.highlighted = !!entry.highlighted;
+
+      const tr = document.createElement('tr');
+      const songSpan = document.createElement('span');
+      songSpan.textContent = entry.song;
+      songSpan.className = 'jam-entry' + (entry.highlighted?' highlighted':'');
+      songSpan.classList.add('clickable-filter');
+      tr.innerHTML = `
+        <td><span class="clickable-filter">${entry.date}</span></td>
+        <td></td>
+        <td>${entry.timing}</td>
+        <td><span class="clickable-filter">${entry.venue}</span></td>
+        <td>${entry.notes}</td>
+      `;
+      tr.children[1].appendChild(songSpan);
+      entry.element = tr;
+      return entry;
+    });
+    sortTable('date');
+  })
+  .catch(err=>{
+    console.error("Failed to load jams.json:",err);
+    tableBody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--muted-color);padding:2rem;">Failed to load jams.json</td></tr>';
+  });
+}
+
+function renderFilteredJams(){
+  const searchTerm = document.getElementById('search-input').value.toLowerCase();
+  const filterVal = document.getElementById('filter-select').value;
+
+  const filtered = allJams.filter(j=>{
+    if(filterVal==='highlighted' && !j.highlighted) return false;
+    if(!searchTerm) return true;
+    return j.song.toLowerCase().includes(searchTerm) ||
+           j.venue.toLowerCase().includes(searchTerm) ||
+           j.date.includes(searchTerm) ||
+           j.notes.toLowerCase().includes(searchTerm);
+  });
+
+  const frag = document.createDocumentFragment();
+  filtered.forEach(j=>frag.appendChild(j.element));
+  tableBody.innerHTML='';
+  tableBody.appendChild(frag);
+
+  if(filtered.length===0)
+    tableBody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--muted-color);padding:2rem;">No jams found matching your criteria.</td></tr>';
+}
+
+function sortTable(column){
+  if(!allJams.length) return;
+  if(currentSort.column===column) currentSort.direction = currentSort.direction==='asc'?'desc':'asc';
+  else {currentSort.column=column; currentSort.direction='asc';}
+
+  allJams.sort((a,b)=>{
+    let va=a[column], vb=b[column];
+    
+    if(column==='date'){
+      // Handle different date formats
+      const parseDate = (dateStr) => {
+        try {
+          // Try YYYY-MM-DD format first
+          if (dateStr.includes('-')) {
+            return new Date(dateStr).getTime();
+          }
+          // Try M/D/YYYY format
+          const [m,d,y] = dateStr.split('/').map(Number);
+          return new Date(y,m-1,d).getTime();
+        } catch {
+          return 0;
+        }
+      };
+      va = parseDate(va);
+      vb = parseDate(vb);
+    } else if(column==='timing'){
+      // Convert MM:SS to total seconds for proper sorting
+      const parseTime = (timeStr) => {
+        if (!timeStr || typeof timeStr !== 'string') return 0;
+        const parts = timeStr.split(':');
+        const minutes = parseInt(parts[0]) || 0;
+        const seconds = parseInt(parts[1]) || 0;
+        return minutes * 60 + seconds;
+      };
+      va = parseTime(va);
+      vb = parseTime(vb);
+    } else {
+      va = va.toString().toLowerCase(); 
+      vb = vb.toString().toLowerCase();
+    }
+    
+    return currentSort.direction==='asc'? (va<vb?-1:va>vb?1:0) : (va<vb?1:va>vb?-1:0);
+  });
+
+  document.querySelectorAll('[id$="-sort"]').forEach(ind=>ind.textContent='');
+  const curr=document.getElementById(currentSort.column+'-sort');
+  if(curr) curr.textContent=currentSort.direction==='asc'?'▲':'▼';
+  renderFilteredJams();
+}
+
+// clickable filters
+tableBody.addEventListener('click',e=>{
+  let target = e.target.closest('.clickable-filter');
+  if(!target) return;
+  document.getElementById('search-input').value = target.textContent.trim();
+  renderFilteredJams();
+});
+
+document.addEventListener('DOMContentLoaded',loadJams);
+</script>
+</body>
+</html>
