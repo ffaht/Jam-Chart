@@ -409,11 +409,43 @@
   },
   {
     "date": "2025-06-27",
+    "song": "America",
+    "timing": "18:22",
+    "venue": "Paddy's Beach Club",
+    "notes": "A soundstage of an early 1980s Caribbean dancehall that pulses circuitously through the night until a distant early warning is heard and it responds with sharper pace and direction. Absolutely fantastic work and determination from everyone, especially Brian.",
+    "highlighted": true
+  },
+  {
+    "date": "2025-06-27",
     "song": "Night After Night",
     "timing": "12:34",
     "venue": "Paddy's Beach Club",
-    "notes": "\nSnappier than usual and outside the box, with some incredible space.\n",
+    "notes": "Snappier than usual and outside the box, with some nice space.",
+    "highlighted": false
+  },
+  {
+    "date": "2025-06-27",
+    "song": "Peaches",
+    "timing": "18:43",
+    "venue": "Paddy's Beach Club",
+    "notes": "\nFloats into outer space and attaches to a repetitive, entrancing groove for a good while until Cory steps up with organ and they start to work towards a peak.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-06-27",
+    "song": "The Postman",
+    "timing": "27:30",
+    "venue": "Paddy's Beach Club",
+    "notes": "\nGrooves dreamily for its first half before being searched for by an intergalactic yeti and its planetary spotlight, eventually reaching a gloomy waterside that brightens to a close. \n",
     "highlighted": true
+  },
+  {
+    "date": "2025-06-27",
+    "song": "The Reprise",
+    "timing": "12:55",
+    "venue": "Paddy's Beach Club",
+    "notes": "\nSlinks its way around a pond garden with a heavy presence. Great stuff from Brian throughout.\n",
+    "highlighted": false
   },
   {
     "date": "2025-06-27",
@@ -708,7 +740,7 @@
     "song": "Musette",
     "timing": "16:21",
     "venue": "Magic Stick",
-    "notes": "Blach blah blaj Chugs through a vibrant swamp that dissolves into a serene trip just over Earth's horizon. Could honestly go down as something closer to 20 minutes before hitting ETS's ending to close out the set.",
+    "notes": null,
     "highlighted": true
   },
   {
