@@ -26,12 +26,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 #filter-select{padding:0.75rem;border-radius:8px;border:1px solid var(--border-color);background:var(--card-bg);color:var(--text-color);}
 .jam-table-container{background:var(--card-bg);border-radius:8px;border:1px solid var(--border-color);overflow-x:auto;}
 .jam-table{width:100%;border-collapse:collapse;font-size:0.9rem;}
+.jam-table th:first-child,
+.jam-table td:first-child{width:95px;min-width:95px;white-space:nowrap;}
 .jam-table th{background:#0a0a0a;color:var(--text-color);font-weight:600;padding:1rem 0.75rem;text-align:left;border-bottom:2px solid var(--border-color);cursor:pointer;user-select:none;}
 .jam-table th:hover{background:#151515;}
 .jam-table td{padding:0.75rem;border-bottom:1px solid var(--border-color);line-height:1.4;vertical-align:top;}
 .jam-table tr:hover{background:rgba(255,255,255,0.02);}
 .jam-entry{cursor:pointer;color:var(--yellow);}
 .jam-entry.highlighted{font-weight:bold;}
+.highlighted-row{border-left:4px solid var(--yellow);}
 .clickable-filter{cursor:pointer;transition:all 0.2s ease;}
 .clickable-filter:hover{text-decoration:underline;color:var(--accent-color);}
 .status-message{text-align:center;padding:0.5rem;border-radius:4px;font-weight:bold;}
@@ -45,8 +48,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <header class="site-header">
 <div class="container">
 <h1>Spafford Jam Chart</h1>
-<p>🎸 🎹 🥁 🎵 The Definitive Archive</p>
-<p class="site-disclaimer">Personal database. Only contains shows with notable jams.</p>
+<p>😀 😂 😊 😎 😜</p>
+<p class="site-disclaimer">Some entries may display as incomplete - working on that!</p>
 </div>
 </header>
 <main class="container">
@@ -77,6 +80,31 @@ let allJams = [];
 let currentSort = {column:'date',direction:'desc'};
 const tableBody = document.getElementById('jam-table-body');
 
+function formatDateForDisplay(dateStr) {
+  if (!dateStr) return '';
+  try {
+    let month, day, year;
+    
+    // Handle YYYY-MM-DD format
+    if (dateStr.includes('-') && dateStr.split('-')[0].length === 4) {
+      [year, month, day] = dateStr.split('-').map(Number);
+    } 
+    // Handle M/D/YYYY format  
+    else if (dateStr.includes('/')) {
+      [month, day, year] = dateStr.split('/').map(Number);
+    }
+    else {
+      return dateStr; // Return as-is if unrecognized format
+    }
+    
+    const monthStr = month.toString().padStart(2, '0');
+    const dayStr = day.toString().padStart(2, '0');
+    return `${monthStr}-${dayStr}-${year}`;
+  } catch {
+    return dateStr; // Return original if parsing fails
+  }
+}
+
 function loadJams(){
   fetch('jams.json')
   .then(r=>r.json())
@@ -90,12 +118,13 @@ function loadJams(){
       entry.highlighted = !!entry.highlighted;
 
       const tr = document.createElement('tr');
+      if(entry.highlighted) tr.classList.add('highlighted-row');
       const songSpan = document.createElement('span');
       songSpan.textContent = entry.song;
       songSpan.className = 'jam-entry' + (entry.highlighted?' highlighted':'');
       songSpan.classList.add('clickable-filter');
       tr.innerHTML = `
-        <td><span class="clickable-filter">${entry.date}</span></td>
+        <td><span class="clickable-filter">${formatDateForDisplay(entry.date)}</span></td>
         <td></td>
         <td>${entry.timing}</td>
         <td><span class="clickable-filter">${entry.venue}</span></td>
