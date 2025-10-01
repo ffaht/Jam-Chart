@@ -140,7 +140,7 @@
     "song": "Duncan's Uncle",
     "timing": "16:05",
     "venue": "The Vogel",
-    "notes": "\nBouncy and lowkey, with a smooth slide -> Anyone.\n",
+    "notes": "Bounces on water and stays lowkey, with a smooth slide -> Anyone.",
     "highlighted": false
   },
   {
@@ -477,6 +477,46 @@
     "timing": "25:16",
     "venue": "Electric Haze",
     "notes": "\nStraightforward, but peaks nicely and has some bluesy playing at the end that drops into Cantaloupe Island.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-06-29",
+    "song": "Can't Find My Vape",
+    "timing": "5:21",
+    "venue": "Electric Haze",
+    "notes": "\nSuper smooth, with a soulful solo from Brian.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-06-29",
+    "song": "Gotta Save Fred",
+    "timing": "21:40",
+    "venue": "Electric Haze",
+    "notes": "\nA rainbow's take on the \"second story basement in an underwater matrix\" to start, with vibrant colors from everyone and a speedy pace on display. It cools down in the final third, coasting somewhere between Careful With That Axe, Eugene and Breakdown (Petty), before building -> Motel 6.\n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-06-29",
+    "song": "Longview",
+    "timing": "16:51",
+    "venue": "Electric Haze",
+    "notes": "\nDrifts out to sea and onto a cloud where it bathes in misty, monochromatic green air.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-06-29",
+    "song": "Money for Nothing",
+    "timing": "18:43",
+    "venue": "Electric Haze",
+    "notes": "\nBounces for a bit before sliding into a familiar intergalactic rave that builds angerly -> Virtual Bean Dip.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-06-29",
+    "song": "Motel 6",
+    "timing": "7:46",
+    "venue": "Electric Haze",
+    "notes": "\nExtra synth goodness with poised playing throughout.\n",
     "highlighted": false
   },
   {
