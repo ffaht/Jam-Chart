@@ -41,6 +41,38 @@
   },
   {
     "date": "2025-01-16",
+    "song": "Dirtbath",
+    "timing": "25:02",
+    "venue": "Cafe Da Vinci",
+    "notes": "\nHard-hitting Shon throughout, with an In the Eyes of Thieves feel at times.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-16",
+    "song": "Double Time",
+    "timing": "13:26",
+    "venue": "Cafe Da Vinci",
+    "notes": "\nBubbles with static before curving down a swirling tunnel at twilight, eventually shooting through the strait to a close.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-16",
+    "song": "Hollywood",
+    "timing": "15:19",
+    "venue": "Cafe Da Vinci",
+    "notes": "\nFlutters lightly before embarking on a zero-gravity walk above forested streams, skipping happily over pockets of air through the valley before reaching a gloomy, slow-motion waterfall set ablaze, dipping into -> Dirtbath.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-16",
+    "song": "In the Eyes of Thieves",
+    "timing": "17:12",
+    "venue": "Cafe Da Vinci",
+    "notes": "\nSlightly chaotic, with an old-school Spafford sound.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-16",
     "song": "Night After Night",
     "timing": "11:52",
     "venue": "Cafe Da Vinci",
@@ -53,6 +85,30 @@
     "timing": "23:17",
     "venue": "Cafe Da Vinci",
     "notes": "\nDescends into the inner workings of a city, passing underground windows of mechanized operations as robots shift through the glass and chase it to the peak. The final third wanders and wobbles a bit, but the last two minutes open up spaciously and build cleanly -> Night After Night.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-17",
+    "song": "Broken Wing",
+    "timing": "32:29",
+    "venue": "Terra Fermata",
+    "notes": "\nFlies through space with sharp synths for the first jam before landing on a Funkadelic planet in the second, where it hovers and surveys, slowly rotating into dawn as clouds timelapse through shifting hues. Patient-er than patient. \n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-17",
+    "song": "Fake the Fate",
+    "timing": "11:02",
+    "venue": "Terra Fermata",
+    "notes": "\nA riverboat western take on the song itself sprouts a swampy, funky jam that twinkles its way toward -> Levilan Shores.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-17",
+    "song": "Neutrino",
+    "timing": "12:54",
+    "venue": "Terra Fermata",
+    "notes": "\nGlides through space with ease in a straightforward manner -> Peaches.\n",
     "highlighted": false
   },
   {
@@ -1268,7 +1324,7 @@
     "song": "Double Time",
     "timing": "16:36",
     "venue": "XL Live",
-    "notes": "Determined playing pops up instantly and swirls into an up-tempo, cyclical groove. Killer final minutes with a clean slide to close.",
+    "notes": "\nRaces through an intergalactic jungle war zone on an up-tempo, cyclical groove that weaves around monorails and hovering structures, with an electrical grid glowing beneath in volcanic yellows and oranges. Killer throughout, with a very clean slide to close.\n",
     "highlighted": true
   },
   {
