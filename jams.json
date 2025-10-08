@@ -89,10 +89,34 @@
   },
   {
     "date": "2025-01-17",
+    "song": "Ain't That Wrong",
+    "timing": "15:35",
+    "venue": "Terra Fermata",
+    "notes": "\nKeeps watch over a harbor as ships with blaring lights stream and shuffle below, while a bridge shifts and locks into different positions, eventually opening up to a bay beneath a fiery sunset.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-17",
     "song": "Broken Wing",
     "timing": "32:29",
     "venue": "Terra Fermata",
     "notes": "\nFlies through space with sharp synths for the first jam before landing on a Funkadelic planet in the second, where it hovers and surveys, slowly rotating into dawn as clouds timelapse through shifting hues. Patient-er than patient. \n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-17",
+    "song": "Can't Find My Vape",
+    "timing": "4:40",
+    "venue": "Terra Fermata",
+    "notes": "\nDeliciously space rodeo opera-y.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-17",
+    "song": "Down Under",
+    "timing": "8:28",
+    "venue": "Terra Fermata",
+    "notes": "\nCoasts on a cool groove and has some ominous organ.\n",
     "highlighted": false
   },
   {
@@ -105,11 +129,35 @@
   },
   {
     "date": "2025-01-17",
+    "song": "Galisteo Way",
+    "timing": "17:33",
+    "venue": "Terra Fermata",
+    "notes": "\nPatiently makes its way to a nice, bright peak.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-17",
     "song": "Neutrino",
     "timing": "12:54",
     "venue": "Terra Fermata",
     "notes": "\nGlides through space with ease in a straightforward manner -> Peaches.\n",
     "highlighted": false
+  },
+  {
+    "date": "2025-01-17",
+    "song": "Pursuit of Trance",
+    "timing": "17:30",
+    "venue": "Terra Fermata",
+    "notes": "\nA bright take on an Anyone-esque groove that (no way!) gets trance-y and swings into a colorful jam that slides smoothly into -> Down Under.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-18",
+    "song": "Gotta Save Fred",
+    "timing": "21:59",
+    "venue": "Colonial Oak Music Park",
+    "notes": "\nMoves through and alongside a projection of millions of years of activity before diving in and breaking through the atmosphere with its systems working overtime. Once it bursts through the clouds, it settles into a new, funky, bluesy, low-key groove that drifts around the horizon of a volcanic island, progressively bubbling into -> Virtual Bean Dip.\n",
+    "highlighted": true
   },
   {
     "date": "2025-06-12",
