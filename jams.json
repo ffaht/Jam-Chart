@@ -153,11 +153,51 @@
   },
   {
     "date": "2025-01-18",
+    "song": "America",
+    "timing": "11:36",
+    "venue": "Colonial Oak Music Park",
+    "notes": "\nVideo game racing with a wish-washy sound throughout.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-18",
+    "song": "Anyone",
+    "timing": "14:30",
+    "venue": "Colonial Oak Music Park",
+    "notes": "\nSkips from start to star inside of a disco-ball universe.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-18",
+    "song": "Electric Taco Stand",
+    "timing": "13:46",
+    "venue": "Colonial Oak Music Park",
+    "notes": "\nBreaks orbit and transitions smoothly -> Anyone.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-18",
+    "song": "Ginger Stardust",
+    "timing": "13:43",
+    "venue": "Colonial Oak Music Park",
+    "notes": "\nSits in a cyberpunk wind tunnel.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-18",
     "song": "Gotta Save Fred",
     "timing": "21:59",
     "venue": "Colonial Oak Music Park",
     "notes": "\nMoves through and alongside a projection of millions of years of activity before diving in and breaking through the atmosphere with its systems working overtime. Once it bursts through the clouds, it settles into a new, funky, bluesy, low-key groove that drifts around the horizon of a volcanic island, progressively bubbling into -> Virtual Bean Dip.\n",
     "highlighted": true
+  },
+  {
+    "date": "2025-01-18",
+    "song": "The Postman",
+    "timing": "24:57",
+    "venue": "Colonial Oak Music Park",
+    "notes": "\nMakes its way to an Art Deco coastline at night before bursting brightly.\n",
+    "highlighted": false
   },
   {
     "date": "2025-06-12",
@@ -1340,16 +1380,16 @@
     "song": "Gold Glittered Hat",
     "timing": "20:22",
     "venue": "Elkton Music Hall",
-    "notes": "\nSheets of synths hit around 12:00, soaring through a summer Arctic landscape. At 16:00, they drive into a nocturnal Northern European city with a steady groove. -> In the Eyes of Thieves.\n",
-    "highlighted": false
+    "notes": "Around 12:00, beams of synths begin to soar through a pristine summer Arctic landscape before  driving into a nocturnal Northern European city with a steady groove -> In the Eyes of Thieves.",
+    "highlighted": true
   },
   {
     "date": "2025-08-27",
     "song": "In the Eyes of Thieves",
     "timing": "19:06",
     "venue": "Elkton Music Hall",
-    "notes": "\nSmoothly slides into churning, late-night groove that goes disco. Face melting shredding from Brian before they hit the main theme again. \n",
-    "highlighted": false
+    "notes": "Smoothly slides from a rainy, tropical purple backyard into a churning late-night intergalactic disco, with some face-melting shredding from Brian and nice playing from Cory before closing out.",
+    "highlighted": true
   },
   {
     "date": "2025-08-27",
