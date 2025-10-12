@@ -343,6 +343,38 @@ let allJams = [];
 let currentSort = {column:'date',direction:'desc'};
 const tableBody = document.getElementById('jam-table-body');
 
+// Add normalizeSongName function here, before it's used in processShowsDatabase
+function normalizeSongName(s) {
+  if (!s) return "";
+  s = s.trim();
+
+  // Normalize Unicode punctuation → ASCII
+  s = s
+    .normalize("NFKD")                    // canonical decomposition
+    .replace(/[‘’‚‛]/g, "'")              // single quotes → '
+    .replace(/[“”„‟]/g, '"')              // double quotes → "
+    .replace(/[‐-‒–—―]/g, "-")            // dashes → -
+    .replace(/\s+/g, " ");                // collapse spaces
+
+  // Handle special multi-part titles
+  if (/smooth.*relax.*down/i.test(s)) return "smooth relax down";
+  if (/motel(\s*6)?/i.test(s)) return "motel 6";
+  if (/april.*1992.*miami/i.test(s)) return "april 29 1992 miami";
+
+  // Clean general junk and lowercase
+  s = s
+    .replace(/\s*\[\s*\d+[\d:]*\s*\]\s*/g, "")
+    .replace(/\s*\(\s*[\d:\-]+\s*\)\s*/g, "")
+    .replace(/[|]+/g, " ")
+    .replace(/[^\w\s,()'-]/g, "")
+    .replace(/'/g, "")  // REMOVE APOSTROPHES for consistent matching
+    .replace(/\s+/g, " ")
+    .toLowerCase()
+    .trim();
+
+  return s;
+}
+
 function formatDateForDisplay(dateStr) {
   if (!dateStr) return '';
   try {
@@ -710,7 +742,16 @@ function sortTable(column){
   renderFilteredJams();
 }
 
-// SETLIST MODAL FUNCTION - FIXED VERSION
+// Helper function to clean markdown
+function cleanMarkdown(text) {
+  if (!text) return '';
+  
+  return text
+    .replace(/\*\*/g, '')  // Remove bold markers
+    .replace(/\[\[|\]\]/g, '');  // Remove bracket markers
+}
+
+// SETLIST PAGE FUNCTION
 function showSetlistForDate(date) {
   // Convert date format if needed (MM-DD-YYYY to YYYY-MM-DD)
   const dbDate = date.includes('-') && date.split('-')[0].length === 4 
@@ -731,92 +772,508 @@ function showSetlistForDate(date) {
     jam.date === date || jam.dbDate === dbDate
   );
   
+  console.log(`🎵 Jam entries for ${dbDate}:`, jamEntries);
+  
+  // Find previous and next shows
+  const allDates = Object.keys(dbShows).filter(d => d.match(/^\d{4}-\d{2}-\d{2}/)).sort();
+  const currentIndex = allDates.indexOf(dbDate);
+  const prevDate = currentIndex > 0 ? allDates[currentIndex - 1] : null;
+  const nextDate = currentIndex < allDates.length - 1 ? allDates[currentIndex + 1] : null;
+  
   // Format date for display (Month Date, Year)
-  const displayDate = new Date(dbDate).toLocaleDateString('en-US', {
+  const [year, month, day] = dbDate.split('-').map(Number);
+  const displayDate = new Date(year, month - 1, day).toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
     year: 'numeric'
   });
   
-  let setlistHTML = `
-    <div class="setlist-header">
-      <div class="setlist-date">${displayDate}</div>
-      <div class="setlist-venue">${show.venue}, ${show.city}, ${show.state}</div>
-      ${show.tour ? `<div class="setlist-show-info">${show.tour} • Show ${show.show_number || '?'}</div>` : ''}
-    </div>
-  `;
+  // Hide other pages, show setlist page
+  document.getElementById('page-jams').style.display = 'none';
+  document.getElementById('page-stats').style.display = 'none';
   
-  // Setlist section
-  setlistHTML += `<div class="setlist-section">
-    <div class="setlist-section-title">Setlist</div>
-    <div class="setlist-songs">`;
+  let setlistPage = document.getElementById('page-setlist');
+  if (!setlistPage) {
+    setlistPage = document.createElement('div');
+    setlistPage.id = 'page-setlist';
+    setlistPage.className = 'page-content';
+    document.querySelector('main.container').appendChild(setlistPage);
+  }
   
-  // Process each set and highlight jam-charted songs - FIXED ARROW HANDLING
-  const setOrder = ['Set 1', 'Set 2', 'Set 3', 'Encore'];
+  setlistPage.style.display = 'block';
   
-  const processSetContent = (content) => {
-    if (!content) return '';
+  // Update navigation tabs
+  document.querySelectorAll('.page-tab').forEach(btn => btn.classList.remove('active'));
+  
+  // Clean rating value
+  const cleanRating = show.rating ? cleanMarkdown(show.rating) : '';
+  
+  // Function to convert markdown to HTML with paragraph handling
+  function markdownToHtml(text) {
+    if (!text) return '';
     
-    // First, highlight jam-charted songs
-    let processed = content;
+    // Split by double newlines to handle paragraphs
+    const paragraphs = text.split(/\n\n+/);
     
-    jamEntries.forEach(jam => {
-      const regex = new RegExp(`\\b${jam.song.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'g');
-      const style = jam.highlighted ? 
-        'color: var(--yellow); font-weight: bold;' : 
-        'color: var(--yellow);';
-      processed = processed.replace(regex, `<span style="${style}">${jam.song}</span>`);
+    const formattedParagraphs = paragraphs.map(paragraph => {
+      // Convert **bold** to <strong>
+      paragraph = paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      
+      // Convert *italic* to <em>
+      paragraph = paragraph.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      
+      // Convert single newlines to <br> tags within paragraphs
+      paragraph = paragraph.replace(/\n/g, '<br>');
+      
+      return paragraph;
     });
     
-    // Then add arrow styling
-    processed = processed
-      .replace(/->/g, '<span class="setlist-arrow">→</span>')
-      .replace(/>/g, '<span class="setlist-arrow">></span>');
+    // Only italicize the first paragraph (factual information)
+    // Keep all other paragraphs (your review) in normal font
+    return formattedParagraphs.map((paragraph, index) => {
+      if (index === 0) {
+        return `<div style="font-style: italic; margin-bottom: 1rem;">${paragraph}</div>`;
+      } else {
+        return `<div style="margin-bottom: 1rem;">${paragraph}</div>`;
+      }
+    }).join('');
+  }
+
+  // Improved function to make ALL songs clickable with better matching
+  // Improved function to make ALL songs clickable with better matching
+// SIMPLE AND RELIABLE APPROACH: Build setlist from scratch
+// FIXED makeAllSongsClickable function to handle duplicate songs with different timings
+// IMPROVED makeAllSongsClickable with exact timing matching
+function makeAllSongsClickable(setContent, jamEntries) {
+  if (!setContent) return '';
+  
+  const cleanedContent = cleanMarkdown(setContent);
+  const allSongs = parseDbSetlist(setContent);
+  
+  if (allSongs.length === 0) return cleanedContent;
+  
+  let result = cleanedContent;
+  
+  // Process each song individually, finding ALL occurrences
+  allSongs.forEach(song => {
+    const timingMatch = song.match(/\((\d+)\)$/);
+    const timing = timingMatch ? `(${timingMatch[1]})` : '';
+    const timingNumber = timingMatch ? parseInt(timingMatch[1]) : null;
+    let cleanSong = song.replace(/\s*\(\d+\)\s*$/, '').trim();
+    cleanSong = cleanSong.replace(/\s+/g, ' ').trim();
     
-    return processed;
-  };
+    const normalizedSong = normalizeSongName(cleanSong);
+    const searchText = cleanSong + (timing ? ' ' + timing : '');
+    
+    // Find ALL jam entries that could match this song (by name)
+    const possibleJamEntries = jamEntries.filter(jam => {
+      const jamSongClean = jam.song.replace(/\s+/g, ' ').trim();
+      const jamNorm = normalizeSongName(jamSongClean);
+      return jamNorm === normalizedSong;
+    });
+    
+    // Find and replace ALL occurrences of this song+timing
+    let position = 0;
+    while ((position = result.indexOf(searchText, position)) !== -1) {
+      // For this specific occurrence, find the best matching jam entry
+      let bestJamEntry = null;
+      
+      if (possibleJamEntries.length > 0) {
+        if (possibleJamEntries.length === 1) {
+          // Only one possible match, use it
+          bestJamEntry = possibleJamEntries[0];
+        } else if (timingNumber) {
+          // Multiple matches - find EXACT timing match first
+          bestJamEntry = possibleJamEntries.find(jam => {
+            const jamTimingMatch = jam.timing.match(/(\d+):(\d+)/);
+            if (!jamTimingMatch) return false;
+            
+            const jamMinutes = parseInt(jamTimingMatch[1]);
+            // Allow 1-minute tolerance for rounding differences
+            return Math.abs(jamMinutes - timingNumber) <= 1;
+          });
+          
+          // If no exact match, don't use any jam entry for this occurrence
+          // This prevents wrong jam entries from being assigned
+          if (!bestJamEntry) {
+            console.log(`No exact timing match for "${cleanSong}" (${timingNumber} min) - skipping jam highlighting`);
+          }
+        } else {
+          // No timing info, don't assign any jam entry to avoid wrong matches
+          console.log(`No timing info for "${cleanSong}" - skipping jam highlighting`);
+        }
+      }
+      
+      // Create replacement HTML
+      let replacement;
+      if (bestJamEntry) {
+        replacement = `<span class="clickable-song jam-song" data-song="${cleanSong.replace(/"/g, '&quot;')}" data-timing="${timingNumber || ''}" data-jam="true">${cleanSong}</span> ${timing}`;
+      } else {
+        replacement = `<span class="clickable-song" data-song="${cleanSong.replace(/"/g, '&quot;')}" data-timing="${timingNumber || ''}" data-jam="false">${cleanSong}</span> ${timing}`;
+      }
+      
+      // Replace at this specific position
+      result = result.substring(0, position) + 
+               replacement + 
+               result.substring(position + searchText.length);
+      
+      // Move position forward to continue searching
+      position += replacement.length;
+    }
+  });
+  
+  return result;
+}
+
+  // Build setlist content with better spacing
+  let content = `
+    <div style="margin-bottom: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div style="display: flex; gap: 0.5rem;">
+          <button onclick="closeSetlistPage()" style="padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); cursor: pointer;">← Back</button>
+          ${prevDate ? `<button onclick="showSetlistForDate('${prevDate}')" style="padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); cursor: pointer;">← Previous</button>` : '<button disabled style="padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--muted-color); cursor: not-allowed;">← Previous</button>'}
+        </div>
+        
+        <div style="display: flex; gap: 0.5rem;">
+          <button onclick="showRandomSetlist()" style="padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); cursor: pointer;">🎲 Random</button>
+        </div>
+        
+        <div style="display: flex; gap: 0.5rem;">
+          ${nextDate ? `<button onclick="showSetlistForDate('${nextDate}')" style="padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); cursor: pointer;">Next →</button>` : '<button disabled style="padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--muted-color); cursor: not-allowed;">Next →</button>'}
+        </div>
+      </div>
+    </div>
+    
+    <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; max-width: 700px; margin: 0 auto;">
+      <div style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+        <h1 style="color: var(--yellow); font-size: 1.8rem; margin-bottom: 0.5rem; text-align: left;">${displayDate}</h1>
+        <div style="font-size: 1.1rem; margin-bottom: 0.3rem; text-align: left;">${show.venue}</div>
+        <div style="color: var(--muted-color); font-size: 0.95rem; text-align: left; margin-bottom: 0.3rem;">${show.city}, ${show.state}</div>
+        ${show.tour || show.show_number ? `<div style="color: var(--muted-color); font-size: 0.9rem; text-align: left;">${show.tour ? `${show.tour}` : ''}${show.tour && show.show_number ? ' • ' : ''}${show.show_number ? `Show #${show.show_number}` : ''}</div>` : ''}
+        ${cleanRating && cleanRating !== 'tags:' ? `<div style="font-size: 0.95rem; margin-top: 0.5rem;">★ ${cleanRating}</div>` : ''}
+      </div>
+      
+      <div style="margin-bottom: 1.5rem;">
+        <div style="line-height: 1.6; color: var(--text-color); font-size: 0.95rem;">
+  `;
+  
+  // Process each set
+  const setOrder = ['Set 1', 'Set 2', 'Set 3', 'Encore'];
+  const specialSections = ["Chuck's Dream"];
+  
+  let displayedChucksDream = false;
   
   setOrder.forEach(setName => {
     if (show.sets[setName]) {
-      const processedContent = processSetContent(show.sets[setName]);
-      setlistHTML += `<div class="setlist-song"><strong>${setName}:</strong> ${processedContent}</div>`;
+      console.log(`🎪 Processing ${setName}:`, show.sets[setName]);
+      const processedContent = makeAllSongsClickable(show.sets[setName], jamEntries);
+      content += `<div style="margin-bottom: 0.75rem;"><strong>${setName}:</strong> ${processedContent}</div>`;
+      
+      // Display Chuck's Dream after Set 1
+      if (setName === 'Set 1' && show.sets["Chuck's Dream"] && !displayedChucksDream) {
+        const chucksContent = makeAllSongsClickable(show.sets["Chuck's Dream"], jamEntries);
+        content += `<div style="margin-bottom: 0.75rem; font-style: italic;"><strong>Chuck's Dream:</strong> ${chucksContent}</div>`;
+        displayedChucksDream = true;
+      }
     }
   });
   
-  // Also check for any other set names
+  // Check for any other set names
   Object.keys(show.sets).forEach(setName => {
-    if (!setOrder.includes(setName)) {
-      const processedContent = processSetContent(show.sets[setName]);
-      setlistHTML += `<div class="setlist-song"><strong>${setName}:</strong> ${processedContent}</div>`;
+    if (!setOrder.includes(setName) && setName !== "Chuck's Dream") {
+      const processedContent = makeAllSongsClickable(show.sets[setName], jamEntries);
+      const isSpecial = specialSections.includes(setName);
+      const style = isSpecial ? 'font-style: italic;' : '';
+      content += `<div style="margin-bottom: 0.75rem; ${style}"><strong>${setName}:</strong> ${processedContent}</div>`;
     }
   });
   
-  setlistHTML += `</div></div>`;
+  content += `</div></div>`;
   
-  // Notes/Review section - get from database
+  // Add notes section if available
   if (show.notes && show.notes.length > 0) {
-    setlistHTML += `<div class="setlist-section">
-      <div class="setlist-section-title">Review</div>
-      <div class="setlist-notes">${show.notes.join('<br><br>')}</div>
-    </div>`;
+    // Combine all notes and convert markdown to HTML
+    const combinedNotes = show.notes.join('\n\n');
+    const formattedNotes = markdownToHtml(combinedNotes);
+    
+    content += `
+      <div style="margin-top: 2rem;">
+        <div style="color: var(--text-color); line-height: 1.8;">
+          ${formattedNotes}
+        </div>
+      </div>
+    `;
   }
   
-  // Create modal
-  const modal = document.createElement('div');
-  modal.className = 'setlist-modal';
-  modal.innerHTML = `
-    <div class="setlist-content">
-      ${setlistHTML}
-      <button class="setlist-close" onclick="this.closest('.setlist-modal').remove()">Close</button>
-    </div>
-  `;
+  content += `</div>`;
   
-  document.body.appendChild(modal);
+  setlistPage.innerHTML = content;
   
-  // Close modal when clicking outside
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) modal.remove();
+  // Add CSS for the tooltip
+  const tooltipCSS = `
+  <style>
+    .jam-song-tooltip {
+      position: absolute;
+      background: var(--card-bg);
+      border: 1px solid var(--yellow);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      color: var(--text-color);
+      font-size: 0.85rem;
+      line-height: 1.4;
+      z-index: 1000;
+      max-width: 300px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    
+    .jam-song-tooltip.show {
+      opacity: 1;
+    }
+    
+    .jam-song-tooltip-timing {
+      color: var(--yellow);
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    
+    .jam-song-tooltip-notes {
+      color: var(--text-color);
+    }
+    
+    /* Style the song spans directly */
+    .jam-song {
+      color: var(--yellow) !important;
+      cursor: pointer;
+    }
+    
+    .jam-song.highlighted {
+      font-weight: bold !important;
+    }
+    
+    .clickable-song {
+      cursor: pointer;
+    }
+    
+    .clickable-song:hover {
+      background-color: rgba(255, 235, 59, 0.15);
+      border-radius: 4px;
+      padding: 2px 4px;
+      margin: -2px -4px;
+    }
+  </style>
+`;
+  
+  // Add tooltip CSS to the page
+  if (!document.getElementById('setlist-tooltip-css')) {
+    const styleElement = document.createElement('div');
+    styleElement.id = 'setlist-tooltip-css';
+    styleElement.innerHTML = tooltipCSS;
+    document.head.appendChild(styleElement);
+  }
+  
+  // Add click and hover handlers after the content is rendered
+  // In the event handler setup section:
+// In the event handler setup:
+// In the event handler setup, fix the click handler:
+setTimeout(() => {
+  let currentTooltip = null;
+  
+  console.log('Setting up clickable songs...');
+  console.log('Jam entries available:', jamEntries.length);
+  
+  // Set up ALL clickable songs first
+  document.querySelectorAll('.clickable-song').forEach((songElement, index) => {
+    const songName = songElement.getAttribute('data-song');
+    const isJamCharted = songElement.getAttribute('data-jam') === 'true';
+    const elementTiming = songElement.getAttribute('data-timing');
+    
+    console.log(`Setting up song ${index + 1}: "${songName}" (jam charted: ${isJamCharted}, timing: ${elementTiming})`);
+    
+    // Apply basic styling
+    if (isJamCharted) {
+      songElement.style.color = 'var(--yellow)';
+      songElement.style.cursor = 'pointer';
+    } else {
+      songElement.style.color = 'var(--text-color)';
+      songElement.style.cursor = 'pointer';
+    }
+    
+    // Click handler for ALL songs - FIXED for non-jam-charted songs
+    songElement.addEventListener('click', function(e) {
+      e.stopPropagation();
+      console.log(`Clicked on: "${songName}" (jam charted: ${isJamCharted})`);
+      
+      if (isJamCharted) {
+        // For jam charted songs, search in jam chart
+        switchPageByName('jams');
+        document.getElementById('search-input').value = songName;
+        renderFilteredJams();
+      } else {
+        // For regular songs, show song history - FIXED: ensure this works
+        console.log(`Showing song detail for: "${songName}"`);
+        const normalizedName = normalizeSongName(songName);
+        console.log(`Normalized name: "${normalizedName}"`);
+        
+        // Check if song exists in database
+        if (dbSongs[normalizedName]) {
+          showSongDetail(normalizedName);
+        } else {
+          // If not found, search for similar songs
+          const similarSong = Object.keys(dbSongs).find(songKey => 
+            normalizeSongName(songKey).includes(normalizedName) || 
+            normalizedName.includes(normalizeSongName(songKey))
+          );
+          
+          if (similarSong) {
+            showSongDetail(similarSong);
+          } else {
+            console.log(`Song "${songName}" not found in database`);
+            // Fallback: switch to stats page and search for the song
+            switchPageByName('stats');
+            document.getElementById('db-song-search').value = songName;
+            filterDbSongs();
+          }
+        }
+      }
+    });
   });
+  
+  // Set up hover tooltips for ALL jam-charted songs with exact timing matching
+  const jamSongs = document.querySelectorAll('.jam-song');
+  console.log(`Found ${jamSongs.length} jam-charted songs to set up tooltips for`);
+  
+  jamSongs.forEach((songElement, index) => {
+    const songName = songElement.getAttribute('data-song');
+    const elementTiming = songElement.getAttribute('data-timing');
+    const elementTimingNumber = elementTiming ? parseInt(elementTiming) : null;
+    
+    console.log(`Setting up tooltip for jam song ${index + 1}: "${songName}" (timing: ${elementTiming})`);
+    
+    // Find ALL possible jam entries for this song
+    const possibleJamEntries = jamEntries.filter(jam => {
+      const jamSongClean = jam.song.replace(/\s+/g, ' ').trim();
+      const jamNorm = normalizeSongName(jamSongClean);
+      const currentNorm = normalizeSongName(songName);
+      return jamNorm === currentNorm;
+    });
+    
+    console.log(`Found ${possibleJamEntries.length} possible jam entries for "${songName}"`);
+    
+    // Find the best matching jam entry for this specific occurrence
+    let bestJamEntry = null;
+    
+    if (possibleJamEntries.length > 0) {
+      if (possibleJamEntries.length === 1) {
+        bestJamEntry = possibleJamEntries[0];
+        console.log(`Single jam entry found for "${songName}": ${bestJamEntry.timing}`);
+      } else if (elementTimingNumber) {
+        // Multiple matches - find EXACT timing match
+        bestJamEntry = possibleJamEntries.find(jam => {
+          const jamTimingMatch = jam.timing.match(/(\d+):(\d+)/);
+          if (!jamTimingMatch) return false;
+          
+          const jamMinutes = parseInt(jamTimingMatch[1]);
+          // Allow 1-minute tolerance for rounding differences
+          const timingDiff = Math.abs(jamMinutes - elementTimingNumber);
+          console.log(`Comparing "${songName}": jam ${jamMinutes}min vs element ${elementTimingNumber}min = diff ${timingDiff}`);
+          return timingDiff <= 1;
+        });
+        
+        if (bestJamEntry) {
+          console.log(`Exact timing match found for "${songName}": ${bestJamEntry.timing}`);
+        } else {
+          console.log(`No exact timing match for "${songName}" (${elementTimingNumber} min) - available: ${possibleJamEntries.map(j => j.timing).join(', ')}`);
+        }
+      } else {
+        console.log(`No timing info for "${songName}" - cannot choose between ${possibleJamEntries.length} jam entries`);
+      }
+    }
+    
+    if (bestJamEntry) {
+      // Apply highlighted styling
+      if (bestJamEntry.highlighted) {
+        songElement.style.fontWeight = 'bold';
+      }
+      
+      const timing = bestJamEntry.timing;
+      const notes = bestJamEntry.notes ? bestJamEntry.notes.replace(/<[^>]*>/g, '').trim() : '';
+      
+      // Add hover events
+      songElement.addEventListener('mouseover', function(e) {
+        if (timing || notes) {
+          if (currentTooltip) {
+            currentTooltip.remove();
+          }
+          
+          currentTooltip = document.createElement('div');
+          currentTooltip.className = 'jam-song-tooltip';
+          
+          let tooltipContent = '';
+          if (timing && notes) {
+            tooltipContent = `
+              <div class="jam-song-tooltip-timing">${timing}</div>
+              <div class="jam-song-tooltip-notes">${notes}</div>
+            `;
+          } else if (timing) {
+            tooltipContent = `<div class="jam-song-tooltip-timing">${timing}</div>`;
+          } else if (notes) {
+            tooltipContent = `<div class="jam-song-tooltip-notes">${notes}</div>`;
+          }
+          
+          currentTooltip.innerHTML = tooltipContent;
+          document.body.appendChild(currentTooltip);
+          
+          const rect = this.getBoundingClientRect();
+          const tooltipHeight = currentTooltip.offsetHeight;
+          const tooltipWidth = currentTooltip.offsetWidth;
+          
+          let top = rect.top - tooltipHeight - 8;
+          let left = rect.left + (rect.width / 2) - (tooltipWidth / 2);
+          
+          if (top < 10) top = rect.bottom + 8;
+          if (left < 10) left = 10;
+          if (left + tooltipWidth > window.innerWidth - 10) {
+            left = window.innerWidth - tooltipWidth - 10;
+          }
+          
+          currentTooltip.style.top = top + 'px';
+          currentTooltip.style.left = left + 'px';
+          
+          setTimeout(() => {
+            if (currentTooltip) {
+              currentTooltip.classList.add('show');
+            }
+          }, 50);
+        }
+      });
+      
+      songElement.addEventListener('mouseout', function() {
+        if (currentTooltip) {
+          currentTooltip.remove();
+          currentTooltip = null;
+        }
+      });
+    } else {
+      console.log(`No suitable jam entry found for "${songName}" - removing jam highlighting`);
+      // Remove jam highlighting since we couldn't find the right match
+      songElement.classList.remove('jam-song');
+      songElement.style.color = 'var(--text-color)';
+      songElement.setAttribute('data-jam', 'false');
+    }
+  });
+  
+  console.log('Finished setting up all song interactions');
+}, 0);
+  
+  window.scrollTo(0, 0);
+}
+
+function closeSetlistPage() {
+  document.getElementById('page-setlist').style.display = 'none';
+  switchPageByName('jams');
 }
 
 // FIXED CLICK HANDLERS - dates don't trigger search
@@ -824,14 +1281,12 @@ tableBody.addEventListener('click', e => {
   let target = e.target;
   
   // Handle date clicks for setlist modal
-  /*
 	if (target.classList.contains('date-link')) {
   const date = target.getAttribute('data-date');
   showSetlistForDate(date);
   e.stopPropagation(); // Prevent triggering search
   return;
 }
-*/
   
   // Handle regular clickable filters for search
   target = e.target.closest('.clickable-filter');
@@ -870,72 +1325,76 @@ function switchPage(page) {
 function parseDbSetlist(str) {
   if (!str || typeof str !== 'string') return [];
 
-  // Step 0: strip obvious junk
+  // Step 1: Clean the string but preserve timing numbers
   str = str.trim();
   if (!str) return [];
 
-  // Step 1: protect known multi-part and tricky names
+  // Step 2: Protect known multi-part names
   str = str
     .replace(/Smooth,\s*Relax,\s*Down/gi, '|||SMOOTH_RELAX_DOWN|||')
     .replace(/\bMotel\s*(?:6)?\b/gi, '|||MOTEL_6|||')
     .replace(/April\s*29,\s*1992\s*\(Miami\)/gi, '|||APRIL_MIAMI|||');
 
-  // Step 2: sanitize loose segues and commas
-  str = str
-    .replace(/\s*>\s*/g, '|||')                // replace '>' segues
-    .replace(/,+/g, ', ')                      // collapse repeated commas
-    .replace(/,\s*(?=[A-Z0-9\[])/g, '|||');    // split on commas before new song titles
+  // Step 3: Clean markdown but preserve timing numbers
+  str = cleanMarkdown(str);
 
-  // Step 3: remove leading/trailing separators that cause blanks
-  str = str.replace(/^(\|)+|(\|)+$/g, '');
+  // Step 4: Use a different approach - split on arrows and commas
+  // First, normalize all whitespace
+  str = str.replace(/\s+/g, ' ');
+  
+  // Split on arrows and commas to get individual song entries
+  const tempParts = str.split(/(->|>|,)/);
+  
+  // Process each part to extract songs
+  const songs = [];
+  let currentSong = '';
+  
+  tempParts.forEach(part => {
+    part = part.trim();
+    if (!part) return;
+    
+    if (part === '->' || part === '>' || part === ',') {
+      // If we have a current song, add it to the list
+      if (currentSong.trim()) {
+        songs.push(currentSong.trim());
+        currentSong = '';
+      }
+    } else {
+      // This is a song (possibly with timing)
+      if (currentSong) {
+        currentSong += ' ' + part;
+      } else {
+        currentSong = part;
+      }
+      
+      // Check if this part ends a song (has timing or is the last part)
+      const hasTiming = /\(\d+\)$/.test(part);
+      if (hasTiming) {
+        songs.push(currentSong.trim());
+        currentSong = '';
+      }
+    }
+  });
+  
+  // Add the last song if there is one
+  if (currentSong.trim()) {
+    songs.push(currentSong.trim());
+  }
 
-  // Step 4: split and deeply clean each song
-  const songs = str
-    .split(/\|\|\|/)
-    .map(s => s.trim())
+  // Step 5: Filter and clean
+  const filteredSongs = songs
     .filter(s => s && /[a-z]/i.test(s)) // ensure it contains letters
     .filter(s => !/^set\s*\d*$/i.test(s)) // skip "Set 1" etc.
-    .filter(s => s.toLowerCase() !== 'unknown');
+    .filter(s => s.toLowerCase() !== 'unknown')
+    .map(s => s.trim());
 
-  // Step 5: restore protected names
-  return songs.map(s =>
+  // Step 6: Restore protected names
+  return filteredSongs.map(s =>
     s
       .replace(/SMOOTH_RELAX_DOWN/gi, 'Smooth, Relax, Down')
       .replace(/MOTEL_6/gi, 'Motel 6')
       .replace(/APRIL_MIAMI/gi, 'April 29, 1992 (Miami)')
   );
-}
-
-
-function normalizeSongName(s) {
-  if (!s) return "";
-  s = s.trim();
-
-  // Normalize Unicode punctuation → ASCII
-  s = s
-    .normalize("NFKD")                    // canonical decomposition
-    .replace(/[‘’‚‛]/g, "'")              // single quotes → '
-    .replace(/[“”„‟]/g, '"')              // double quotes → "
-    .replace(/[‐-‒–—―]/g, "-")            // dashes → -
-    .replace(/\s+/g, " ");                // collapse spaces
-
-  // Handle special multi-part titles
-  if (/smooth.*relax.*down/i.test(s)) return "smooth relax down";
-  if (/motel(\s*6)?/i.test(s)) return "motel 6";
-  if (/april.*1992.*miami/i.test(s)) return "april 29 1992 miami";
-
-  // Clean general junk and lowercase
-  s = s
-    .replace(/\s*\[\s*\d+[\d:]*\s*\]\s*/g, "")
-    .replace(/\s*\(\s*[\d:\-]+\s*\)\s*/g, "")
-    .replace(/[|]+/g, " ")
-    .replace(/[^\w\s,()'-]/g, "")
-    .replace(/'/g, "")  // REMOVE APOSTROPHES for consistent matching
-    .replace(/\s+/g, " ")
-    .toLowerCase()
-    .trim();
-
-  return s;
 }
 
 function loadShowsDatabase() {
@@ -1726,6 +2185,13 @@ function switchDbTab(tab) {
     document.querySelector(`.tab-button[onclick*="${tab}"]`).classList.add('active');
   }
   document.getElementById('db-' + tab).classList.add('active');
+}
+
+// Add random show function
+function showRandomSetlist() {
+  const allDates = Object.keys(dbShows).filter(d => d.match(/^\d{4}-\d{2}-\d{2}/));
+  const randomDate = allDates[Math.floor(Math.random() * allDates.length)];
+  showSetlistForDate(randomDate);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
