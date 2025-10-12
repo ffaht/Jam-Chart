@@ -1859,38 +1859,23 @@ document.addEventListener('click', e => {
     const text = target.textContent.trim();
     
     // If in song detail view, check if this is a date click
-    if (songDetailPane.classList.contains('active') && target.closest('td') && target.closest('td').cellIndex === 0) {
-      // This is a date in the song detail table
-      const clickedRow = target.closest('tr');
-      
-      // Switch to jam chart page
-      switchPageByName('jams');
-      
-      // Set search and filter
-      document.getElementById('search-input').value = text;
-      renderFilteredJams();
-      
-      // Highlight the matching row in jam chart
-      setTimeout(() => {
-        document.querySelectorAll('.jam-table tbody tr').forEach(row => {
-          row.classList.remove('selected-row');
-          const dateCell = row.children[0]?.textContent.trim();
-          if (dateCell === text) {
-            row.classList.add('selected-row');
-            row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        });
-      }, 100);
-    } else {
-      // Regular click from other stats tabs
-      switchPageByName('jams');
-      document.getElementById('search-input').value = text;
-      renderFilteredJams();
-    }
+if (songDetailPane.classList.contains('active') && target.closest('td') && target.closest('td').cellIndex === 0) {
+  // This is a date in the song detail table - show setlist
+  showSetlistForDate(text);
+  return;
+} else {
+  // Regular click from other stats tabs
+  switchPageByName('jams');
+  document.getElementById('search-input').value = text;
+  renderFilteredJams();
+}
   }
 });
 
 function showSongDetail(normSongName) {
+  // Switch back to stats page first
+  switchPageByName('stats');
+  
   const song = dbSongs[normSongName];
   if (!song) {
     console.log("❌ Song not found in dbSongs:", normSongName);
@@ -1901,9 +1886,6 @@ function showSongDetail(normSongName) {
   console.log("Song data:", song);
   
   currentSongDetail = { norm: normSongName, data: song };
-  
-  // Get unique dates for counting
-  const uniqueDates = [...new Set(song.performances)];
   
   // Update header info
   document.getElementById('song-detail-title').textContent = song.name;
