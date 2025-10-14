@@ -754,23 +754,38 @@ function cleanMarkdown(text) {
 // SETLIST PAGE FUNCTION
 function showSetlistForDate(date) {
   // Convert date format if needed (MM-DD-YYYY to YYYY-MM-DD)
-  const dbDate = date.includes('-') && date.split('-')[0].length === 4 
-    ? date 
-    : (() => {
-        const [month, day, year] = date.split('-');
-        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-      })();
+  let dbDate;
+  if (date.includes('-') && date.split('-')[0].length === 4) {
+    // Already in YYYY-MM-DD format
+    dbDate = date;
+  } else {
+    // Assume MM-DD-YYYY format
+    const [month, day, year] = date.split('-');
+    dbDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+  }
+  
+  console.log('🔍 Looking for show with dbDate:', dbDate);
   
   const show = dbShows[dbDate];
   if (!show) {
+    console.log('❌ No show data found for:', dbDate);
+    console.log('Available dates:', Object.keys(dbShows).filter(d => d.match(/^\d{4}-\d{2}-\d{2}/)).slice(0, 10));
     alert(`No setlist data found for ${date}`);
     return;
   }
   
+  console.log('✅ Found show data:', show);
+  
   // Get jam data for this date to check which songs are highlighted
-  const jamEntries = allJams.filter(jam => 
-    jam.date === date || jam.dbDate === dbDate
-  );
+  const jamEntries = allJams.filter(jam => {
+    const jamDbDate = jam.dbDate || (jam.date.includes('-') && jam.date.split('-')[0].length === 4 
+      ? jam.date 
+      : (() => {
+          const [m, d, y] = jam.date.split('-');
+          return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+        })());
+    return jamDbDate === dbDate;
+  });
   
   console.log(`🎵 Jam entries for ${dbDate}:`, jamEntries);
   
@@ -839,11 +854,7 @@ function showSetlistForDate(date) {
     }).join('');
   }
 
-  // Improved function to make ALL songs clickable with better matching
-  // Improved function to make ALL songs clickable with better matching
-// SIMPLE AND RELIABLE APPROACH: Build setlist from scratch
-// FIXED makeAllSongsClickable function to handle duplicate songs with different timings
-// IMPROVED makeAllSongsClickable with exact timing matching
+  // FIXED makeAllSongsClickable function with proper protected name handling
 function makeAllSongsClickable(setContent, jamEntries) {
   if (!setContent) return '';
   
@@ -862,8 +873,19 @@ function makeAllSongsClickable(setContent, jamEntries) {
     let cleanSong = song.replace(/\s*\(\d+\)\s*$/, '').trim();
     cleanSong = cleanSong.replace(/\s+/g, ' ').trim();
     
-    const normalizedSong = normalizeSongName(cleanSong);
+    // RESTORE PROTECTED NAMES BEFORE NORMALIZATION
+    let displaySong = cleanSong;
+    if (cleanSong.includes('SMOOTH_RELAX_DOWN')) {
+      displaySong = 'Smooth, Relax, Down';
+    } else if (cleanSong.includes('MOTEL_6')) {
+      displaySong = 'Motel 6';
+    } else if (cleanSong.includes('APRIL_MIAMI')) {
+      displaySong = 'April 29, 1992 (Miami)';
+    }
+    
+    const normalizedSong = normalizeSongName(displaySong);
     const searchText = cleanSong + (timing ? ' ' + timing : '');
+    const displayText = displaySong + (timing ? ' ' + timing : '');
     
     // Find ALL jam entries that could match this song (by name)
     const possibleJamEntries = jamEntries.filter(jam => {
@@ -894,22 +916,21 @@ function makeAllSongsClickable(setContent, jamEntries) {
           });
           
           // If no exact match, don't use any jam entry for this occurrence
-          // This prevents wrong jam entries from being assigned
           if (!bestJamEntry) {
-            console.log(`No exact timing match for "${cleanSong}" (${timingNumber} min) - skipping jam highlighting`);
+            console.log(`No exact timing match for "${displaySong}" (${timingNumber} min) - skipping jam highlighting`);
           }
         } else {
           // No timing info, don't assign any jam entry to avoid wrong matches
-          console.log(`No timing info for "${cleanSong}" - skipping jam highlighting`);
+          console.log(`No timing info for "${displaySong}" - skipping jam highlighting`);
         }
       }
       
-      // Create replacement HTML
+      // Create replacement HTML - USE DISPLAY SONG NAME (with proper formatting)
       let replacement;
       if (bestJamEntry) {
-        replacement = `<span class="clickable-song jam-song" data-song="${cleanSong.replace(/"/g, '&quot;')}" data-timing="${timingNumber || ''}" data-jam="true">${cleanSong}</span> ${timing}`;
+        replacement = `<span class="clickable-song jam-song" data-song="${displaySong.replace(/"/g, '&quot;')}" data-timing="${timingNumber || ''}" data-jam="true">${displaySong}</span> ${timing}`;
       } else {
-        replacement = `<span class="clickable-song" data-song="${cleanSong.replace(/"/g, '&quot;')}" data-timing="${timingNumber || ''}" data-jam="false">${cleanSong}</span> ${timing}`;
+        replacement = `<span class="clickable-song" data-song="${displaySong.replace(/"/g, '&quot;')}" data-timing="${timingNumber || ''}" data-jam="false">${displaySong}</span> ${timing}`;
       }
       
       // Replace at this specific position
@@ -957,38 +978,43 @@ function makeAllSongsClickable(setContent, jamEntries) {
         <div style="line-height: 1.6; color: var(--text-color); font-size: 0.95rem;">
   `;
   
-  // Process each set
-  const setOrder = ['Set 1', 'Set 2', 'Set 3', 'Encore'];
-  const specialSections = ["Chuck's Dream"];
-  
-  let displayedChucksDream = false;
-  
-  setOrder.forEach(setName => {
-    if (show.sets[setName]) {
-      console.log(`🎪 Processing ${setName}:`, show.sets[setName]);
-      const processedContent = makeAllSongsClickable(show.sets[setName], jamEntries);
-      content += `<div style="margin-bottom: 0.75rem;"><strong>${setName}:</strong> ${processedContent}</div>`;
-      
-      // Display Chuck's Dream after Set 1
-      if (setName === 'Set 1' && show.sets["Chuck's Dream"] && !displayedChucksDream) {
-        const chucksContent = makeAllSongsClickable(show.sets["Chuck's Dream"], jamEntries);
-        content += `<div style="margin-bottom: 0.75rem; font-style: italic;"><strong>Chuck's Dream:</strong> ${chucksContent}</div>`;
-        displayedChucksDream = true;
+    // Process each set - check if sets exist
+  if (show.sets && Object.keys(show.sets).length > 0) {
+    console.log('🎪 Available sets:', Object.keys(show.sets));
+    
+    const setOrder = ['Set 1', 'Set 2', 'Set 3', 'Encore'];
+    const specialSections = ["Chuck's Dream"];
+    
+    let displayedChucksDream = false;
+    
+    setOrder.forEach(setName => {
+      if (show.sets[setName]) {
+        console.log(`🎪 Processing ${setName}:`, show.sets[setName]);
+        const processedContent = makeAllSongsClickable(show.sets[setName], jamEntries);
+        content += `<div style="margin-bottom: 0.75rem;"><strong>${setName}:</strong> ${processedContent}</div>`;
+        
+        // Display Chuck's Dream after Set 1
+        if (setName === 'Set 1' && show.sets["Chuck's Dream"] && !displayedChucksDream) {
+          const chucksContent = makeAllSongsClickable(show.sets["Chuck's Dream"], jamEntries);
+          content += `<div style="margin-bottom: 0.75rem; font-style: italic;"><strong>Chuck's Dream:</strong> ${chucksContent}</div>`;
+          displayedChucksDream = true;
+        }
       }
-    }
-  });
-  
-  // Check for any other set names
-  Object.keys(show.sets).forEach(setName => {
-    if (!setOrder.includes(setName) && setName !== "Chuck's Dream") {
-      const processedContent = makeAllSongsClickable(show.sets[setName], jamEntries);
-      const isSpecial = specialSections.includes(setName);
-      const style = isSpecial ? 'font-style: italic;' : '';
-      content += `<div style="margin-bottom: 0.75rem; ${style}"><strong>${setName}:</strong> ${processedContent}</div>`;
-    }
-  });
-  
-  content += `</div></div>`;
+    });
+    
+    // Check for any other set names
+    Object.keys(show.sets).forEach(setName => {
+      if (!setOrder.includes(setName) && setName !== "Chuck's Dream") {
+        const processedContent = makeAllSongsClickable(show.sets[setName], jamEntries);
+        const isSpecial = specialSections.includes(setName);
+        const style = isSpecial ? 'font-style: italic;' : '';
+        content += `<div style="margin-bottom: 0.75rem; ${style}"><strong>${setName}:</strong> ${processedContent}</div>`;
+      }
+    });
+  } else {
+    console.log('❌ No sets found in show data');
+    content += `<div style="text-align: center; color: var(--muted-color); padding: 2rem;">No setlist data available for this show</div>`;
+  }
   
   // Add notes section if available
   if (show.notes && show.notes.length > 0) {
@@ -1329,11 +1355,11 @@ function parseDbSetlist(str) {
   str = str.trim();
   if (!str) return [];
 
-  // Step 2: Protect known multi-part names
+  // Step 2: Protect known multi-part names - FIXED to handle variations
   str = str
-    .replace(/Smooth,\s*Relax,\s*Down/gi, '|||SMOOTH_RELAX_DOWN|||')
+    .replace(/Smooth[,\s]*Relax[,\s]*Down/gi, '|||SMOOTH_RELAX_DOWN|||')
     .replace(/\bMotel\s*(?:6)?\b/gi, '|||MOTEL_6|||')
-    .replace(/April\s*29,\s*1992\s*\(Miami\)/gi, '|||APRIL_MIAMI|||');
+    .replace(/April\s*29[,\s]*1992[^)]*Miami/gi, '|||APRIL_MIAMI|||');
 
   // Step 3: Clean markdown but preserve timing numbers
   str = cleanMarkdown(str);
@@ -1388,14 +1414,20 @@ function parseDbSetlist(str) {
     .filter(s => s.toLowerCase() !== 'unknown')
     .map(s => s.trim());
 
-  // Step 6: Restore protected names
-  return filteredSongs.map(s =>
-    s
-      .replace(/SMOOTH_RELAX_DOWN/gi, 'Smooth, Relax, Down')
-      .replace(/MOTEL_6/gi, 'Motel 6')
-      .replace(/APRIL_MIAMI/gi, 'April 29, 1992 (Miami)')
-  );
+  // Step 6: Restore protected names - FIXED to handle the protected format
+  return filteredSongs.map(s => {
+    let restored = s;
+    if (s.includes('SMOOTH_RELAX_DOWN')) {
+      restored = 'Smooth, Relax, Down';
+    } else if (s.includes('MOTEL_6')) {
+      restored = 'Motel 6';
+    } else if (s.includes('APRIL_MIAMI')) {
+      restored = 'April 29, 1992 (Miami)';
+    }
+    return restored;
+  });
 }
+
 
 function loadShowsDatabase() {
   console.log('Loading shows_database.json...');
@@ -1839,36 +1871,54 @@ Days:         ${dayGap} days
 Total Shows:  ${matchingShows.length} in ${input}`;
 }
 
-// Add click handlers for stats tables to navigate back to jam chart
+// Add click handlers for stats tables
 document.addEventListener('click', e => {
-  // Check for song name link in song history
-  if (e.target.classList.contains('song-name-link')) {
-    const norm = e.target.getAttribute('data-song-norm');
-    showSongDetail(norm);
-    return;
-  }
-  
   const target = e.target.closest('.clickable-filter');
   if (!target) return;
   
-  // Check if we're in the stats page (but not song detail)
+  // Check if we're in the stats page
   const statsPage = document.getElementById('page-stats');
-  const songDetailPane = document.getElementById('db-song-detail');
-  
   if (statsPage.style.display !== 'none') {
     const text = target.textContent.trim();
     
-    // If in song detail view, check if this is a date click
-if (songDetailPane.classList.contains('active') && target.closest('td') && target.closest('td').cellIndex === 0) {
-  // This is a date in the song detail table - show setlist
-  showSetlistForDate(text);
-  return;
-} else {
-  // Regular click from other stats tabs
-  switchPageByName('jams');
-  document.getElementById('search-input').value = text;
-  renderFilteredJams();
-}
+    // Check if this is a date (matches YYYY-MM-DD or MM-DD-YYYY format)
+    const isDate = /^\d{4}-\d{2}-\d{2}$/.test(text) || /^\d{1,2}-\d{1,2}-\d{4}$/.test(text);
+    
+    if (isDate) {
+      // Always show setlist for date clicks in stats
+      showSetlistForDate(text);
+      return;
+    }
+    
+    // Check if this is a song name click in the song history table
+    const isSongInHistoryTable = target.closest('#db-songs-tbody') && 
+                                 target.closest('td') && 
+                                 target.closest('td').cellIndex === 0; // First column (song names)
+    
+    if (isSongInHistoryTable) {
+      // This is a song name click in the song history table - show song detail
+      const norm = target.getAttribute('data-song-norm');
+      if (norm) {
+        showSongDetail(norm);
+      } else {
+        // Fallback: try to find the song by name
+        const songNorm = normalizeSongName(text);
+        if (dbSongs[songNorm]) {
+          showSongDetail(songNorm);
+        } else {
+          // If not found, search for it
+          switchPageByName('jams');
+          document.getElementById('search-input').value = text;
+          renderFilteredJams();
+        }
+      }
+      return;
+    }
+    
+    // For all other clicks (venues, locations, etc.), do the regular search
+    switchPageByName('jams');
+    document.getElementById('search-input').value = text;
+    renderFilteredJams();
   }
 });
 
