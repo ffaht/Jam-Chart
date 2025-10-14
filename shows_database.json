@@ -46,8 +46,8 @@
     "state": "FL",
     "tour": "2025 Winter",
     "show_number": "2",
-    "rating": "",
-    "chucks_dream": "rating: \"8.0",
+    "rating": "8.0",
+    "chucks_dream": "",
     "sets": {
       "Set 1": "Shelter in Place (23) -> Night After Night (11), Sham Time (5), Fuel (5), Darkness Singularity (13)",
       "Set 2": "Double Time (13), In the Eyes of Thieves (17) > Hollywood (15) > Dirtbath (25)",
@@ -14477,5 +14477,6 @@
     "date": "2009-12-31"
   }
 }
+
 
 
