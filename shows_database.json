@@ -1323,20 +1323,26 @@
     "date": "2025-01-24"
   },
   "2025-01-23": {
-    "url": "https://spaffnerds.com/shows/2025-01-23",
+    "date": "2025-01-23",
     "venue": "Antone's",
     "city": "Austin",
     "state": "TX",
+    "tour": "2025 Winter",
+    "show_number": "7",
+    "rating": "tags:",
+    "chucks_dream": "Ghost Writer",
     "sets": {
-      "Set 1": "Double Time > Fake The Fate > Motel 6 > Salamander Song > Double Time",
-      "Set 2": "Chuck's Dream,, Broken Wing > Stuck In The Middle With You > Dis Go In 5? > Stuck In The Middle With You,, Todd's Tots",
-      "Encore": "Take Your Mama [ 1 ]"
+      "Set 1": "Double Time (16) -> Fake the Fate (21) -> **Motel 6** (15) -> Salamander Song (9) > Double Time (4)",
+      "Chuck's Dream": "Ghost Writer",
+      "Set 2": "Broken Wing (24) -> Stuck in the Middle With You (14) > Dis Go In 5? (7) -> Stuck in the Middle With You (9) > Todd's Tots (18)",
+      "Encore": "Take Your Mama (5)"
     },
     "notes": [
-      "[ 1 ]: Scissor Sisters"
+      "*This was the seventh show of the 2025 Winter Tour and the band's first appearance in Austin since 11/10/22 (Antone's), ending a **234 show gap**. This show featured the first **Double Time** first-set sandwich since 5/6/23 (Holyoke, MA), ending a **167 show gap**. The first **Double Time** contained full band **Fake the Fate** teases.*\n\n*\"Ghost, I trekked through my whole self before I finally won.\"*"
     ],
-    "source": "spaffnerds",
-    "date": "2025-01-23"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-01-23.md",
+    "url": "https://spaffnerds.com/shows/2025-01-23"
   },
   "2025-01-22": {
     "date": "2025-01-22",
@@ -1345,14 +1351,14 @@
     "state": "TX",
     "tour": "2025 Winter",
     "show_number": "6",
-    "rating": "7.5",
-    "chucks_dream": "",
+    "rating": "",
+    "chucks_dream": "rating: \"7.5",
     "sets": {
       "Set 1": "Night After Night (11), **Windmill** (34) -> Darkness Singularity (15), I Shall Be Released (7), Red's Jam (15) -> The Waltz (13), Jealous Guy (4)",
       "Encore": "Legend (7), Frog Gossip (6)"
     },
     "notes": [
-      "*This was the sixth show of the 2025 Winter Tour and the band's first appearance in Houston since 11/11/22 (Last Concert Cafe), ending a **229 show gap**.*\n\nJust the one set tonight, and while there are some *very* cool picks here (**I Shall Be Released**, which they slay, **The Waltz**, **Jealous Guy**, and **Legend**) and a major jam in **Windmill** (highly recommended!), it just didn't totally do it for me. Definitely a show I'd love a lot more if I'd been there in person."
+      "*This was the sixth show of the 2025 Winter Tour and the band's first appearance in Houston since 11/11/22 (Last Concert Cafe), ending a **232 show gap**.*\n\nJust the one set tonight, and while there are some *very* cool picks here (**I Shall Be Released**, which they slay, **The Waltz**, **Jealous Guy**, and **Legend**) and a major jam in **Windmill** (highly recommended!), it just didn't totally do it for me. Definitely a show I'd love a lot more if I'd been there in person."
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-01-22.md",
