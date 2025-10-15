@@ -1329,7 +1329,7 @@
     "state": "TX",
     "tour": "2025 Winter",
     "show_number": "7",
-    "rating": "tags:",
+    "rating": ",
     "chucks_dream": "Ghost Writer",
     "sets": {
       "Set 1": "Double Time (16) -> Fake the Fate (21) -> **Motel 6** (15) -> Salamander Song (9) > Double Time (4)",
@@ -1351,8 +1351,8 @@
     "state": "TX",
     "tour": "2025 Winter",
     "show_number": "6",
-    "rating": "",
-    "chucks_dream": "rating: \"7.5",
+    "rating": "7.5",
+    "chucks_dream": "",
     "sets": {
       "Set 1": "Night After Night (11), **Windmill** (34) -> Darkness Singularity (15), I Shall Be Released (7), Red's Jam (15) -> The Waltz (13), Jealous Guy (4)",
       "Encore": "Legend (7), Frog Gossip (6)"
@@ -14478,3 +14478,4 @@
     "date": "2009-12-31"
   }
 }
+
