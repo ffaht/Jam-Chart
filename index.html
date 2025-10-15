@@ -1429,29 +1429,6 @@ function parseDbSetlist(str) {
 }
 
 
-function loadShowsDatabase() {
-  console.log('Loading shows_database.json...');
-  fetch('shows_database.json')
-    .then(r => {
-      console.log('Shows database response:', r.status);
-      return r.json();
-    })
-    .then(data => {
-      console.log('Shows database loaded:', Object.keys(data).length, 'shows');
-      dbShows = data;
-      processShowsDatabase();
-      renderDbSongs();
-      renderDbLocations();
-      // Now that dbShows is loaded, load the jams
-      loadJams();
-    })
-    .catch(err => {
-      console.error('Failed to load shows_database.json:', err);
-      document.getElementById('db-songs-tbody').innerHTML = 
-        '<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted-color);">Failed to load shows_database.json</td></tr>';
-    });
-}
-
 function processShowsDatabase() {
   const songs = {};
   const locations = {};
@@ -1871,6 +1848,168 @@ Days:         ${dayGap} days
 Total Shows:  ${matchingShows.length} in ${input}`;
 }
 
+function showLocationShows(type, value) {
+  // Switch to stats page first
+  switchPageByName('stats');
+  
+  let shows = [];
+  let title = '';
+  
+  // Find shows based on location type
+  if (type === 'cityState') {
+    // Extract city and state if possible
+    const [city, state] = value.split(',').map(s => s.trim());
+    shows = dbDates.filter(date => {
+      const show = dbShows[date];
+      if (state) {
+        return show.city === city && show.state === state;
+      } else {
+        return show.city === value || `${show.city}, ${show.state}` === value;
+      }
+    });
+    title = `Shows in ${value}`;
+  } else if (type === 'venue') {
+    shows = dbDates.filter(date => {
+      const show = dbShows[date];
+      return show.venue === value;
+    });
+    title = `Shows at ${value}`;
+  }
+  
+  // Update header info
+  document.getElementById('song-detail-title').textContent = title;
+  document.getElementById('song-detail-count').textContent = shows.length;
+  document.getElementById('song-detail-first').textContent = shows[0] || '-';
+  document.getElementById('song-detail-last').textContent = shows[shows.length - 1] || '-';
+  document.getElementById('song-detail-gap').textContent = '-';
+  
+  // Clear the new song search input
+  document.getElementById('song-detail-new-search').value = '';
+  
+  // Render location shows table
+  renderLocationShowsTable(shows, title);
+  
+  // Switch to song detail tab (we're repurposing it for location shows)
+  switchDbTab('song-detail');
+}
+
+function renderLocationShowsTable(shows, title) {
+  const tbody = document.getElementById('song-detail-tbody');
+  tbody.innerHTML = '';
+  
+  if (shows.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted-color);">No shows found</td></tr>';
+    return;
+  }
+  
+  // Sort shows by date (newest first)
+  shows.sort((a, b) => new Date(b) - new Date(a));
+  
+  shows.forEach(date => {
+    const show = dbShows[date];
+    if (!show) return;
+    
+    // Count total songs in the show
+    let totalSongs = 0;
+    const sets = show.sets || {};
+    Object.values(sets).forEach(setContent => {
+      const songs = parseDbSetlist(setContent);
+      totalSongs += songs.length;
+    });
+    
+    // Count jam chart entries for this show
+    const jamEntries = allJams.filter(jam => {
+      const jamDbDate = jam.dbDate || (jam.date.includes('-') && jam.date.split('-')[0].length === 4 
+        ? jam.date 
+        : (() => {
+            const [m, d, y] = jam.date.split('-');
+            return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+          })());
+      return jamDbDate === date;
+    });
+    
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="clickable-filter date-link" data-date="${date}" style="cursor: pointer; color: var(--text-color);">${date}</span></td>
+      <td><span class="clickable-filter">${show.venue || 'Unknown'}</span></td>
+      <td>${show.city || 'Unknown'}, ${show.state || ''}</td>
+      <td>${totalSongs}</td>
+      <td>${jamEntries.length}</td>
+      <td>${show.tour || '-'}</td>
+      <td>${show.show_number || '-'}</td>
+    `;
+    
+    tbody.appendChild(tr);
+  });
+  
+  // Update the table headers for location shows
+  const thead = document.querySelector('#db-song-detail thead tr');
+  thead.innerHTML = `
+    <th onclick="sortLocationShows('date')">Date <span id="location-shows-date-sort">▼</span></th>
+    <th onclick="sortLocationShows('venue')">Venue <span id="location-shows-venue-sort"></span></th>
+    <th onclick="sortLocationShows('location')">Location <span id="location-shows-location-sort"></span></th>
+    <th onclick="sortLocationShows('songs')">Total Songs <span id="location-shows-songs-sort"></span></th>
+    <th onclick="sortLocationShows('jams')">Jam Entries <span id="location-shows-jams-sort"></span></th>
+    <th onclick="sortLocationShows('tour')">Tour <span id="location-shows-tour-sort"></span></th>
+    <th onclick="sortLocationShows('showNumber')">Show # <span id="location-shows-showNumber-sort"></span></th>
+  `;
+}
+
+function sortLocationShows(column) {
+  const tbody = document.getElementById('song-detail-tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  
+  rows.sort((a, b) => {
+    let aValue, bValue;
+    
+    switch (column) {
+      case 'date':
+        aValue = new Date(a.cells[0].textContent);
+        bValue = new Date(b.cells[0].textContent);
+        break;
+      case 'venue':
+        aValue = a.cells[1].textContent.toLowerCase();
+        bValue = b.cells[1].textContent.toLowerCase();
+        break;
+      case 'location':
+        aValue = a.cells[2].textContent.toLowerCase();
+        bValue = b.cells[2].textContent.toLowerCase();
+        break;
+      case 'songs':
+        aValue = parseInt(a.cells[3].textContent) || 0;
+        bValue = parseInt(b.cells[3].textContent) || 0;
+        break;
+      case 'jams':
+        aValue = parseInt(a.cells[4].textContent) || 0;
+        bValue = parseInt(b.cells[4].textContent) || 0;
+        break;
+      case 'tour':
+        aValue = a.cells[5].textContent.toLowerCase();
+        bValue = b.cells[5].textContent.toLowerCase();
+        break;
+      case 'showNumber':
+        aValue = parseInt(a.cells[6].textContent) || 0;
+        bValue = parseInt(b.cells[6].textContent) || 0;
+        break;
+    }
+    
+    if (typeof aValue === 'number') {
+      return aValue - bValue;
+    } else {
+      return aValue.localeCompare(bValue);
+    }
+  });
+  
+  // Clear and re-append sorted rows
+  tbody.innerHTML = '';
+  rows.forEach(row => tbody.appendChild(row));
+  
+  // Update sort indicators
+  document.querySelectorAll('#db-song-detail thead th span').forEach(span => span.textContent = '');
+  const indicator = document.getElementById('location-shows-' + column + '-sort');
+  if (indicator) indicator.textContent = '▼';
+}
+
 // Add click handlers for stats tables
 document.addEventListener('click', e => {
   const target = e.target.closest('.clickable-filter');
@@ -1915,7 +2054,25 @@ document.addEventListener('click', e => {
       return;
     }
     
-    // For all other clicks (venues, locations, etc.), do the regular search
+    // NEW: Check if this is a location click (city, state, or venue)
+    const isLocationClick = target.closest('#db-locations-tbody');
+    if (isLocationClick) {
+      const row = target.closest('tr');
+      const locationText = target.textContent.trim();
+      const cellIndex = target.closest('td').cellIndex;
+      
+      // Determine what type of location was clicked
+      if (cellIndex === 0) { // City, State column
+        showLocationShows('cityState', locationText);
+      } else if (cellIndex === 1) { // Venue column
+        showLocationShows('venue', locationText);
+      } else if (cellIndex === 3 || cellIndex === 4) { // First/Last show dates
+        showSetlistForDate(text);
+      }
+      return;
+    }
+	
+    // For all other clicks in stats page, do the regular search
     switchPageByName('jams');
     document.getElementById('search-input').value = text;
     renderFilteredJams();
@@ -2217,6 +2374,20 @@ function switchDbTab(tab) {
     document.querySelector(`.tab-button[onclick*="${tab}"]`).classList.add('active');
   }
   document.getElementById('db-' + tab).classList.add('active');
+  
+  // Reset song detail table headers when switching away from song-detail tab
+  if (tab !== 'song-detail' && currentSongDetail) {
+    const thead = document.querySelector('#db-song-detail thead tr');
+    thead.innerHTML = `
+      <th onclick="sortSongDetail('date')">Date <span id="song-detail-date-sort">▲</span></th>
+      <th onclick="sortSongDetail('venue')">Venue <span id="song-detail-venue-sort"></span></th>
+      <th onclick="sortSongDetail('gap')">Gap <span id="song-detail-gap-sort"></span></th>
+      <th onclick="sortSongDetail('set')">Set <span id="song-detail-set-sort"></span></th>
+      <th onclick="sortSongDetail('songBefore')">Song Before</th>
+      <th onclick="sortSongDetail('songAfter')">Song After</th>
+      <th>Notes</th>
+    `;
+  }
 }
 
 // Add random show function
@@ -2226,8 +2397,308 @@ function showRandomSetlist() {
   showSetlistForDate(randomDate);
 }
 
+function showLocationShows(type, value) {
+  // Switch to stats page first
+  switchPageByName('stats');
+  
+  let shows = [];
+  let title = '';
+  
+  // Find shows based on location type
+  if (type === 'cityState') {
+    shows = dbDates.filter(date => {
+      const show = dbShows[date];
+      return `${show.city}, ${show.state}` === value;
+    });
+    title = `Shows in ${value}`;
+  } else if (type === 'venue') {
+    shows = dbDates.filter(date => {
+      const show = dbShows[date];
+      return show.venue === value;
+    });
+    title = `Shows at ${value}`;
+  }
+  
+  // Update header info
+  document.getElementById('song-detail-title').textContent = title;
+  document.getElementById('song-detail-count').textContent = shows.length;
+  document.getElementById('song-detail-first').textContent = shows[0] || '-';
+  document.getElementById('song-detail-last').textContent = shows[shows.length - 1] || '-';
+  document.getElementById('song-detail-gap').textContent = '-';
+  
+  // Clear the new song search input
+  document.getElementById('song-detail-new-search').value = '';
+  
+  // Render location shows table
+  renderLocationShowsTable(shows, title);
+  
+  // Switch to song detail tab
+  switchDbTab('song-detail');
+}
+
+function renderLocationShowsTable(shows, title) {
+  const tbody = document.getElementById('song-detail-tbody');
+  tbody.innerHTML = '';
+  
+  if (shows.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted-color);">No shows found</td></tr>';
+    return;
+  }
+  
+  // Sort shows by date (newest first)
+  shows.sort((a, b) => new Date(b) - new Date(a));
+  
+  shows.forEach(date => {
+    const show = dbShows[date];
+    if (!show) return;
+    
+    // Count total songs in the show
+    let totalSongs = 0;
+    const sets = show.sets || {};
+    Object.values(sets).forEach(setContent => {
+      const songs = parseDbSetlist(setContent);
+      totalSongs += songs.length;
+    });
+    
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="clickable-filter date-link" data-date="${date}" style="cursor: pointer; color: var(--text-color);">${date}</span></td>
+      <td><span class="clickable-filter">${show.venue || 'Unknown'}</span></td>
+      <td>${show.city || 'Unknown'}, ${show.state || ''}</td>
+      <td>${totalSongs}</td>
+      <td>${show.tour || '-'}</td>
+      <td>${show.show_number || '-'}</td>
+    `;
+    
+    tbody.appendChild(tr);
+  });
+  
+  // Update the table headers for location shows
+  const thead = document.querySelector('#db-song-detail thead tr');
+  thead.innerHTML = `
+    <th>Date</th>
+    <th>Venue</th>
+    <th>Location</th>
+    <th>Total Songs</th>
+    <th>Tour</th>
+    <th>Show #</th>
+  `;
+}
+
+function showLocationShows(type, value) {
+  // Switch to stats page first
+  switchPageByName('stats');
+  
+  let shows = [];
+  let title = '';
+  
+  // Find shows based on location type
+  if (type === 'cityState') {
+    shows = dbDates.filter(date => {
+      const show = dbShows[date];
+      return `${show.city}, ${show.state}` === value;
+    });
+    title = `Shows in ${value}`;
+  } else if (type === 'venue') {
+    shows = dbDates.filter(date => {
+      const show = dbShows[date];
+      return show.venue === value;
+    });
+    title = `Shows at ${value}`;
+  }
+  
+  // Update header info
+  document.getElementById('song-detail-title').textContent = title;
+  document.getElementById('song-detail-count').textContent = shows.length;
+  document.getElementById('song-detail-first').textContent = shows[0] || '-';
+  document.getElementById('song-detail-last').textContent = shows[shows.length - 1] || '-';
+  document.getElementById('song-detail-gap').textContent = '-';
+  
+  // Clear the new song search input
+  document.getElementById('song-detail-new-search').value = '';
+  
+  // Render location shows table
+  renderLocationShowsTable(shows, title);
+  
+  // Switch to song detail tab
+  switchDbTab('song-detail');
+}
+
+function renderLocationShowsTable(shows, title) {
+  const tbody = document.getElementById('song-detail-tbody');
+  tbody.innerHTML = '';
+  
+  if (shows.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted-color);">No shows found</td></tr>';
+    return;
+  }
+  
+  // Sort shows by date (newest first)
+  shows.sort((a, b) => new Date(b) - new Date(a));
+  
+  shows.forEach(date => {
+    const show = dbShows[date];
+    if (!show) return;
+    
+    // Count total songs in the show
+    let totalSongs = 0;
+    const sets = show.sets || {};
+    Object.values(sets).forEach(setContent => {
+      const songs = parseDbSetlist(setContent);
+      totalSongs += songs.length;
+    });
+    
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="clickable-filter date-link" data-date="${date}" style="cursor: pointer; color: var(--text-color);">${date}</span></td>
+      <td><span class="clickable-filter">${show.venue || 'Unknown'}</span></td>
+      <td>${show.city || 'Unknown'}, ${show.state || ''}</td>
+      <td>${totalSongs}</td>
+      <td>${show.tour || '-'}</td>
+      <td>${show.show_number || '-'}</td>
+    `;
+    
+    tbody.appendChild(tr);
+  });
+  
+  // Update the table headers for location shows
+  const thead = document.querySelector('#db-song-detail thead tr');
+  thead.innerHTML = `
+    <th>Date</th>
+    <th>Venue</th>
+    <th>Location</th>
+    <th>Total Songs</th>
+    <th>Tour</th>
+    <th>Show #</th>
+  `;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-  loadShowsDatabase();
+// Replace the loadShowsDatabase() call with this:
+function loadShowsDatabase() {
+  console.log('Loading shows_database.json...');
+  fetch('shows_database.json')
+    .then(r => {
+      console.log('Shows database response:', r.status);
+      if (!r.ok) throw new Error(`HTTP error! status: ${r.status}`);
+      return r.json();
+    })
+    .then(data => {
+      console.log('Shows database loaded:', Object.keys(data).length, 'shows');
+      dbShows = data;
+      processShowsDatabase();
+      renderDbSongs();
+      renderDbLocations();
+      // Now that dbShows is loaded, load the jams
+      loadJams();
+    })
+    .catch(err => {
+      console.error('Failed to load shows_database.json:', err);
+      document.getElementById('db-songs-tbody').innerHTML = 
+        '<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted-color);">Failed to load shows_database.json</td></tr>';
+    });
+}
+
+function processShowsDatabase() {
+  const songs = {};
+  const locations = {};
+  dbDates = Object.keys(dbShows)
+    .filter(d => d.match(/^\d{4}-\d{2}-\d{2}/))
+    .sort();
+
+  dbDates.forEach(date => {
+    const show = dbShows[date];
+    const venue = show.venue || "Unknown";
+    const city = show.city || "Unknown";
+    const state = show.state || "";
+    const locationKey = `${city}, ${state}`.trim();
+
+    if (!locations[locationKey]) {
+      locations[locationKey] = {
+        venue,
+        shows: [],
+        firstShow: date,
+        lastShow: date,
+      };
+    }
+    locations[locationKey].shows.push(date);
+    locations[locationKey].lastShow = date;
+
+    const sets = show.sets || {};
+    Object.values(sets).forEach(setContent => {
+      const songList = parseDbSetlist(setContent);
+      songList.forEach(song => {
+        let norm = normalizeSongName(song);
+        let displayName = song.trim()
+          .replace(/^[\s|]+/, "")
+          .replace(/\s*\[\s*\d+[\d:]*\s*\]\s*/g, "")
+          .replace(/\s*\(\s*[\d:\-]+\s*\)\s*/g, "")
+          .replace(/[,\s]+$/, "")
+          .trim();
+
+        // SPECIAL HANDLING: Merge all variations of "To Be Young..."
+        if (norm.includes("to be young") || norm.includes("is to be high") || norm.includes("is to be sad")) {
+          norm = "to be young is to be sad is to be high";
+          displayName = "To Be Young (Is to Be Sad, Is to Be High)";
+        }
+        
+        if (norm.includes("april 29 1992 miami")) displayName = "April 29, 1992 (Miami)";
+        else if (norm.includes("smooth relax down")) displayName = "Smooth, Relax, Down";
+        else if (norm.includes("motel 6")) displayName = "Motel 6";
+
+        if (!songs[norm]) {
+          songs[norm] = {
+            name: displayName,
+            performances: [],
+            firstPlayed: date,
+            lastPlayed: date,
+          };
+        }
+
+        songs[norm].performances.push({
+          date: date,
+        });
+        if (new Date(date) < new Date(songs[norm].firstPlayed))
+          songs[norm].firstPlayed = date;
+        if (new Date(date) > new Date(songs[norm].lastPlayed))
+          songs[norm].lastPlayed = date;
+      });
+    });
+  });
+
+  const merged = {};
+  Object.values(songs).forEach(song => {
+    const key = normalizeSongName(song.name).replace(/[^\w\s]/g, "").trim();
+    if (!key) return;
+
+    if (!merged[key]) {
+      merged[key] = {
+        name: song.name,
+        performances: [...song.performances],
+        firstPlayed: song.firstPlayed,
+        lastPlayed: song.lastPlayed,
+      };
+    } else {
+      merged[key].performances.push(...song.performances);
+      merged[key].performances = [...new Set(merged[key].performances)].sort(
+        (a, b) => new Date(a) - new Date(b)
+      );
+      if (new Date(song.firstPlayed) < new Date(merged[key].firstPlayed))
+        merged[key].firstPlayed = song.firstPlayed;
+      if (new Date(song.lastPlayed) > new Date(merged[key].lastPlayed))
+        merged[key].lastPlayed = song.lastPlayed;
+    }
+  });
+
+  dbSongs = merged;
+  dbLocations = locations;
+
+  document.getElementById("db-total-songs").textContent = Object.keys(merged).length;
+  document.getElementById("db-total-shows").textContent = dbDates.length;
+}
+
+// Now call the function
+loadShowsDatabase();
 });
 </script>
 </body>
