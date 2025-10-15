@@ -46,8 +46,8 @@
     "state": "FL",
     "tour": "2025 Winter",
     "show_number": "2",
-    "rating": "8.0",
-    "chucks_dream": "",
+    "rating": "",
+    "chucks_dream": "rating: \"8.0",
     "sets": {
       "Set 1": "Shelter in Place (23) -> Night After Night (11), Sham Time (5), Fuel (5), Darkness Singularity (13)",
       "Set 2": "Double Time (13), In the Eyes of Thieves (17) > Hollywood (15) > Dirtbath (25)",
@@ -102,28 +102,6 @@
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-01-18.md",
-    "url": ""
-  },
-  "2025-01-19": {
-    "date": "2025-01-19",
-    "venue": "Colonial Oak Music Park",
-    "city": "St. Augustine",
-    "state": "FL",
-    "tour": "2025 Winter",
-    "show_number": "5",
-    "rating": "7.8",
-    "chucks_dream": "Once The Captain",
-    "sets": {
-      "Set 1": "Diana (4), Funkadelic (30) -> The Way You Do the Things You Do (12) -> Mind's Unchained (14)",
-      "Chuck's Dream": "Once The Captain",
-      "Set 2": "Smooth, Relax, Down (4), Walls (16), Longview (15), Duncan's Uncle (18), Run Like Hell (12)",
-      "Encore": "Sweet (8)"
-    },
-    "notes": [
-      "*This was the fifth show of the 2025 Winter Tour and the band's first appearance in St. Augustine. This show featured the first **Diana** opener since 8/18/23 (Bridgeport, CT), ending a **137 show gap**, and the first ever **Smooth, Relax, Down** second set opener, which was its first appearance since 11/2/23 (Mill Valley, CA), ending a **110 show gap**.*\n\nA nice listen, though it took me a couple of sit-downs to get through, which probably lowered my enjoyment a bit. Still, love how they managed to squeeze in a 30 minute jam in the first set(!) and **Diana** and **Smooth, Relax, Down** in the same show. Highlights here are **Mind's Unchained**, which has a legitimately incredible peaking section, **Walls** (that first buildup is nasty!), and **Duncan's Uncle**, which has some dirty funk to it."
-    ],
-    "source": "obsidian",
-    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-01-19.md",
     "url": ""
   },
   "2025-06-12": {
@@ -1361,29 +1339,46 @@
     "date": "2025-01-23"
   },
   "2025-01-22": {
-    "url": "https://spaffnerds.com/shows/2025-01-22",
+    "date": "2025-01-22",
     "venue": "The Heights Theater",
     "city": "Houston",
     "state": "TX",
+    "tour": "2025 Winter",
+    "show_number": "6",
+    "rating": "7.5",
+    "chucks_dream": "",
     "sets": {
-      "Set 1": "Night After Night,, Windmill > Darkness Singularity,, I Shall Be Released [ 1 ],, Red's Jam > The Waltz,, Jealous Guy [ 2 ]"
+      "Set 1": "Night After Night (11), **Windmill** (34) -> Darkness Singularity (15), I Shall Be Released (7), Red's Jam (15) -> The Waltz (13), Jealous Guy (4)",
+      "Encore": "Legend (7), Frog Gossip (6)"
     },
     "notes": [
-      "[ 1 ]: Bob Dylan",
-      "[ 2 ]: John Lennon"
+      "*This was the sixth show of the 2025 Winter Tour and the band's first appearance in Houston since 11/11/22 (Last Concert Cafe), ending a **229 show gap**.*\n\nJust the one set tonight, and while there are some *very* cool picks here (**I Shall Be Released**, which they slay, **The Waltz**, **Jealous Guy**, and **Legend**) and a major jam in **Windmill** (highly recommended!), it just didn't totally do it for me. Definitely a show I'd love a lot more if I'd been there in person."
     ],
-    "source": "spaffnerds",
-    "date": "2025-01-22"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-01-22.md",
+    "url": "https://spaffnerds.com/shows/2025-01-22"
   },
   "2025-01-19": {
-    "url": "https://spaffnerds.com/shows/2025-01-19",
+    "date": "2025-01-19",
     "venue": "Colonial Oak Music Park",
     "city": "St. Augustine",
     "state": "FL",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-01-19"
+    "tour": "2025 Winter",
+    "show_number": "5",
+    "rating": "7.8",
+    "chucks_dream": "Once The Captain",
+    "sets": {
+      "Set 1": "Diana (4), Funkadelic (30) -> The Way You Do the Things You Do (12) -> Mind's Unchained (14)",
+      "Chuck's Dream": "Once The Captain",
+      "Set 2": "Smooth, Relax, Down (4), Walls (16), Longview (15), Duncan's Uncle (18), Run Like Hell (12)",
+      "Encore": "Sweet (8)"
+    },
+    "notes": [
+      "*This was the fifth show of the 2025 Winter Tour and the band's first appearance in St. Augustine. This show featured the first **Diana** opener since 8/18/23 (Bridgeport, CT), ending a **137 show gap**, and the first ever **Smooth, Relax, Down** second set opener, which was its first appearance since 11/2/23 (Mill Valley, CA), ending a **110 show gap**.*\n\nA nice listen, though it took me a couple of sit-downs to get through, which probably lowered my enjoyment a bit. Still, love how they managed to squeeze in a 30 minute jam in the first set(!) and **Diana** and **Smooth, Relax, Down** in the same show. Highlights here are **Mind's Unchained**, which has a legitimately incredible peaking section, **Walls** (that first buildup is nasty!), and **Duncan's Uncle**, which has some dirty funk to it."
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-01-19.md",
+    "url": "https://spaffnerds.com/shows/2025-01-19"
   },
   "2024-12-31": {
     "url": "https://spaffnerds.com/shows/2024-12-31",
@@ -14477,6 +14472,3 @@
     "date": "2009-12-31"
   }
 }
-
-
-
