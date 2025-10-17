@@ -265,6 +265,14 @@
   },
   {
     "date": "2025-01-23",
+    "song": "Broken Wing",
+    "timing": "24:18",
+    "venue": "Antone's",
+    "notes": "\nRelaxed, cool groove with slippery synths that morphs into a cyclical trance before building into -> Stuck in the Middle with You.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-23",
     "song": "Double Time",
     "timing": "16:25",
     "venue": "Antone's",
@@ -293,6 +301,22 @@
     "timing": "9:30",
     "venue": "Antone's",
     "notes": "\nAwesome, spacey synths and an emotional ending.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-23",
+    "song": "Stuck in the Middle with You",
+    "timing": "14:04",
+    "venue": "Antone's",
+    "notes": "\nSpins through universes upon universes -> Dis Go In 5?\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-01-24",
+    "song": "Shelter in Place",
+    "timing": "15:53",
+    "venue": "Antone's",
+    "notes": "\nConsonant, entrancing groove with heated peaks that cool into a lush stream -> Palisades.\n",
     "highlighted": false
   },
   {
