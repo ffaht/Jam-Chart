@@ -1318,7 +1318,8 @@
     "rating": "",
     "chucks_dream": "rating:",
     "sets": {
-      "Set 1": "Be Strange (6), Shelter in Place (15) -> Palisades (9) -> The Other One (9) -> Dirtbath (25)"
+      "Set 1": "Be Strange (6), Shelter in Place (15) -> Palisades (9) -> The Other One (9) -> Dirtbath (25)",
+      "Set 2": "Plush (15) -> Space Gadget (4), Weasel (16)"
     },
     "notes": [
       "*This was the eighth show of the 2025 Winter Tour and the second night of a two-night run at Antone's.*"
@@ -1356,7 +1357,7 @@
     "state": "TX",
     "tour": "2025 Winter",
     "show_number": "6",
-    "rating": "7.5",
+    "rating": "",
     "chucks_dream": "rating: \"7.5",
     "sets": {
       "Set 1": "Night After Night (11), **Windmill** (34) -> Darkness Singularity (15), I Shall Be Released (7), Red's Jam (15) -> The Waltz (13), Jealous Guy (4)",
