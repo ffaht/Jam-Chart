@@ -355,6 +355,11 @@ function normalizeSongName(s) {
   if (!s) return "";
   s = s.trim();
 
+  // Skip Chuck's Dream entirely
+  if (s.toLowerCase().includes("chuck's dream")) {
+    return "chucks_dream_skip";
+  }
+
   // Normalize Unicode punctuation → ASCII
   s = s
     .normalize("NFKD")                    // canonical decomposition
@@ -755,6 +760,10 @@ function cleanMarkdown(text) {
   
   return text
     .replace(/\*\*/g, '')  // Remove bold markers
+    .replace(/\*/g, '')    // Remove italic markers  
+    .replace(/__/g, '')    // Remove underline markers
+    .replace(/~~/g, '')    // Remove strikethrough markers
+    .replace(/`/g, '')     // Remove code markers
     .replace(/\[\[|\]\]/g, '');  // Remove bracket markers
 }
 
@@ -861,96 +870,91 @@ function showSetlistForDate(date) {
     }).join('');
   }
 
-  // FIXED makeAllSongsClickable function with proper protected name handling
-function makeAllSongsClickable(setContent, jamEntries) {
-  if (!setContent) return '';
+  // ABSOLUTE PRESERVE VERSION — displays setlist exactly like JSON, highlights only jam-charted songs
+function makeAllSongsClickable(rawSetString, jamEntries) {
+  if (!rawSetString) return '';
+
+  // Clean markdown FIRST before processing
+  const cleanedString = cleanMarkdown(rawSetString);
   
-  const cleanedContent = cleanMarkdown(setContent);
-  const allSongs = parseDbSetlist(setContent);
+  // Check if this is a Chuck's Dream section and return it as plain text
+  if (cleanedString.toLowerCase().includes("chuck's dream")) {
+    return cleanedString;
+  }
   
-  if (allSongs.length === 0) return cleanedContent;
-  
-  let result = cleanedContent;
-  
-  // Process each song individually, finding ALL occurrences
-  allSongs.forEach(song => {
-    const timingMatch = song.match(/\((\d+)\)$/);
-    const timing = timingMatch ? `(${timingMatch[1]})` : '';
+  // Do NOT clean or trim further — keep every space and arrow intact
+  const tokens = cleanedString.split(/(\s*->\s*|\s*>\s*|\s*,\s*)/g);
+
+  let output = '';
+
+  for (let token of tokens) {
+    // Keep arrows/commas exactly as they appear
+    if (/^\s*(->|>|,)\s*$/.test(token)) {
+      output += token;
+      continue;
+    }
+
+    // Skip if this token contains Chuck's Dream
+    if (token.toLowerCase().includes("chuck's dream")) {
+      output += token;
+      continue;
+    }
+
+    // Extract timing like (12) from the raw text
+    const timingMatch = token.match(/\((\d+)\)\s*$/);
     const timingNumber = timingMatch ? parseInt(timingMatch[1]) : null;
-    let cleanSong = song.replace(/\s*\(\d+\)\s*$/, '').trim();
-    cleanSong = cleanSong.replace(/\s+/g, ' ').trim();
-    
-    // RESTORE PROTECTED NAMES BEFORE NORMALIZATION
-    let displaySong = cleanSong;
-    if (cleanSong.includes('SMOOTH_RELAX_DOWN')) {
-      displaySong = 'Smooth, Relax, Down';
-    } else if (cleanSong.includes('MOTEL_6')) {
-      displaySong = 'Motel 6';
-    } else if (cleanSong.includes('APRIL_MIAMI')) {
-      displaySong = 'April 29, 1992 (Miami)';
+
+    // Extract the visible song portion (without timing)
+    const songOnly = timingMatch
+      ? token.slice(0, token.lastIndexOf(timingMatch[0]))
+      : token;
+
+    // Skip if this is Chuck's Dream
+    if (songOnly.toLowerCase().includes("chuck's dream")) {
+      output += token;
+      continue;
     }
-    
-    const normalizedSong = normalizeSongName(displaySong);
-    const searchText = cleanSong + (timing ? ' ' + timing : '');
-    const displayText = displaySong + (timing ? ' ' + timing : '');
-    
-    // Find ALL jam entries that could match this song (by name)
-    const possibleJamEntries = jamEntries.filter(jam => {
-      const jamSongClean = jam.song.replace(/\s+/g, ' ').trim();
-      const jamNorm = normalizeSongName(jamSongClean);
-      return jamNorm === normalizedSong;
-    });
-    
-    // Find and replace ALL occurrences of this song+timing
-    let position = 0;
-    while ((position = result.indexOf(searchText, position)) !== -1) {
-      // For this specific occurrence, find the best matching jam entry
-      let bestJamEntry = null;
-      
-      if (possibleJamEntries.length > 0) {
-        if (possibleJamEntries.length === 1) {
-          // Only one possible match, use it
-          bestJamEntry = possibleJamEntries[0];
-        } else if (timingNumber) {
-          // Multiple matches - find EXACT timing match first
-          bestJamEntry = possibleJamEntries.find(jam => {
-            const jamTimingMatch = jam.timing.match(/(\d+):(\d+)/);
-            if (!jamTimingMatch) return false;
-            
-            const jamMinutes = parseInt(jamTimingMatch[1]);
-            // Allow 1-minute tolerance for rounding differences
-            return Math.abs(jamMinutes - timingNumber) <= 1;
-          });
-          
-          // If no exact match, don't use any jam entry for this occurrence
-          if (!bestJamEntry) {
-            console.log(`No exact timing match for "${displaySong}" (${timingNumber} min) - skipping jam highlighting`);
-          }
-        } else {
-          // No timing info, don't assign any jam entry to avoid wrong matches
-          console.log(`No timing info for "${displaySong}" - skipping jam highlighting`);
-        }
+
+    // Normalize for comparison
+    const normalized = normalizeSongName(songOnly);
+
+    // Find possible jam entries
+    const possible = jamEntries.filter(
+      j => normalizeSongName(j.song) === normalized
+    );
+
+    // Pick the jam whose timing is closest to this instance
+    let matchedJam = null;
+    if (possible.length > 0) {
+      if (timingNumber) {
+        matchedJam = possible.find(j => {
+          const m = (j.timing || '').match(/(\d+):/);
+          if (!m) return false;
+          const jamMin = parseInt(m[1]);
+          return Math.abs(jamMin - timingNumber) <= 1;
+        });
+      } else if (possible.length === 1) {
+        matchedJam = possible[0];
       }
-      
-      // Create replacement HTML - USE DISPLAY SONG NAME (with proper formatting)
-      let replacement;
-      if (bestJamEntry) {
-        replacement = `<span class="clickable-song jam-song" data-song="${displaySong.replace(/"/g, '&quot;')}" data-timing="${timingNumber || ''}" data-jam="true">${displaySong}</span> ${timing}`;
-      } else {
-        replacement = `<span class="clickable-song" data-song="${displaySong.replace(/"/g, '&quot;')}" data-timing="${timingNumber || ''}" data-jam="false">${displaySong}</span> ${timing}`;
-      }
-      
-      // Replace at this specific position
-      result = result.substring(0, position) + 
-               replacement + 
-               result.substring(position + searchText.length);
-      
-      // Move position forward to continue searching
-      position += replacement.length;
     }
-  });
-  
-  return result;
+
+    const safeSong = songOnly.replace(/"/g, '&quot;');
+
+    if (matchedJam) {
+      // Inject clickable span around the song portion only (leave timing & spaces untouched)
+      output += token.replace(
+        songOnly.trim(),
+        `<span class="clickable-song jam-song" data-song="${safeSong}" data-timing="${timingNumber || ''}" data-jam="true">${songOnly.trim()}</span>`
+      );
+    } else {
+      output += token.replace(
+        songOnly.trim(),
+        `<span class="clickable-song" data-song="${safeSong}" data-timing="${timingNumber || ''}" data-jam="false">${songOnly.trim()}</span>`
+      );
+    }
+  }
+
+  return output;
 }
 
   // Build setlist content with better spacing
@@ -1000,12 +1004,12 @@ function makeAllSongsClickable(setContent, jamEntries) {
         const processedContent = makeAllSongsClickable(show.sets[setName], jamEntries);
         content += `<div style="margin-bottom: 0.75rem;"><strong>${setName}:</strong> ${processedContent}</div>`;
         
-        // Display Chuck's Dream after Set 1
-        if (setName === 'Set 1' && show.sets["Chuck's Dream"] && !displayedChucksDream) {
-          const chucksContent = makeAllSongsClickable(show.sets["Chuck's Dream"], jamEntries);
-          content += `<div style="margin-bottom: 0.75rem; font-style: italic;"><strong>Chuck's Dream:</strong> ${chucksContent}</div>`;
-          displayedChucksDream = true;
-        }
+            // Display Chuck's Dream after Set 1 - as plain text, not clickable
+		if (setName === 'Set 1' && show.sets["Chuck's Dream"] && !displayedChucksDream) {
+      const chucksContent = cleanMarkdown(show.sets["Chuck's Dream"]);
+      content += `<div style="margin-bottom: 0.75rem; font-style: italic;"><strong>Chuck's Dream:</strong> ${chucksContent}</div>`;
+      displayedChucksDream = true;
+		}
       }
     });
     
@@ -1362,11 +1366,12 @@ function parseDbSetlist(str) {
   str = str.trim();
   if (!str) return [];
 
-  // Step 2: Protect known multi-part names - FIXED to handle variations
+  // Step 2: Protect known multi-part names and exclude Chuck's Dream
   str = str
     .replace(/Smooth[,\s]*Relax[,\s]*Down/gi, '|||SMOOTH_RELAX_DOWN|||')
     .replace(/\bMotel\s*(?:6)?\b/gi, '|||MOTEL_6|||')
-    .replace(/April\s*29[,\s]*1992[^)]*Miami/gi, '|||APRIL_MIAMI|||');
+    .replace(/April\s*29[,\s]*1992[^)]*Miami/gi, '|||APRIL_MIAMI|||')
+    .replace(/Chuck'?s\s+Dream/gi, '|||CHUCKS_DREAM|||'); // Add Chuck's Dream protection
 
   // Step 3: Clean markdown but preserve timing numbers
   str = cleanMarkdown(str);
@@ -1414,14 +1419,15 @@ function parseDbSetlist(str) {
     songs.push(currentSong.trim());
   }
 
-  // Step 5: Filter and clean
+  // Step 5: Filter and clean - EXCLUDE CHUCK'S DREAM
   const filteredSongs = songs
     .filter(s => s && /[a-z]/i.test(s)) // ensure it contains letters
     .filter(s => !/^set\s*\d*$/i.test(s)) // skip "Set 1" etc.
     .filter(s => s.toLowerCase() !== 'unknown')
+    .filter(s => !s.includes('CHUCKS_DREAM')) // Exclude Chuck's Dream
     .map(s => s.trim());
 
-  // Step 6: Restore protected names - FIXED to handle the protected format
+  // Step 6: Restore protected names - EXCLUDE CHUCK'S DREAM from restoration
   return filteredSongs.map(s => {
     let restored = s;
     if (s.includes('SMOOTH_RELAX_DOWN')) {
@@ -1431,10 +1437,10 @@ function parseDbSetlist(str) {
     } else if (s.includes('APRIL_MIAMI')) {
       restored = 'April 29, 1992 (Miami)';
     }
+    // Do NOT restore Chuck's Dream - it will be filtered out above
     return restored;
   });
 }
-
 
 function processShowsDatabase() {
   const songs = {};
@@ -1443,28 +1449,34 @@ function processShowsDatabase() {
     .filter(d => d.match(/^\d{4}-\d{2}-\d{2}/))
     .sort();
 
-  dbDates.forEach(date => {
-    const show = dbShows[date];
+  dbDates.forEach(dateKey => {
+    const cleanDate = dateKey.split('/')[0];  // Clean version for storage
+    const show = dbShows[dateKey];  // Use original key for lookup
     const venue = show.venue || "Unknown";
     const city = show.city || "Unknown";
     const state = show.state || "";
     const locationKey = `${city}, ${state}`.trim();
-
+    
     if (!locations[locationKey]) {
       locations[locationKey] = {
         venue,
         shows: [],
-        firstShow: date,
-        lastShow: date,
+        firstShow: cleanDate,
+        lastShow: cleanDate,
       };
     }
-    locations[locationKey].shows.push(date);
-    locations[locationKey].lastShow = date;
-
+    locations[locationKey].shows.push(cleanDate);
+    locations[locationKey].lastShow = cleanDate;
+    
     const sets = show.sets || {};
     Object.values(sets).forEach(setContent => {
       const songList = parseDbSetlist(setContent);
-      songList.forEach(song => {
+       songList.forEach(song => {
+        // SKIP CHUCK'S DREAM - don't include it in song statistics
+        if (song.toLowerCase().includes("chuck's dream")) {
+          return; // Skip to next song
+        }
+        
         let norm = normalizeSongName(song);
         let displayName = song.trim()
           .replace(/^[\s|]+/, "")
@@ -1472,7 +1484,7 @@ function processShowsDatabase() {
           .replace(/\s*\(\s*[\d:\-]+\s*\)\s*/g, "")
           .replace(/[,\s]+$/, "")
           .trim();
-
+          
         // SPECIAL HANDLING: Merge all variations of "To Be Young..."
         if (norm.includes("to be young") || norm.includes("is to be high") || norm.includes("is to be sad")) {
           norm = "to be young is to be sad is to be high";
@@ -1482,56 +1494,57 @@ function processShowsDatabase() {
         if (norm.includes("april 29 1992 miami")) displayName = "April 29, 1992 (Miami)";
         else if (norm.includes("smooth relax down")) displayName = "Smooth, Relax, Down";
         else if (norm.includes("motel 6")) displayName = "Motel 6";
-
+        
         if (!songs[norm]) {
           songs[norm] = {
             name: displayName,
             performances: [],
-            firstPlayed: date,
-            lastPlayed: date,
+            firstPlayed: cleanDate,
+            lastPlayed: cleanDate,
           };
         }
-
-        // Instead of just pushing the date, push an object with the date
-// This allows us to count total performances, not just unique dates
-songs[norm].performances.push({
-  date: date,
-  // We can add more info here if needed, like set position
-});
-        if (new Date(date) < new Date(songs[norm].firstPlayed))
-          songs[norm].firstPlayed = date;
-        if (new Date(date) > new Date(songs[norm].lastPlayed))
-          songs[norm].lastPlayed = date;
+        
+        songs[norm].performances.push(cleanDate);
+        
+        if (new Date(cleanDate) < new Date(songs[norm].firstPlayed))
+          songs[norm].firstPlayed = cleanDate;
+        if (new Date(cleanDate) > new Date(songs[norm].lastPlayed))
+          songs[norm].lastPlayed = cleanDate;
       });
     });
   });
 
-  // 💥 FINAL CROSS-MERGE: collapse any duplicates that slipped through
-const merged = {};
-Object.values(songs).forEach(song => {
-  // Extra-strict normalization of merge key
-  const key = normalizeSongName(song.name).replace(/[^\w\s]/g, "").trim();
-  if (!key) return;
+  const merged = {};
+  Object.values(songs).forEach(song => {
+    const key = normalizeSongName(song.name).replace(/[^\w\s]/g, "").trim();
+    if (!key) return;
 
-  if (!merged[key]) {
-    merged[key] = {
-      name: song.name,
-      performances: [...song.performances],
-      firstPlayed: song.firstPlayed,
-      lastPlayed: song.lastPlayed,
-    };
-  } else {
-    merged[key].performances.push(...song.performances);
-    merged[key].performances = [...new Set(merged[key].performances)].sort(
-      (a, b) => new Date(a) - new Date(b)
-    );
-    if (new Date(song.firstPlayed) < new Date(merged[key].firstPlayed))
-      merged[key].firstPlayed = song.firstPlayed;
-    if (new Date(song.lastPlayed) > new Date(merged[key].lastPlayed))
-      merged[key].lastPlayed = song.lastPlayed;
-  }
-});
-
+    if (!merged[key]) {
+      merged[key] = {
+        name: song.name,
+        performances: [...song.performances],
+        firstPlayed: song.firstPlayed,
+        lastPlayed: song.lastPlayed,
+      };
+    } else {
+      merged[key].performances.push(...song.performances);
+      const allDates = merged[key].performances.map(p => {
+        const dateStr = typeof p === 'string' ? p : p.date;
+        return dateStr ? dateStr.trim().split('/')[0] : dateStr;
+      });
+      merged[key].performances = [...new Set(allDates)].sort(
+        (a, b) => new Date(a) - new Date(b)
+      );
+      
+      const cleanFirstPlayed = song.firstPlayed.includes('/') ? song.firstPlayed.split('/')[0].trim() : song.firstPlayed;
+      const cleanLastPlayed = song.lastPlayed.includes('/') ? song.lastPlayed.split('/')[0].trim() : song.lastPlayed;
+      
+      if (new Date(cleanFirstPlayed) < new Date(merged[key].firstPlayed))
+        merged[key].firstPlayed = cleanFirstPlayed;
+      if (new Date(cleanLastPlayed) > new Date(merged[key].lastPlayed))
+        merged[key].lastPlayed = cleanLastPlayed;
+    }
+  });
 
   dbSongs = merged;
   dbLocations = locations;
@@ -1546,6 +1559,14 @@ function renderDbSongs() {
   dbSongRows = [];
   
   let sortedSongs = Object.entries(dbSongs);
+  
+  // DEBUG: Check if Chuck's Dream is in the database
+  console.log("=== DEBUG: Checking for Chuck's Dream in dbSongs ===");
+  sortedSongs.forEach(([norm, data]) => {
+    if (data.name.toLowerCase().includes("chuck") || norm.includes("chuck")) {
+      console.log("FOUND CHUCK'S DREAM:", data.name, "norm:", norm);
+    }
+  });
   
   // Apply sorting
   const sort = dbSortState.songs;
@@ -1573,7 +1594,19 @@ function renderDbSongs() {
     return sort.direction === 'asc' ? (va < vb ? -1 : va > vb ? 1 : 0) : (va < vb ? 1 : va > vb ? -1 : 0);
   });
   
-  sortedSongs.forEach(([norm, data]) => {
+    sortedSongs.forEach(([norm, data]) => {
+    // COMPREHENSIVE FILTER: Remove any variation of Chuck's Dream
+    const songNameLower = data.name.toLowerCase();
+    const normLower = norm.toLowerCase();
+    
+    if (songNameLower.includes("chuck's dream") || 
+        songNameLower.includes("chucks dream") ||
+        normLower.includes("chuck") ||
+        songNameLower.includes("chuck")) {
+      console.log("FILTERING OUT:", data.name, "norm:", norm);
+      return; // Skip this song entirely
+    }
+    
     const lastIdx = dbDates.indexOf(data.lastPlayed);
     const currentGap = dbDates.length - 1 - lastIdx;
     
@@ -1675,7 +1708,20 @@ function filterDbSongs() {
   tbody.innerHTML = '';
   
   dbSongRows
-    .filter(row => !search || row.data.name.toLowerCase().includes(search))
+    .filter(row => {
+      // Filter out Chuck's Dream first
+      const songNameLower = row.data.name.toLowerCase();
+      const normLower = normalizeSongName(row.data.name).toLowerCase();
+      
+      if (songNameLower.includes("chuck's dream") || 
+          songNameLower.includes("chucks dream") ||
+          normLower.includes("chuck")) {
+        return false;
+      }
+      
+      // Then apply search filter
+      return !search || row.data.name.toLowerCase().includes(search);
+    })
     .forEach(row => tbody.appendChild(row.element));
 }
 
@@ -2069,8 +2115,7 @@ document.addEventListener('click', e => {
       }
       return;
     }
-	
-    // For all other clicks in stats page, do the regular search
+// For all other clicks in stats page, do the regular search
     switchPageByName('jams');
     document.getElementById('search-input').value = text;
     renderFilteredJams();
@@ -2120,36 +2165,45 @@ function renderSongDetailTable() {
   
   const song = currentSongDetail.data;
   
-  // Get unique dates sorted chronologically (oldest to newest)
-const performanceDates = song.performances.map(p => typeof p === 'string' ? p : p.date);
-const uniqueDates = [...new Set(performanceDates)].sort((a, b) => new Date(a) - new Date(b));  
-  let performances = [];
-  const seenPerformances = new Set();
+  // Get ALL performance dates (including duplicates for multiple shows on same date)
+  const allPerformanceDates = song.performances;
   
-  // Build performances with proper gap calculation
-  uniqueDates.forEach((date, dateIndex) => {
-    const show = dbShows[date];
-    if (!show) return;
-    
-    const sets = show.sets || {};
-    let occurrenceInDate = 0;
-    
-    Object.entries(sets).forEach(([setName, setContent]) => {
-      const songs = parseDbSetlist(setContent);
+  let performances = [];
+  let processedDates = new Set(); // Track which date+show combinations we've processed
+
+  // Build performances - process ALL occurrences
+  allPerformanceDates.forEach((baseDate, dateIndex) => {
+    // Try to find ALL shows for this base date (could be multiple shows on same date)
+    const showsForDate = Object.keys(dbShows).filter(key => {
+      const keyBaseDate = key.split('/')[0];
+      return keyBaseDate === baseDate;
+    }).sort(); // Sort to ensure consistent order
+
+    showsForDate.forEach(showKey => {
+      const show = dbShows[showKey];
+      if (!show) return;
       
-      songs.forEach((songName, idx) => {
-        let norm = normalizeSongName(songName);
+      const sets = show.sets || {};
+      
+      // Find ALL occurrences of this song in this specific show
+      Object.entries(sets).forEach(([setName, setContent]) => {
+        const songs = parseDbSetlist(setContent);
         
-        // SPECIAL HANDLING: Apply the same normalization as in processShowsDatabase
-        if (norm.includes("to be young") || norm.includes("is to be high") || norm.includes("is to be sad")) {
-          norm = "to be young is to be sad is to be high";
-        }
-        
-        if (norm === currentSongDetail.norm) {
-          const perfKey = `${date}-${setName}-${idx}`;
+        songs.forEach((songName, idx) => {
+          let norm = normalizeSongName(songName);
           
-          if (!seenPerformances.has(perfKey)) {
-            seenPerformances.add(perfKey);
+          // SPECIAL HANDLING: Apply the same normalization as in processShowsDatabase
+          if (norm.includes("to be young") || norm.includes("is to be high") || norm.includes("is to be sad")) {
+            norm = "to be young is to be sad is to be high";
+          }
+          
+          if (norm === currentSongDetail.norm) {
+            // Create unique identifier for this performance
+            const performanceId = `${showKey}-${setName}-${idx}`;
+            
+            // Skip if we've already processed this exact performance
+            if (processedDates.has(performanceId)) return;
+            processedDates.add(performanceId);
             
             // Standardize set name
             let standardizedSetName = setName;
@@ -2165,42 +2219,60 @@ const uniqueDates = [...new Set(performanceDates)].sort((a, b) => new Date(a) - 
               standardizedSetName = setName.replace('set', 'Set ');
             }
             
-            // Calculate gap
+            // Calculate gap from previous performance
             let gap = '-';
-            const isFirstOccurrence = occurrenceInDate === 0;
-            
-            if (isFirstOccurrence) {
-              if (dateIndex === 0) {
-                // First ever performance - calculate gap from start of database
-                const currentDateIndex = dbDates.indexOf(date);
-                gap = currentDateIndex;
+            if (dateIndex === 0 && performances.length === 0) {
+              // First ever performance - calculate shows from beginning
+              let currentDateIndex = dbDates.indexOf(showKey);
+              if (currentDateIndex === -1) {
+                // If not found, try to find the position by date comparison
+                currentDateIndex = dbDates.findIndex(d => new Date(d.split('/')[0]) >= new Date(baseDate));
+              }
+              gap = currentDateIndex >= 0 ? currentDateIndex : 0;
+            } else if (performances.length > 0) {
+              // Get the previous performance's show key
+              const prevPerformance = performances[performances.length - 1];
+              const prevShowKey = prevPerformance.showKey;
+              
+              // Only show gap if this is a different show than previous
+              if (showKey !== prevShowKey) {
+                let currentDateIndex = dbDates.indexOf(showKey);
+                let prevDateIndex = dbDates.indexOf(prevShowKey);
+                
+                // If exact keys not found, find closest matches
+                if (currentDateIndex === -1 || prevDateIndex === -1) {
+                  // Fallback: calculate by date comparison
+                  const currentDate = new Date(baseDate);
+                  const prevDate = new Date(prevPerformance.baseDate);
+                  const allSortedDates = [...new Set(dbDates.map(d => d.split('/')[0]))].sort((a, b) => new Date(a) - new Date(b));
+                  const currentSortedIndex = allSortedDates.indexOf(baseDate);
+                  const prevSortedIndex = allSortedDates.indexOf(prevPerformance.baseDate);
+                  
+                  if (currentSortedIndex !== -1 && prevSortedIndex !== -1) {
+                    gap = Math.max(0, currentSortedIndex - prevSortedIndex - 1);
+                  }
+                } else {
+                  gap = Math.max(0, currentDateIndex - prevDateIndex - 1);
+                }
               } else {
-                // Subsequent performances - calculate gap from previous performance
-                const currentDateIndex = dbDates.indexOf(date);
-                const prevDateIndex = dbDates.indexOf(uniqueDates[dateIndex - 1]);
-                gap = Math.max(0, currentDateIndex - prevDateIndex - 1);
+                gap = ''; // Same show as previous performance, no gap
               }
             }
             
-            occurrenceInDate++;
-            
-            // Store chronological index for stable sorting
-            const chronologicalIndex = dateIndex;
-            
             performances.push({
-              date,
-              dateTimestamp: new Date(date).getTime(),
-              chronologicalIndex,
+              baseDate,
+              showKey,
+              dateTimestamp: new Date(baseDate).getTime(),
+              chronologicalIndex: performances.length,
               show,
               setName: standardizedSetName,
               position: idx,
               songBefore: idx > 0 ? songs[idx - 1].replace(/\s*\[\s*\d+[\d:]*\s*\]\s*/g, '') : '-',
               songAfter: idx < songs.length - 1 ? songs[idx + 1].replace(/\s*\[\s*\d+[\d:]*\s*\]\s*/g, '') : '-',
-              gap: gap,
-              isFirstOccurrenceOfDate: isFirstOccurrence
+              gap: gap
             });
           }
-        }
+        });
       });
     });
   });
@@ -2211,8 +2283,7 @@ const uniqueDates = [...new Set(performanceDates)].sort((a, b) => new Date(a) - 
     let result = 0;
     
     if (sort.column === 'date') {
-      // Use chronological index for stable, predictable sorting
-      result = a.chronologicalIndex - b.chronologicalIndex;
+      result = a.dateTimestamp - b.dateTimestamp;
       if (result === 0) {
         const setOrder = {'Set 1': 1, 'Set 2': 2, 'Set 3': 3, 'Encore': 4};
         result = (setOrder[a.setName] || 5) - (setOrder[b.setName] || 5);
@@ -2252,16 +2323,13 @@ const uniqueDates = [...new Set(performanceDates)].sort((a, b) => new Date(a) - 
     const jamNorm = normalizeSongName(j.song);
     const dbNorm = currentSongDetail.norm;
     
-    // Direct match
     if (jamNorm === dbNorm) return true;
     
-    // Special case for "To Be Young" variations
     if ((jamNorm.includes("to be young") || jamNorm.includes("is to be high") || jamNorm.includes("is to be sad")) &&
         (dbNorm.includes("to be young") || dbNorm.includes("is to be high") || dbNorm.includes("is to be sad"))) {
       return true;
     }
     
-    // Fuzzy matching for other songs - check if one contains the other
     if (jamNorm.includes(dbNorm) || dbNorm.includes(jamNorm)) {
       return true;
     }
@@ -2274,12 +2342,12 @@ const uniqueDates = [...new Set(performanceDates)].sort((a, b) => new Date(a) - 
     const jamEntry = jamsForSong.find(j => {
       const jamDate = j.date;
       const formattedJamDate = formatDateForDisplay(jamDate);
+      const perfBaseDate = perf.baseDate;
       
-      // Try multiple date formats for matching
-      return jamDate === perf.date || 
-             formattedJamDate === perf.date ||
-             formatDateForDisplay(perf.date) === jamDate ||
-             formatDateForDisplay(perf.date) === formattedJamDate;
+      return jamDate === perfBaseDate || 
+             formattedJamDate === perfBaseDate ||
+             formatDateForDisplay(perfBaseDate) === jamDate ||
+             formatDateForDisplay(perfBaseDate) === formattedJamDate;
     });
     
     const isHighlighted = jamEntry?.highlighted;
@@ -2288,21 +2356,77 @@ const uniqueDates = [...new Set(performanceDates)].sort((a, b) => new Date(a) - 
     const tr = document.createElement('tr');
     if (isHighlighted) tr.classList.add('highlighted-row');
     
-    const dateText = perf.date;
-    const venueText = perf.show.venue || 'Unknown';
+    // Create venue click handler
+    const venueCell = `<span class="clickable-venue" data-venue="${perf.show.venue || 'Unknown'}" style="cursor: pointer; color: var(--yellow);">${perf.show.venue || 'Unknown'}</span>`;
+    
+    // Create song before/after click handlers
+    const songBeforeCell = perf.songBefore !== '-' 
+      ? `<span class="clickable-song-history" data-song="${perf.songBefore}" style="cursor: pointer; color: var(--yellow);">${perf.songBefore}</span>`
+      : '-';
+    
+    const songAfterCell = perf.songAfter !== '-' 
+      ? `<span class="clickable-song-history" data-song="${perf.songAfter}" style="cursor: pointer; color: var(--yellow);">${perf.songAfter}</span>`
+      : '-';
     
     tr.innerHTML = `
-      <td><span class="clickable-filter" style="${isHighlighted ? 'font-weight:bold;' : ''}">${dateText}</span></td>
-      <td><span class="clickable-filter">${venueText}</span></td>
-      <td>${perf.isFirstOccurrenceOfDate ? perf.gap : ''}</td>
+      <td><span class="clickable-filter date-link" data-date="${perf.baseDate}" style="cursor: pointer; color: var(--text-color); ${isHighlighted ? 'font-weight:bold;' : ''}">${perf.baseDate}</span></td>
+      <td>${venueCell}</td>
+      <td>${perf.gap}</td>
       <td>${perf.setName}</td>
-      <td>${perf.songBefore}</td>
-      <td>${perf.songAfter}</td>
+      <td>${songBeforeCell}</td>
+      <td>${songAfterCell}</td>
       <td>${notes}</td>
     `;
     
     tbody.appendChild(tr);
   });
+  
+  // Add click event listeners for the new elements
+  setTimeout(() => {
+    // Venue clicks - show venue stats
+    document.querySelectorAll('.clickable-venue').forEach(venueElement => {
+      venueElement.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const venueName = this.getAttribute('data-venue');
+        console.log('Venue clicked:', venueName);
+        showLocationShows('venue', venueName);
+      });
+    });
+    
+    // Song before/after clicks - show song history
+    document.querySelectorAll('.clickable-song-history').forEach(songElement => {
+      songElement.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const songName = this.getAttribute('data-song');
+        console.log('Song clicked:', songName);
+        
+        // Find the song in the database
+        const normSearch = normalizeSongName(songName);
+        if (dbSongs[normSearch]) {
+          showSongDetail(normSearch);
+        } else {
+          // If not found, search for similar songs
+          const similarSong = Object.keys(dbSongs).find(songKey => 
+            normalizeSongName(songKey).includes(normSearch) || 
+            normSearch.includes(normalizeSongName(songKey))
+          );
+          
+          if (similarSong) {
+            showSongDetail(similarSong);
+          } else {
+            console.log(`Song "${songName}" not found in database`);
+            // Fallback: search in the main song list
+            document.getElementById('db-song-search').value = songName;
+            switchDbTab('songs');
+            filterDbSongs();
+          }
+        }
+      });
+    });
+  }, 0);
+  
+  console.log('About to render', performances.length, 'performances');
+  console.log('First 3 performances:', performances.slice(0, 3));
   
   if (performances.length === 0) {
     tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted-color);">No performances found in setlists for this song</td></tr>';
@@ -2570,112 +2694,135 @@ function renderLocationShowsTable(shows, title) {
     <th>Show #</th>
   `;
 }
-
 document.addEventListener('DOMContentLoaded', function() {
-// Replace the loadShowsDatabase() call with this:
-function loadShowsDatabase() {
-  console.log('Loading shows_database.json...');
-  fetch('shows_database.json')
-    .then(r => {
-      console.log('Shows database response:', r.status);
-      if (!r.ok) throw new Error(`HTTP error! status: ${r.status}`);
-      return r.json();
-    })
-    .then(data => {
-      console.log('Shows database loaded:', Object.keys(data).length, 'shows');
-      dbShows = data;
-      processShowsDatabase();
-      renderDbSongs();
-      renderDbLocations();
-      // Now that dbShows is loaded, load the jams
-      loadJams();
-    })
-    .catch(err => {
-      console.error('Failed to load shows_database.json:', err);
-      document.getElementById('db-songs-tbody').innerHTML = 
-        '<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted-color);">Failed to load shows_database.json</td></tr>';
-    });
-}
+  // Define loadShowsDatabase function
+  function loadShowsDatabase() {
+    console.log('Loading shows_database.json...');
+    fetch('shows_database.json')
+      .then(r => {
+        console.log('Shows database response:', r.status);
+        if (!r.ok) throw new Error(`HTTP error! status: ${r.status}`);
+        return r.json();
+      })
+      .then(data => {
+        console.log('Shows database loaded:', Object.keys(data).length, 'shows');
+        
+        // Clean the date keys - normalize dates with /1, /2 suffixes
+        const cleanedData = {};
+        Object.keys(data).forEach(dateKey => {
+          const cleanDate = dateKey.split('/')[0]; // Take only YYYY-MM-DD part
+          
+          // Store with clean key - if duplicate, keep the one WITHOUT suffix as primary
+          if (!cleanedData[cleanDate] || !dateKey.includes('/')) {
+            cleanedData[cleanDate] = data[dateKey];
+          }
+          
+          // Also store the original key for lookup (for setlist display)
+          cleanedData[dateKey] = data[dateKey];
+        });
+        
+        dbShows = cleanedData;
+        processShowsDatabase();
+        renderDbSongs();
+        renderDbLocations();
+        loadJams();
+      })
+      .catch(err => {
+        console.error('Failed to load shows_database.json:', err);
+        document.getElementById('db-songs-tbody').innerHTML = 
+          '<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted-color);">Failed to load shows_database.json</td></tr>';
+      });
+  }
 
-function processShowsDatabase() {
+  function processShowsDatabase() {
   const songs = {};
   const locations = {};
-  dbDates = Object.keys(dbShows)
-    .filter(d => d.match(/^\d{4}-\d{2}-\d{2}/))
-    .sort();
+  dbDates = [];
 
-  dbDates.forEach(date => {
-    const show = dbShows[date];
-    const venue = show.venue || "Unknown";
-    const city = show.city || "Unknown";
-    const state = show.state || "";
-    const locationKey = `${city}, ${state}`.trim();
+  Object.keys(dbShows)
+    .filter(d => /^\d{4}-\d{2}-\d{2}(?:\/\d+)?$/.test(d))
+    .sort()
+    .forEach(fullKey => {
+      const baseDate = fullKey.split('/')[0]; // what we display
+      const show = dbShows[fullKey];
+      const venue = show.venue || "Unknown";
+      const city = show.city || "Unknown";
+      const state = show.state || "";
+      const locationKey = `${city}, ${state}`.trim();
 
-    if (!locations[locationKey]) {
-      locations[locationKey] = {
-        venue,
-        shows: [],
-        firstShow: date,
-        lastShow: date,
-      };
-    }
-    locations[locationKey].shows.push(date);
-    locations[locationKey].lastShow = date;
+      // track this show by full key (so we don’t lose multi-shows)
+      dbDates.push(fullKey);
 
-    const sets = show.sets || {};
-    Object.values(sets).forEach(setContent => {
+      // Locations table still groups by base date
+      if (!locations[locationKey]) {
+        locations[locationKey] = {
+          venue,
+          shows: [],
+          firstShow: baseDate,
+          lastShow: baseDate,
+        };
+      }
+      locations[locationKey].shows.push(baseDate);
+      if (new Date(baseDate) < new Date(locations[locationKey].firstShow))
+        locations[locationKey].firstShow = baseDate;
+      if (new Date(baseDate) > new Date(locations[locationKey].lastShow))
+        locations[locationKey].lastShow = baseDate;
+
+      // Parse sets → songs
+         const sets = show.sets || {};
+    Object.entries(sets).forEach(([setName, setContent]) => {
+      // SKIP CHUCK'S DREAM SECTIONS ENTIRELY
+      if (setName.toLowerCase().includes("chuck's dream")) {
+        return;
+      }
       const songList = parseDbSetlist(setContent);
-      songList.forEach(song => {
-        let norm = normalizeSongName(song);
-        let displayName = song.trim()
-          .replace(/^[\s|]+/, "")
-          .replace(/\s*\[\s*\d+[\d:]*\s*\]\s*/g, "")
-          .replace(/\s*\(\s*[\d:\-]+\s*\)\s*/g, "")
-          .replace(/[,\s]+$/, "")
-          .trim();
+        songList.forEach(song => {
+          let norm = normalizeSongName(song);
+          let displayName = song.trim()
+            .replace(/^[\s|]+/, "")
+            .replace(/\s*\[\s*\d+[\d:]*\s*\]\s*/g, "")
+            .replace(/\s*\(\s*[\d:\-]+\s*\)\s*/g, "")
+            .replace(/[,\s]+$/, "")
+            .trim();
 
-        // SPECIAL HANDLING: Merge all variations of "To Be Young..."
-        if (norm.includes("to be young") || norm.includes("is to be high") || norm.includes("is to be sad")) {
-          norm = "to be young is to be sad is to be high";
-          displayName = "To Be Young (Is to Be Sad, Is to Be High)";
-        }
-        
-        if (norm.includes("april 29 1992 miami")) displayName = "April 29, 1992 (Miami)";
-        else if (norm.includes("smooth relax down")) displayName = "Smooth, Relax, Down";
-        else if (norm.includes("motel 6")) displayName = "Motel 6";
+          // merge variants
+          if (norm.includes("to be young") || norm.includes("is to be high") || norm.includes("is to be sad")) {
+            norm = "to be young is to be sad is to be high";
+            displayName = "To Be Young (Is to Be Sad, Is to Be High)";
+          }
+          if (norm.includes("april 29 1992 miami")) displayName = "April 29, 1992 (Miami)";
+          else if (norm.includes("smooth relax down")) displayName = "Smooth, Relax, Down";
+          else if (norm.includes("motel 6")) displayName = "Motel 6";
 
-        if (!songs[norm]) {
-          songs[norm] = {
-            name: displayName,
-            performances: [],
-            firstPlayed: date,
-            lastPlayed: date,
-          };
-        }
+          if (!songs[norm]) {
+            songs[norm] = {
+              name: displayName,
+              performances: [],
+              firstPlayed: baseDate,
+              lastPlayed: baseDate,
+            };
+          }
 
-        songs[norm].performances.push({
-          date: date,
+          // push baseDate for display but keep reference to fullKey internally
+          songs[norm].performances.push(baseDate);
+          songs[norm].performances = [...new Set(songs[norm].performances)];
+
+          if (new Date(baseDate) < new Date(songs[norm].firstPlayed))
+            songs[norm].firstPlayed = baseDate;
+          if (new Date(baseDate) > new Date(songs[norm].lastPlayed))
+            songs[norm].lastPlayed = baseDate;
         });
-        if (new Date(date) < new Date(songs[norm].firstPlayed))
-          songs[norm].firstPlayed = date;
-        if (new Date(date) > new Date(songs[norm].lastPlayed))
-          songs[norm].lastPlayed = date;
       });
     });
-  });
 
+  // Merge duplicates
   const merged = {};
   Object.values(songs).forEach(song => {
     const key = normalizeSongName(song.name).replace(/[^\w\s]/g, "").trim();
     if (!key) return;
 
     if (!merged[key]) {
-      merged[key] = {
-        name: song.name,
-        performances: [...song.performances],
-        firstPlayed: song.firstPlayed,
-        lastPlayed: song.lastPlayed,
-      };
+      merged[key] = { ...song };
     } else {
       merged[key].performances.push(...song.performances);
       merged[key].performances = [...new Set(merged[key].performances)].sort(
@@ -2691,12 +2838,14 @@ function processShowsDatabase() {
   dbSongs = merged;
   dbLocations = locations;
 
+  // total shows includes all variants (so 980 stays 980)
   document.getElementById("db-total-songs").textContent = Object.keys(merged).length;
   document.getElementById("db-total-shows").textContent = dbDates.length;
 }
 
-// Now call the function
-loadShowsDatabase();
+
+  // Now call the function
+  loadShowsDatabase();
 });
 </script>
 </body>
