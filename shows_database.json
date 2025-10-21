@@ -203,7 +203,7 @@
     "rating": "7.5",
     "chucks_dream": "",
     "sets": {
-      "Set 1": "Can't Find My Vape (5), Neutrino (21) -> **Swingtown** (19) > **Ain't That Wrong** (15), Be Strange (6) > (19) > Down Under (12) > The Postman (11), Mind's Unchained (5)"
+      "Set 1": "Can't Find My Vape (5), Neutrino (21) -> **Swingtown** (19) > **Ain't That Wrong** (15), Be Strange (6), The Postman (19) > Down Under (12) > The Postman (11), Mind's Unchained (5)"
     },
     "notes": [
       "*This was the fifth show of the 2025 Summer Tour and the band's first appearance in King of Prussia. Jimkata was the opening act. This was a one set show. **Neutrino** contained a Drinking Out of Cups (Dan Deacon) sample from Cory. **Ain't That Wrong** contained El Pito (Joe Cuba) and **Neutrino** teases from Cory. Special thanks to Chris Imburgia for taping and Chuck for the livestream!*\n\n*\"We've only got so much time. We don't even know how to play a five minute song.\"*\n\nThis **Neutrino -> Swingtown** combination is insane for so early in the show. **Neutrino** quickly makes its way into some *deep* House, builds with intent, and then hops its way into **Swingtown**, where they tap into some bumping Electro House at 13:54 and raise the energy to hit a blistering ending that drops straight into **Ain't That Wrong**. This is Yuma Tent. Holy shit! I was thinking it'd be **Night After Night** or **Darkness Singularity**! Wow! Moments like that are prime examples of how Spafford is on fire. The back half is a bit lackluster. Definitely still some highlights here - don't sleep on the \"first set\" **Neutrino** -> **Swingtown** > **Ain't That Wrong**."
@@ -752,7 +752,7 @@
       "Encore": "Frog Gossip (7)"
     },
     "notes": [
-      "*This was the 32nd show of the 2025 Summer Tour and the band's first appearance in Maryland (and the band's first ever appearance in Elkton) since 6/19/24 (Baltimore Soundstage, Baltimore), ending a **118 show gap**. **Pursuit of Madness** contained an **Ice Cream** tease from Brian. **Gold Glittered Hat** contained a Free (Phish) tease from Cory.*\n\nIntent with power from the start, this one gets underway with the first Pursuit of Madness opener in well over a year (3/22/24 Roanoke, VA -  **135 show gap**) that feels more like a second set closer than a show opener, with peaks galore. It's followed up by a talented **Ice Cream**, a fiery **Back in L.A.**, and an entrancing **Duncan's Uncle**. \n\nSecond set kept things going and was probably a great experience in person, with all four jams showing off signature Spafford grooves and some serious shredding from Brian, though a few tired moments popped up. Gotta give it to Shon for another rock-solid night. Highlight here is **Duncan's Uncle**, with an awesome first 15 minutes, and **Galisteo Way** deserves a mention for some very unusual midi-mutron work from Brian."
+      "*This was the 32nd show of the 2025 Summer Tour and the band's first appearance in Maryland and the band's first appearance in Elkton. **Pursuit of Madness** contained an **Ice Cream** tease from Brian. **Gold Glittered Hat** contained a Free (Phish) tease from Cory.*\n\nIntent with power from the start, this one gets underway with the first **Pursuit of Madness** opener in well over a year, and it feels more like a second set closer than a show opener, packed with peaks galore. It's followed up by a talented **Ice Cream**, a fiery **Back in L.A.**, and an entrancing **Duncan's Uncle** that's certain to land on the JOTY list.\n\nSecond set kept things going and was probably a great experience in person, with all four jams showing off signature Spafford grooves and some serious shredding from Brian, though a few tired moments popped up. Gotta give it to Shon for another rock-solid night. Highlight here is **Duncan's Uncle**, with an awesome first 15 minutes, but the whole second set is too good to pass up."
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-08-27.md",
@@ -1291,22 +1291,26 @@
     "date": "2025-01-26"
   },
   "2025-01-25": {
-    "url": "https://spaffnerds.com/shows/2025-01-25",
-    "venue": "The Kessler",
+    "date": "2025-01-25",
+    "venue": "The Kessler Theater",
     "city": "Dallas",
     "state": "TX",
+    "tour": "2025 Winter",
+    "show_number": "9",
+    "rating": "7.4",
+    "chucks_dream": "Tunnel Visions",
     "sets": {
-      "Set 1": "The Remedy,, Darkness Singularity,, Can't Catch Me Now [ 1 ],, Mind's Unchained > Galisteo Way",
-      "Set 2": "Chuck's Dream,, Neutrino > The Postman,, Kiss Off [ 2 ] > Electric Taco Stand > Alternate Ending > Electric Taco Stand",
-      "Encore": "Cantaloupe Island [ 3 ]"
+      "Set 1": "The Remedy (14), Darkness Singularity (12), Can't Catch Me Now (5), Mind's Unchained (15), Galisteo Way (17)",
+      "Chuck's Dream": "Tunnel Visions",
+      "Set 2": "Neutrino (20) > The Postman (22), Kiss Off (3) > Electric Taco Stand (13) -> Alternate Ending (10) > Electric Taco Stand (5)",
+      "Encore": "Cantaloupe Island (7)"
     },
     "notes": [
-      "[ 1 ]: Olivia Rodrigo",
-      "[ 2 ]: The Violent Femmes",
-      "[ 3 ]: Herbie Hancock , House version"
+      "*This was the ninth show of the 2025 Winter Tour and the band's first appearance in Dallas since 11/12/22 (The Studio at The Factory), ending a **231 show gap**. **Cantaloupe Island** was performed in a House style.*\n\nFun, but nothing all that crazy here, though **Can't Catch Me Now** and **Kiss Off** were a bit out of place. Highlight here is **Neutrino**, but I've already come back to **Galisteo Way** and **ETS** a few times. Probably another show that was better in person than on tape."
     ],
-    "source": "spaffnerds",
-    "date": "2025-01-25"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-01-25.md",
+    "url": "https://spaffnerds.com/shows/2025-01-25"
   },
   "2025-01-24": {
     "date": "2025-01-24",
@@ -1359,8 +1363,8 @@
     "state": "TX",
     "tour": "2025 Winter",
     "show_number": "6",
-    "rating": "7.5",
-    "chucks_dream": "",
+    "rating": "",
+    "chucks_dream": "rating: \"7.5",
     "sets": {
       "Set 1": "Night After Night (11), **Windmill** (34) -> Darkness Singularity (15), I Shall Be Released (7), Red's Jam (15) -> The Waltz (13), Jealous Guy (4)",
       "Encore": "Legend (7), Frog Gossip (6)"
