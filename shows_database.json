@@ -25,7 +25,7 @@
     "state": "FL",
     "tour": "2025 Winter",
     "show_number": "1",
-    "rating": "",
+    "rating": "7.5",
     "chucks_dream": "rating: \"7.5",
     "sets": {
       "Set 1": "All My Friends (2) -> Bee Jam (16) -> Todd's Tots (17), Breakdown (18) -> Salamander Song (8)",
@@ -46,8 +46,8 @@
     "state": "FL",
     "tour": "2025 Winter",
     "show_number": "2",
-    "rating": "",
-    "chucks_dream": "rating: \"8.0",
+    "rating": "8.0",
+    "chucks_dream": "",
     "sets": {
       "Set 1": "Shelter in Place (23) -> Night After Night (11), Sham Time (5), Fuel (5), Darkness Singularity (13)",
       "Set 2": "Double Time (13), In the Eyes of Thieves (17) > Hollywood (15) > Dirtbath (25)",
@@ -1281,14 +1281,26 @@
     "date": "2025-02-13"
   },
   "2025-01-26": {
-    "url": "https://spaffnerds.com/shows/2025-01-26",
-    "venue": "The Rev Room",
+    "date": "2025-01-26",
+    "venue": "Revolution Music Room",
     "city": "Little Rock",
     "state": "AR",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-01-26"
+    "tour": "2025 Winter",
+    "show_number": "10",
+    "rating": "8.5",
+    "chucks_dream": "Uncertain Hero",
+    "sets": {
+      "Set 1": "Crazy (6), **Pursuit of Madness** (27) -> All My Friends (2) -> **Bee Jam** (12) -> Creep (4), Walls (13)",
+      "Chuck's Dream": "Uncertain Hero",
+      "Set 2": "Seven (7), Hollywood (18) -> Virtual Bean Dip (6), Smooth, Relax, Down (4), **Ginger Stardust** (19) -> Fly Like an Eagle (7)",
+      "Encore": "To The Nest (10) -> Simple Mysteries (6)"
+    },
+    "notes": [
+      "*This was the 10th and final show of the 2025 Winter Tour and the band's first appearance in Little Rock since 4/5/23, ending a **181 show gap**. This show featured the first **Creep** since 10/26/18 (Boulder, CO), ending a **466 show gap**, and the first **Seven** second set opener since 10/5/17 (Northampton, MA), ending a **582 show gap**. **Hollywood** contained a **Virtual Bean Dip** tease from Shon. The encore was preceded by crew thanks, several You're a Grand Old Flag teases from Cory, a Charge! tease from Shon, and Nick's drumstick getting caught in the rafters.*\n\nAn awesome show to close out the tour, with tons of highlights. It's almost like every song was a goody, starting with a **Crazy** opener that Brian shreds, a **Pursuit of Madness** that features some clean looping, a **Bee Jam** that gets surprisingly deep, and a major bust out in **Creep**. That's just the first set! \n\nSecond set delivered, too, getting underway with the first **Seven** second set opener in 582 shows(!), then gets funky with **Hollywood**, neatly tosses in **Virtual Bean Dip** and **Smooth, Relax, Down** (I was shocked at this call lol), then closes out with a killer, spacey combo in **Ginger Stardust -> Fly Like an Eagle**. The encore was the cherry on top, with the always special **To The Nest -> Simple Mysteries**. Can't wait for the next shows!"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-01-26.md",
+    "url": "https://spaffnerds.com/shows/2025-01-26"
   },
   "2025-01-25": {
     "date": "2025-01-25",
@@ -14488,5 +14500,35 @@
     "notes": [],
     "source": "spaffnerds",
     "date": "2009-12-31"
+  },
+  "2025-10-23": {
+    "url": "https://spaffnerds.com/shows/2025-10-23",
+    "venue": "The Get Down",
+    "city": "Portland",
+    "state": "OR",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-10-23"
+  },
+  "2025-10-22": {
+    "url": "https://spaffnerds.com/shows/2025-10-22",
+    "venue": "Volcanic Theatre Pub",
+    "city": "Bend",
+    "state": "OR",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-10-22"
+  },
+  "2025-10-21": {
+    "url": "https://spaffnerds.com/shows/2025-10-21",
+    "venue": "Hidden Hall",
+    "city": "Seattle",
+    "state": "WA",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-10-21"
   }
 }
