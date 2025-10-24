@@ -25,7 +25,7 @@
     "state": "FL",
     "tour": "2025 Winter",
     "show_number": "1",
-    "rating": "7.5",
+    "rating": "",
     "chucks_dream": "rating: \"7.5",
     "sets": {
       "Set 1": "All My Friends (2) -> Bee Jam (16) -> Todd's Tots (17), Breakdown (18) -> Salamander Song (8)",
@@ -46,7 +46,7 @@
     "state": "FL",
     "tour": "2025 Winter",
     "show_number": "2",
-    "rating": "8.0",
+    "rating": "",
     "chucks_dream": "rating: \"8.0",
     "sets": {
       "Set 1": "Shelter in Place (23) -> Night After Night (11), Sham Time (5), Fuel (5), Darkness Singularity (13)",
@@ -111,12 +111,12 @@
     "state": "PA",
     "tour": "Summer 2025",
     "show_number": "1",
-    "rating": "tags:",
-    "chucks_dream": "Broken Wing",
+    "rating": "8.4",
+    "chucks_dream": "",
     "sets": {
       "Set 1": "Gold Glittered Hat (22) -> All My Friends (2) -> Bee Jam (17) -> Motel 6 (8), Mind's Unchained (18)",
       "Chuck's Dream": "Broken Wing",
-      "Set 2": "Broken Wing (35) > Gotta Save Fred (20) > Frog Gossip (6)",
+      "Set 2": "**Broken Wing** (35) > **Gotta Save Fred** (20) > Frog Gossip (6)",
       "Encore": "On Fire (19)"
     },
     "notes": [
@@ -14522,13 +14522,105 @@
     "date": "2025-10-22"
   },
   "2025-10-21": {
-    "url": "https://spaffnerds.com/shows/2025-10-21",
+    "date": "2025-10-21",
     "venue": "Hidden Hall",
     "city": "Seattle",
     "state": "WA",
+    "tour": "2025 Fall",
+    "show_number": "1",
+    "rating": "8.8",
+    "chucks_dream": "Seattle Listening",
+    "sets": {
+      "Set 1": "**Motel 6** (19), **Mind's Unchained** (19), **Fake the Fate** (17), Breakdown (7)",
+      "Chuck's Dream": "Seattle Listening",
+      "Set 2": "**Double Time** (21), Darkness Singularity (14), America (17),  The Reprise (13)",
+      "Encore": "Sweet (7)"
+    },
+    "notes": [
+      "*This was the first show of the 2025 Fall Tour and the first show to feature Nick's electronic mandala pads. **Mind's Unchained** contained **Fake the Fate** teases from Brian.* \n\n*\"Is it one of those dreams all too real that you don't feel until you wake up, and can't go back because it hasn't happened yet?*\n\n*Seattle melting next to me, decades later, suddenly. Worn out, sleeping peacefully, dreaming of days like these.\"*\n\nDreaming of days like these. One of those shows where everything clicks and it hits just right, but it's also one that's going to leave a lasting impression, maybe for a long time. The first set in particular  feels like it reaches that upper level, with each jam showing something different: **Motel 6** (which has its jam start at the midway point rather than the end! Insane!) gets incredibly spacious and electronic, **Mind's Unchained** soaks up sunlight and reaches a spectacular peak, and **Fake the Fate** showcases some genuinely powerful arena rock. \n\nSecond set was a beast of its own, too. **Double Time** broke the 20-mintue marker with ease and featured some awesome, iridescent electro; **America** settled on a thumping groove that Shon demolished, and The Reprise got loopy with tons of new toys. This might be a turning point. It feels like a turning point. Dreaming of days like these."
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-10-21.md",
+    "url": "https://spaffnerds.com/shows/2025-10-21"
+  },
+  "2025-11-01": {
+    "url": "https://spaffnerds.com/shows/2025-11-01",
+    "venue": "Moe's Alley",
+    "city": "Santa Cruz",
+    "state": "CA",
     "sets": {},
     "notes": [],
     "source": "spaffnerds",
-    "date": "2025-10-21"
+    "date": "2025-11-01"
+  },
+  "2025-10-31": {
+    "url": "https://spaffnerds.com/shows/2025-10-31",
+    "venue": "The Guild Theatre",
+    "city": "Menlo Park",
+    "state": "CA",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-10-31"
+  },
+  "2025-10-30": {
+    "url": "https://spaffnerds.com/shows/2025-10-30",
+    "venue": "Lost on Main",
+    "city": "Chico",
+    "state": "CA",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-10-30"
+  },
+  "2025-10-29": {
+    "url": "https://spaffnerds.com/shows/2025-10-29",
+    "venue": "Ace Of Spades",
+    "city": "Sacramento",
+    "state": "CA",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-10-29"
+  },
+  "2025-10-28": {
+    "url": "https://spaffnerds.com/shows/2025-10-28",
+    "venue": "The Alpine",
+    "city": "Reno",
+    "state": "NV",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-10-28"
+  },
+  "2025-10-26": {
+    "url": "https://spaffnerds.com/shows/2025-10-26",
+    "venue": "The State Room",
+    "city": "Salt Lake City",
+    "state": "UT",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-10-26"
+  },
+  "2025-10-25": {
+    "url": "https://spaffnerds.com/shows/2025-10-25",
+    "venue": "Shrine Social Club",
+    "city": "Boise",
+    "state": "ID",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-10-25"
+  },
+  "2025-10-24": {
+    "url": "https://spaffnerds.com/shows/2025-10-24",
+    "venue": "The Get Down",
+    "city": "Portland",
+    "state": "OR",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-10-24"
   }
 }
