@@ -373,7 +373,7 @@
     "timing": "19:17",
     "venue": "Revolution Music Room",
     "notes": "\nGrooves steadily and robotically before peaking nicely and dipping into very deep space for the last few minutes.\n",
-    "highlighted": true
+    "highlighted": false
   },
   {
     "date": "2025-01-26",
@@ -393,10 +393,42 @@
   },
   {
     "date": "2025-06-12",
+    "song": "Bee Jam",
+    "timing": "17:05",
+    "venue": "Archer Music Hall",
+    "notes": "",
+    "highlighted": false
+  },
+  {
+    "date": "2025-06-12",
+    "song": "Broken Wing",
+    "timing": "35:10",
+    "venue": "Archer Music Hall",
+    "notes": "\nJazzy and low-key for the first few minutes before setting sail between icebergs illuminated by aural projections, with sod roof houses and geometric figures moving in looped animations until the energy goes out. Backup generative power kicks in, gradually reloading an underglow of white light through the landscape, eventually going into overdrive and and peaking brightly before hitting the main theme, then shifting into a syncopated, plinko disco that gets spacey and drifts between colossal rocks shaped and charred by millions of years of aquatic and volcanic activity.\n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-06-12",
     "song": "Gold Glittered Hat",
     "timing": "22:16",
     "venue": "Archer Music Hall",
     "notes": "A dreamscape of assembly line robots working on water toward an explosive finish. -> All My Friends.",
+    "highlighted": false
+  },
+  {
+    "date": "2025-06-12",
+    "song": "Gotta Save Fred",
+    "timing": "20:20",
+    "venue": "Archer Music Hall",
+    "notes": "\nBursts with funk early before making its way through a tunnel toward a classy, future funk-infused city, eventually pulling back to watch its relaxed, glowing skyline set in twilight.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-06-12",
+    "song": "Mind's Unchained",
+    "timing": "18:46",
+    "venue": "Archer Music Hall",
+    "notes": "",
     "highlighted": false
   },
   {
@@ -806,6 +838,14 @@
     "venue": "Paddy's Beach Club",
     "notes": "\nFloats into outer space and attaches to a repetitive, entrancing groove for a good while until Cory steps up with organ and they start to work towards a peak.\n",
     "highlighted": false
+  },
+  {
+    "date": "2025-06-27",
+    "song": "Shelter in Place",
+    "timing": "24:31",
+    "venue": "Paddy's Beach Club",
+    "notes": "\nTriggered consecutive implosions to carve artificial canyons on the crest of the city, letting shades of light surface. A nighttime flyover leads to a clash between auroras and city lights, building to a monstrous peak that settles down, slyly boogies, and incredibly rocks its way -> Night After Night.\n",
+    "highlighted": true
   },
   {
     "date": "2025-06-27",
@@ -1685,6 +1725,54 @@
     "timing": "20:37",
     "venue": "Adirondack Music Festival",
     "notes": "\nA Duncan's Uncle-esque groove that drifts through vocal pad trance, hits a sharp peak, and circles back with a low-key take on the earlier groove before building (impressively!) to -> Night After Night.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-21",
+    "song": "America",
+    "timing": "17:30",
+    "venue": "Hidden Hall",
+    "notes": "\nSettles on a relaxed, thumping groove driven by Shon and has a chaotic, slightly jazzy buildup.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-21",
+    "song": "Double Time",
+    "timing": "21:37",
+    "venue": "Hidden Hall",
+    "notes": "\nGoes double time and moves into colorful, iridescent electro before peaking with power.\n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-21",
+    "song": "Fake the Fate",
+    "timing": "17:39",
+    "venue": "Hidden Hall",
+    "notes": "\nGoes through deep funk before sliding into an awesome, glacial landscape that runs through a couple of powerful yet somber peaks before filtering out. Some killer Brian here, and a great, loud full-band sound.\n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-21",
+    "song": "Mind's Unchained",
+    "timing": "19:53",
+    "venue": "Hidden Hall",
+    "notes": "\nBounces on pristine, colorful tiles soaked in sunlight, exerting immense energy in what seems an impossible attempt to reach the top, and gets rewarded with the view of a lifetime.\n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-21",
+    "song": "Motel 6",
+    "timing": "19:26",
+    "venue": "Hidden Hall",
+    "notes": "Breaks out from the quiet part (the quiet part!) into spectacular, electronically dyed, entrancing space that grows eclectically and powers its way back into the second half of the song proper. Everything you've ever wanted.",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-21",
+    "song": "The Reprise",
+    "timing": "13:16",
+    "venue": "Hidden Hall",
+    "notes": "\nSpacey, loopy, and showcases several different time signatures and new electronics.\n",
     "highlighted": false
   }
 ]
