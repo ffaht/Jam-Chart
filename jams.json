@@ -404,7 +404,7 @@
     "song": "Broken Wing",
     "timing": "35:10",
     "venue": "Archer Music Hall",
-    "notes": "\nJazzy and low-key for the first few minutes before setting sail between icebergs illuminated by aural projections, with sod roof houses and geometric figures moving in looped animations until the energy goes out. Backup generative power kicks in, gradually reloading an underglow of white light through the landscape, eventually going into overdrive and and peaking brightly before hitting the main theme, then shifting into a syncopated, plinko disco that gets spacey and drifts between colossal rocks shaped and charred by millions of years of aquatic and volcanic activity.\n",
+    "notes": "Jazzy and low-key for the first few minutes before setting sail between icebergs illuminated by aural projections, with sod roof houses and geometric figures moving in looped animations until the energy goes out. Backup generative power kicks in, gradually reloading an underglow of white light through the landscape, eventually going into overdrive and peaking brightly before hitting the main theme, then shifting into a syncopated, plinko disco that gets spacey and drifts between colossal rocks shaped and charred by millions of years of aquatic and volcanic activity.",
     "highlighted": true
   },
   {
@@ -1774,5 +1774,53 @@
     "venue": "Hidden Hall",
     "notes": "\nSpacey, loopy, and showcases several different time signatures and new electronics.\n",
     "highlighted": false
+  },
+  {
+    "date": "2025-10-22",
+    "song": "Broken Wing",
+    "timing": "34:45",
+    "venue": "Volcanic Theatre Pub",
+    "notes": "\nThe usual deal (but done very well) for the first half, then gets funky and works its way toward a peak straight out of Salamander Song, before slamming into Salamander Song itself.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-22",
+    "song": "Comfortable",
+    "timing": "18:27",
+    "venue": "Volcanic Theatre Pub",
+    "notes": "An open-air amphitheater tucked in patches of thick, lush grass within a city, framed by buildings looming overhead as stutter-step funk echoes through the park until the sun sets, when things get atmospheric and peak with the moon's rise.",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-22",
+    "song": "Longview",
+    "timing": "16:06",
+    "venue": "Volcanic Theatre Pub",
+    "notes": "\nSunbathes in a springtime mountainous stream.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-22",
+    "song": "Neutrino",
+    "timing": "20:28",
+    "venue": "Volcanic Theatre Pub",
+    "notes": "Swirls into deep space, finding it self in a jazzy strait of miniature planets before descending to an angular alleyway, guided by flares pointing to a massive, nondescript facility buried deep within an industrialized city. Inside lies a limestone cave studded with stalactites and subwoofers, housing a mechanical rave and opening onto an enormous quartz block where purple lights strobe and shadows skip against perfectly placed pillars until the scene zooms out to a galactic tea garden.",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-22",
+    "song": "Shelter in Place",
+    "timing": "25:32",
+    "venue": "Volcanic Theatre Pub",
+    "notes": "\nBounces into pristine, vast outer space for the first half and travels through an unexpectedly happy cycle in the second, with a bright, satisfying peak and a calm end.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-22",
+    "song": "Windmill",
+    "timing": "22:12",
+    "venue": "Volcanic Theatre Pub",
+    "notes": "\nInstantly gets incredibly airy and spacious, like swaths of grass swaying in the wind chiming softly, before growing electronic and drifting into an outer-space lullaby that rocks and revolves around a glitzy disco ball. \n",
+    "highlighted": true
   }
 ]
