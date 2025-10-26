@@ -1812,7 +1812,7 @@
     "song": "Shelter in Place",
     "timing": "25:32",
     "venue": "Volcanic Theatre Pub",
-    "notes": "\nBounces into pristine, vast outer space for the first half and travels through an unexpectedly happy cycle in the second, with a bright, satisfying peak and a calm end.\n",
+    "notes": "Bounces into vast outer space for the first half and travels through an unexpectedly happy cycle in the second, with a bright, satisfying peak and a calm end.",
     "highlighted": false
   },
   {
@@ -1821,6 +1821,102 @@
     "timing": "22:12",
     "venue": "Volcanic Theatre Pub",
     "notes": "\nInstantly gets incredibly airy and spacious, like swaths of grass swaying in the wind chiming softly, before growing electronic and drifting into an outer-space lullaby that rocks and revolves around a glitzy disco ball. \n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-23",
+    "song": "Ain't That Wrong",
+    "timing": "14:43",
+    "venue": "The Get Down",
+    "notes": "Bobs into an entrancing rave.",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-23",
+    "song": "Alternate Ending",
+    "timing": "12:05",
+    "venue": "The Get Down",
+    "notes": "\nPowerful!\n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-23",
+    "song": "Electric Taco Stand",
+    "timing": "16:07",
+    "venue": "The Get Down",
+    "notes": "Gets neuralyzed and transported into the doorway of an intergalactic hallway, one end opening onto a busy railway of imperfectly rendered trains, each looping and weaving in random animations. Sound bounces from a second story basement nearby as a heat signature alert leads to a chase and big peak -> Alternate Ending.",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-23",
+    "song": "Enjoy the Silence",
+    "timing": "16:06",
+    "venue": "The Get Down",
+    "notes": "\nA noticeably strong start that makes its way into a geodesic sphere containing millions of galaxies, radiating in transcendent shapes and forms of different colors and intensities.\n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-23",
+    "song": "Stratus",
+    "timing": "10:09",
+    "venue": "The Get Down",
+    "notes": "Spacey to start and incredibly tight throughout.",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-23",
+    "song": "Todd's Tots",
+    "timing": "26:35",
+    "venue": "The Get Down",
+    "notes": "Washes into rich, shimmering space where it floats tranquilly before shooting back through the atmosphere to reach the main theme. Fantastic.",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-24",
+    "song": "Anyone",
+    "timing": "14:37",
+    "venue": "The Get Down",
+    "notes": "Incredibly strong, with tight playing from everyone, a celebratory jam, and a beautiful, hard-hitting final couple of minutes.",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-24",
+    "song": "Galisteo Way",
+    "timing": "9:41",
+    "venue": "The Get Down",
+    "notes": "\nComing round from an exceptional Anyone, this one sways patiently for a couple of minutes before going straight into its ending. OHHHHHHHHHHH! \n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-24",
+    "song": "Money for Nothing",
+    "timing": "23:20",
+    "venue": "The Get Down",
+    "notes": "\nAn easy-to-digest groove that blooms around the 15-minute mark before descending into an abandoned lakeside amphitheater.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-24",
+    "song": "Night After Night",
+    "timing": "13:56",
+    "venue": "The Get Down",
+    "notes": "\nCool throughout, with an extra buildup, too. Really slick.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-24",
+    "song": "Pursuit of Trance",
+    "timing": "24:53",
+    "venue": "The Get Down",
+    "notes": "\nAn ear-ringing call from outer space leads to a trip in a hopping space rover, bright light dyeing its metallic body in assorted washout out colors as its climbs through rocky terrain, hits a major peak with a triple moonrise, then calms down and builds -> Night After Night.\n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-24",
+    "song": "Walls",
+    "timing": "25:54",
+    "venue": "The Get Down",
+    "notes": "\nZiplines into a world filled with translucent pink and purple blobs of jelly breathing as random units, then builds into a travelator within an infinite pattern of gold and steel pyramids that snap and unfold into and onto each other. The second jam features a funky groove that grows spacious and joyful.\n",
     "highlighted": true
   }
 ]
