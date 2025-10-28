@@ -14628,14 +14628,25 @@
     "date": "2025-10-26"
   },
   "2025-10-25": {
-    "url": "https://spaffnerds.com/shows/2025-10-25",
+    "date": "2025-10-25",
     "venue": "Shrine Social Club",
     "city": "Boise",
     "state": "ID",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-10-25"
+    "tour": "2025 Fall",
+    "show_number": "5",
+    "rating": "8.5",
+    "chucks_dream": "-",
+    "sets": {
+      "Set 1": "**Ghostbusters** (22) > Spooky (4), All My Friends (2) -> Bee Jam (15) -> In The Eyes of Thieves (19)",
+      "Set 2": "**Shu Ba Da Du Ma Ma Ma Ma** (7), **Gotta Save Fred** (21) -> **Dirtbath** (29), Weasel (10) -> Legend of Zelda (6) -> Weasel (4)",
+      "Encore": "Cantaloupe Island (9)"
+    },
+    "notes": [
+      "*This was the fifth show of the 2025 Fall Tour. This show featured the debut of **Shu Ba Da Du Ma Ma Ma Ma** (Steve Miller), the first **Ghostbusters** since 10/25/19 (Ogden, CO), ending a **445 show gap**, the first **Ghostbusters** show opener since 10/29/16 (Phoenix, AZ), ending a **726 show gap**, and the first **Legend of Zelda** since 10/25/19 (Ogden, CO) ending a **445 show gap**. For the first set, the band wore Ghostbusters jackets. The encore was preceded by a Harry Hood (Phish) tease from Brian and Nick. **Cantaloupe Island** was performed in a House style.*\n\n*\"I said when we 'knew' how to play that, not 'know.'\"*\n\nA really fun show with some major bust outs in **Ghostbusters** and **Zelda** (the first of which has a strong jam, especially for an opener), a micro jam debut in **Shu Ba Da Du Ma Ma Ma Ma**, and killer jams in the second set. Y'all even got **Spooky**. Boise got a good one!"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-10-25.md",
+    "url": "https://spaffnerds.com/shows/2025-10-25"
   },
   "2025-10-24": {
     "date": "2025-10-24",
