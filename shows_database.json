@@ -730,7 +730,7 @@
       "Encore": "Slip and Squander (11)"
     },
     "notes": [
-      "*This was the 31st show of the 2025 Summer Tour and the band's first appearance in Norfolk. **Fake the Fate**'s lyrics were changed to 'He was born with telepathy\" and contained Heartbreaker (Led Zeppelin) teases from Shon.*"
+      "*This was the 31st show of the 2025 Summer Tour and the band's first appearance in Norfolk. This show featured the first **Slip and Squander** encore since 11/3/22 (Boulder, CO), ending a **298 show gap**. **Fake the Fate**'s lyrics were changed to 'He was born with telepathy\" and contained Heartbreaker (Led Zeppelin) teases from Shon.*"
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-08-26.md",
@@ -14618,14 +14618,26 @@
     "date": "2025-10-28"
   },
   "2025-10-26": {
-    "url": "https://spaffnerds.com/shows/2025-10-26",
+    "date": "2025-10-26",
     "venue": "The State Room",
     "city": "Salt Lake City",
     "state": "UT",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-10-26"
+    "tour": "2024 Fall",
+    "show_number": "6",
+    "rating": "8.1",
+    "chucks_dream": "Sunshine in Silence",
+    "sets": {
+      "Set 1": "Dissociation Assist (3), **Hollywood** (23) -> **The Remedy** (19), Be Strange (7), **Tainted Love** (12)",
+      "Chuck's Dream": "Sunshine in Silence",
+      "Set 2": "Peaches (26) -> Soggy Froggy (17) -> Plush (17) -> Virtual Bean Dip (9)",
+      "Encore": "Slip and Squander (11)"
+    },
+    "notes": [
+      "*This was the sixth show of the 2025 Fall Tour and the band's first appearance at The State Room since 3/11/18, ending a **585 show gap**. **Hollywood** contained a Harry Hood (Phish) jam in reference to the previous night's banter.*\n\n*\"I've been collecting all my tears from the past few years, gonna grow something beautiful.\"*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-10-26.md",
+    "url": "https://spaffnerds.com/shows/2025-10-26"
   },
   "2025-10-25": {
     "date": "2025-10-25",
