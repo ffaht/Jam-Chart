@@ -100,7 +100,7 @@
     "song": "Broken Wing",
     "timing": "32:29",
     "venue": "Terra Fermata",
-    "notes": "\nFlies through space with sharp synths for the first jam before landing on a Funkadelic planet in the second, where it hovers and surveys, slowly rotating into dawn as clouds timelapse through shifting hues. Patient-er than patient. \n",
+    "notes": "Flies through space with sharp synths for the first jam before landing on a Funkadelic planet in the second, where it hovers and surveils, slowly rotating into dawn as clouds timelapse through shifting hues. Patient-er than patient.",
     "highlighted": false
   },
   {
@@ -244,7 +244,7 @@
     "song": "Night After Night",
     "timing": "11:56",
     "venue": "The Heights Theater",
-    "notes": "\nSurveys intergalactic glacial volcanoes.\n",
+    "notes": "Surveils intergalactic glacial volcanoes.",
     "highlighted": false
   },
   {
@@ -1974,5 +1974,53 @@
     "venue": "Shrine Social Club",
     "notes": "\nVery colorful electro that widens into space and goes -> Legend of Zelda.\n",
     "highlighted": false
+  },
+  {
+    "date": "2025-10-26",
+    "song": "Hollywood",
+    "timing": "23:40",
+    "venue": "The State Room",
+    "notes": "A quick Hood jam (in reference to the previous night's \"I said when we 'knew' how to play that, not 'know'\" banter) that slow-drips across a simulated Moab desert, surveils for extraterrestrial life, then explodes into the sun and dissipates.",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-26",
+    "song": "Peaches",
+    "timing": "26:52",
+    "venue": "The State Room",
+    "notes": "\nStandard funk quiets, then builds into atmospheric, mechanical disco dream pop that peaks fantastically and has a cool outro -> Soggy Foggy.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-26",
+    "song": "Plush",
+    "timing": "17:00",
+    "venue": "The State Room",
+    "notes": "\nA much happier take on the usual deal.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-26",
+    "song": "Soggy Froggy",
+    "timing": "17:13",
+    "venue": "The State Room",
+    "notes": "\nShakes into a late night drive lit by striving lights and echoing sounds. \n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-26",
+    "song": "Tainted Love",
+    "timing": "12:19",
+    "venue": "The State Room",
+    "notes": "\nSlick grooving morphs into vibrant electro that grows hot and hits hard.\n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-26",
+    "song": "The Remedy",
+    "timing": "19:02",
+    "venue": "The State Room",
+    "notes": "\nDreams into a dark box with a window looking out to a small coastline and an endless ocean, while the sunrise gradually fills the room with refracted colors.\n",
+    "highlighted": true
   }
 ]
