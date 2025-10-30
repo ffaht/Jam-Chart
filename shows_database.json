@@ -14608,14 +14608,25 @@
     "date": "2025-10-29"
   },
   "2025-10-28": {
-    "url": "https://spaffnerds.com/shows/2025-10-28",
+    "date": "2025-10-28",
     "venue": "The Alpine",
     "city": "Reno",
     "state": "NV",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-10-28"
+    "tour": "2025 Fall",
+    "show_number": "7",
+    "rating": "",
+    "chucks_dream": "rating:",
+    "sets": {
+      "Set 1": "**Pursuit of Madness** (26) -> **Spunkadelic** (19), Shelter in Place (11) > **High Beams** (5)",
+      "Set 2": "The Way You Do the Things You Do (21) -> Motel 6 (19) > A Union Devine (4), The Waltz (13) > Ain't That Wrong (18)",
+      "Encore": "Legend (9)"
+    },
+    "notes": [
+      "*This was the seventh show of the 2025 Fall Tour and the band's first appearance in Reno since 10/29/24 (Cypress), ending a **102 show gap**. This show featured the debut of **Spunkadelic**, a sped-up version of **Funkadelic**."
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-10-28.md",
+    "url": "https://spaffnerds.com/shows/2025-10-28"
   },
   "2025-10-26": {
     "date": "2025-10-26",
