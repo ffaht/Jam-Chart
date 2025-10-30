@@ -1188,7 +1188,7 @@
     "song": "Alternate Ending",
     "timing": "12:43",
     "venue": "Magic Stick",
-    "notes": "Right in the middle of an ETS sandwich, with some heated playing from Brian.",
+    "notes": "\nHeated playing from Brian on display.\n",
     "highlighted": false
   },
   {
@@ -1220,7 +1220,15 @@
     "song": "Musette",
     "timing": "16:21",
     "venue": "Magic Stick",
-    "notes": null,
+    "notes": "Drifts into a simulated rice field under a projection of a blue sky, as gigantic intergalactic beasts of vehicles stroll into the scene, tearing the fabric of the projected sky and leaving behind a wide, shining rainbow that speeds up time before straightening out for a celebratory build back into ETS.",
+    "highlighted": true
+  },
+  {
+    "date": "2025-08-03",
+    "song": "Neutrino",
+    "timing": "30:09",
+    "venue": "Magic Stick",
+    "notes": "\nGlides and rewinds in stuttering motion down a mountainside blanketed with snow, gaining speed as it robotically dodges rocks, branches, and terrain as if it were on rails before slipping into a deep hibernation dimly lit by swirling colors and muted hues. From there, it takes its time to wake up with neat, bluesy playing that turns bright and reels into several minutes of ETS teasing that, you guessed it, goes -> ETS.\n",
     "highlighted": true
   },
   {
