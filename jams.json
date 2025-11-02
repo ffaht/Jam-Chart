@@ -2033,7 +2033,7 @@
   },
   {
     "date": "2025-10-28",
-    "song": "A Union Devine",
+    "song": "A Union Divine",
     "timing": "4:06",
     "venue": "The Alpine",
     "notes": "\nDevastatingly good final minute or so.\n",
@@ -2078,5 +2078,77 @@
     "venue": "The Alpine",
     "notes": "Wharf Rat-y and Dark Star-ish, peaking fiercely before snapping into a power-building groove that grows chaotic.",
     "highlighted": true
+  },
+  {
+    "date": "2025-10-30",
+    "song": "Broken Wing",
+    "timing": "32:48",
+    "venue": "Lost on Main",
+    "notes": "\nMoves into a strobing, vibrant disco framed by comforting, blinking, and twirling lights that grows radiant and triumphant until it peaks with the main theme. The second jam begins with a hard-hitting, Funkadelic-style groove before giving way to a soundscape of glacial streams flowing through rock formations that lead to an alien ceremony, followed by streaky guitar and a buildup straight out of Darkness Singularity.\n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-30",
+    "song": "Down Under",
+    "timing": "21:23",
+    "venue": "Lost on Main",
+    "notes": "\nTwo jams, both of which show off a lot of new sounds but ultimately make for straightforward jamtronica.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-30",
+    "song": "Neutrino",
+    "timing": "19:03",
+    "venue": "Lost on Main",
+    "notes": "\nA looser start to the jam than usual, with playful Off the Wall / Wanna Be Startin\u2019 Somethin\u2019 teasing before stepping into a shower of vibrating meteors whose particles dash and shift positions with sharp color, making for a big buildup and a spacey exit.\n",
+    "highlighted": true
+  },
+  {
+    "date": "2025-10-30",
+    "song": "Palisades",
+    "timing": "8:40",
+    "venue": "Lost on Main",
+    "notes": "\nPiercing, soulful guitar playing throughout.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-30",
+    "song": "The Reprise",
+    "timing": "10:24",
+    "venue": "Lost on Main",
+    "notes": "\nAliens-esque, noisy deep space.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-31",
+    "song": "Comfortable",
+    "timing": "26:17",
+    "venue": "The Guild Theatre",
+    "notes": "\nCool, colorful grooving, but a bit same-y in spots.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-31",
+    "song": "Electric Taco Stand",
+    "timing": "15:21",
+    "venue": "The Guild Theatre",
+    "notes": "\nDissipates into a hazy, misty coastal highway before gearing into a Double Time-y buildup.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2025-10-31",
+    "song": "Motel 6",
+    "timing": "14:50",
+    "venue": "The Guild Theatre",
+    "notes": "\nSails into a spacey, joyful, and repetitive groove before marching away.\n",
+    "highlighted": false
+  },
+  {
+    "date": "2026-10-28",
+    "song": "Pursuit of Madness",
+    "timing": "26:25",
+    "venue": "The Alpine",
+    "notes": "\nWhite hot playing from Brian between verses and a light, bouncy start to the jam that grows groovy as it dips its toes in a stream, electrifying the surrounding area to the maximum. Then they skip into deep space, working their way into a guarded, semi-industrialized village that raves away.\n",
+    "highlighted": false
   }
 ]
