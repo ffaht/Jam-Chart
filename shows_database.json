@@ -165,7 +165,7 @@
       "Encore": "Cantaloupe Island (10)"
     },
     "notes": [
-      "*This was the third show of the 2025 Summer Tour and the band's fourth appearance in Fairfield. Darkness Singularity contained an Electric Taco Stand tease from Brian. **Plush** contained Old Enough to Party (Superbad) samples from Cory. **Cantaloupe Island** was performed in a House style.*\n\nOne of those shows where it just was not connecting with me as much as I thought it would. Still a pretty damn strong setlist on paper with good playing featured throughout (Cory has been crushing **Night After Night** lately and really steps up for **Salamander Song**). Definitely took a few listens to get into this one, though. \n\nHighlights here are **Plush**, with its last 8 or so minutes dipping into a Fleetwood Mac-Pat Metheny blend, **Dirtbath**, which glides through shimmering space and plunges into a gooey, mechanical trance before closing, and **Ain't That Wrong**, which shows off your usual up-tempo, dancey jamming."
+      "*This was the third show of the 2025 Summer Tour and the band's fourth appearance in Fairfield. **Darkness Singularity** contained an **Electric Taco Stand** tease from Brian. **Plush** contained Spooky teases and Old Enough to Party (Superbad) samples from Cory. **Cantaloupe Island** was performed in a House style.*\n\nOne of those shows where it just was not connecting with me as much as I thought it would. Still a pretty damn strong setlist on paper with good playing featured throughout (Cory has been crushing **Night After Night** lately and really steps up for **Salamander Song**). Definitely took a few listens to get into this one, though. \n\nHighlights here are **Plush**, with its last 8 or so minutes dipping into a Fleetwood Mac-Pat Metheny blend, **Dirtbath**, which glides through shimmering space and plunges into a gooey, mechanical trance before closing, and **Ain't That Wrong**, which shows off your usual up-tempo, dancey jamming."
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-06-14.md",
@@ -14578,24 +14578,48 @@
     "date": "2025-11-01"
   },
   "2025-10-31": {
-    "url": "https://spaffnerds.com/shows/2025-10-31",
+    "date": "2025-10-31",
     "venue": "The Guild Theatre",
     "city": "Menlo Park",
     "state": "CA",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-10-31"
+    "tour": "2025 Fall",
+    "show_number": "9",
+    "rating": "6.5",
+    "chucks_dream": "Buried",
+    "sets": {
+      "Set 1": "Robotnik's Theme (1) -> Double Time (14) -> Motel 6 (14) > Dr. Robotnik's Boss Theme (1) -> Motel 6 (4), Electric Taco Stand (15) -> Dis Go In 5? (7) > Electric Taco Stand (7), Joker's Theme (3)",
+      "Chuck's Dream": "Buried",
+      "Set 2": "X-Men '97 (2) > Gotta Save Fred (13) > Comfortable (26) -> The Imperial March (5) > The Postman (22), Armageddon (2)",
+      "Encore": "Day-O (The Banana Boat Song) (9) -> Jump in the Line (3)"
+    },
+    "notes": [
+      "*This was the ninth show of the 2025 Fall Tour and the band's first appearance in Menlo Park. This show featured the Spafford debuts of **Robotnik's Theme**, **Dr. Robotnik's Boss Theme**, **Joker's Theme**, **X-Men '97**, and **The Imperial March**. This show also featured the first **Banana Boat Song** and **Jump in the Line** since 10/31/24 (Mill Valley, CA), ending a **103 show gap**, along with the band dressed up as Darth Vader (Brian), Doctor Robotnik (Cory), The Joker (Nick), and Magneto (Shon).*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-10-31.md",
+    "url": "https://spaffnerds.com/shows/2025-10-31"
   },
   "2025-10-30": {
-    "url": "https://spaffnerds.com/shows/2025-10-30",
+    "date": "2025-10-30",
     "venue": "Lost on Main",
     "city": "Chico",
     "state": "CA",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-10-30"
+    "tour": "2025 Fall",
+    "show_number": "8",
+    "rating": "7.0",
+    "chucks_dream": "Lost in the Distance",
+    "sets": {
+      "Set 1": "**Broken Wing** (32) > Todd's Tots (21), Sham Time (8)",
+      "Chuck's Dream": "Lost in the Distance",
+      "Set 2": "**Neutrino** (19) -> Down Under (21) > The Reprise (10) -> Palisades (8) -> The Reprise (6) > Run Like Hell (13)",
+      "Encore": "America (9)"
+    },
+    "notes": [
+      "*This was the eighth show of the 2025 Fall Tour and the band's first appearance in Chico since 3/22/19 (Lost on Main), ending a **486 show gap**. For the first set, the band dressed up as a Ghostbuster (Brian), Doctor Eggman (Cory), The Joker (Nick), and The Easter Bunny (Shon). This show featured the first **Reprise** sandwich since 6/11/23 (Portsmouth, NH), ending a **230 show gap**. **Broken Wing** contained a **Funkadelic** tease from Brian. **Neutrino** contained an Off the Wall (Michael Jackson) tease from Cory and a Wanna Be Startin' Somethin' (Michael Jackson) tease from Shon.*\n\nSome cool setlist trickery and fantastic jams in **Broken Wing** and **Neutrino** (this one's getting gold for the night!), but overall, this one just didn't do it for me. Onto Halloween!"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-10-30.md",
+    "url": "https://spaffnerds.com/shows/2025-10-30"
   },
   "2025-10-29": {
     "url": "https://spaffnerds.com/shows/2025-10-29",
@@ -14619,7 +14643,7 @@
     "sets": {
       "Set 1": "Pursuit of Madness (26) -> **Spunkadelic** (19), Shelter in Place (11) > **High Beams** (5)",
       "Chuck's Dream": "Moonwind",
-      "Set 2": "**The Way You Do the Things You Do** (21) -> **Motel 6** (19) > **A Union Devine** (4), The Waltz (13) > Ain't That Wrong (18)",
+      "Set 2": "**The Way You Do the Things You Do** (21) -> **Motel 6** (19) > **A Union Divine** (4), The Waltz (13) > Ain't That Wrong (18)",
       "Encore": "Legend (9)"
     },
     "notes": [
