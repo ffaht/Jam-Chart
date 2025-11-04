@@ -14568,14 +14568,26 @@
     "url": "https://spaffnerds.com/shows/2025-10-21"
   },
   "2025-11-01": {
-    "url": "https://spaffnerds.com/shows/2025-11-01",
+    "date": "2025-11-01",
     "venue": "Moe's Alley",
     "city": "Santa Cruz",
     "state": "CA",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-11-01"
+    "tour": "2025 Fall",
+    "show_number": "10",
+    "rating": "8.2",
+    "chucks_dream": "Drunk and the Punk",
+    "sets": {
+      "Set 1": "Darkness Singularity (18), Runaway (6), **Ice Cream** (11), **Gold Glittered Hat** (19) -> Can't Find My Vape (5)",
+      "Chuck's Dream": "Drunk and the Punk",
+      "Set 2": "All My Friends (2) -> **Fake the Fate** (22) > On Fire (18), Red's Jam (14) -> Kiss Off (7)",
+      "Encore": "Bee Jam (15) -> Kiss Off (Reprise) (7)"
+    },
+    "notes": [
+      "*This was the 10th show of the 2025 Fall Tour and the band's first appearance in Santa Cruz since 10/28/22 (The Catalyst), ending a **315 show gap**. **Ice Cream** was preceded by an **Ice Cream** tease from Brian. **Gold Glittered Hat** was preceded by a **Gold Glittered Hat** tease from Brian and Cory. **All My Friends** contained a **Bee Jam** fake out. During band introductions prior to the encore, Cory and Shon were introduced as \"The Wizard, Doctor Robotnik\" and \"Magneto.\" This show featured the first **Bee Jam** encore since 11/2/18 (Tucson, AZ), ending a **535 show gap**. \n\n*\"We're Spafford and I think this is the first time we've played Santa Cruz. Yeah? I'm a big fat liar. No? I'm lying? Multiple times? I totally remember every time I've been here, I promise you that.\"*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-11-01.md",
+    "url": "https://spaffnerds.com/shows/2025-11-01"
   },
   "2025-10-31": {
     "date": "2025-10-31",
