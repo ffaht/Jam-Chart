@@ -14771,14 +14771,26 @@
     "date": "2025-11-05"
   },
   "2025-11-04": {
-    "url": "https://spaffnerds.com/shows/2025-11-04",
+    "date": "2025-11-04",
     "venue": "Belly Up",
     "city": "Solana Beach",
     "state": "CA",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-11-04"
+    "tour": "2025 Fall",
+    "show_number": "12",
+    "rating": "8.3",
+    "chucks_dream": "The What Ifs",
+    "sets": {
+      "Set 1": "Take Your Mama (4), **Pursuit of Trance** (26) -> Another Day in Paradise (3), **Neutrino** (21) -> Diana (5)",
+      "Chuck's Dream": "The What Ifs",
+      "Set 2": "Armageddon (2), Plush (20) -> **Galisteo Way** (19), Weasel (18) -> Electric Taco Stand (13)",
+      "Encore": "Cantaloupe Island (10)"
+    },
+    "notes": [
+      "*This was the 12th show of the 2025 Fall Tour and the band's first appearance in Solana Beach since 10/2/21 (Belly Up), ending a **393 show gap**. This show featured the Spafford debut of **Another Day in Paradise** (Phill Collins). **Plush** was preceded by a **Plush** tease from Nick. During **Weasel**, Brian and Shon did a synchronized dance. **Cantaloupe Island** was performed in a House style and was preceded by several **Cantaloupe Island** teases from Nick. \n\n*Oh, think twice.*\n*It's just another day for you and me in paradise.*\n\nA really fun show with great energy that gives Westerly a run for its money when it comes to an excited crowd. Good jams all around (especially in **Galisteo Way**), great playing throughout, and a neat debut. Man, the guys are killing it."
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-11-04.md",
+    "url": "https://spaffnerds.com/shows/2025-11-04"
   },
   "2025-11-03": {
     "date": "2025-11-03",
@@ -14787,16 +14799,16 @@
     "state": "CA",
     "tour": "2025 Fall",
     "show_number": "11",
-    "rating": "",
-    "chucks_dream": "rating:",
+    "rating": "8.3",
+    "chucks_dream": "War and Ballet",
     "sets": {
       "Set 1": "I Wouldn't Want to Be Like You (3), Ginger Stardust (20) -> Walls (16), Smooth, Relax, Down (4), Dissociation Assist (3), Stratus (10)",
       "Chuck's Dream": "War and Ballet",
-      "Set 2": "Dream Jam (20) -> In the Eyes of Thieves (20), Swingtown (16), Mind's Unchained (10)",
+      "Set 2": "Dream Jam (20) -> **In the Eyes of Thieves** (20), Swingtown (16) -> Mind's Unchained (10)",
       "Encore": "Crazy (6)"
     },
     "notes": [
-      "*This was the 11th show of the 2025 Fall Tour and the band's first appearance in Pioneertown since 11/22/24 (Pappy and Harriet's), ending a **103 show gap**. This show featured the first **I Wouldn't Want to Be Like You** opener since 4/12/22 (Pittsburgh, PA), ending a **359 show gap**. **Ginger Stardust** contained a Free (Phish) tease from Cory.*"
+      "*This was the 11th show of the 2025 Fall Tour and the band's first appearance in Pioneertown since 11/22/24 (Pappy and Harriet's), ending a **103 show gap**. This show featured the first **I Wouldn't Want to Be Like You** opener since 4/12/22 (Pittsburgh, PA), ending a **359 show gap**, and the first **Crazy** encore since 10/17/17 (Madison, WI), ending a **647 show gap**. **Ginger Stardust** contained a Free (Phish) tease from Cory.*"
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-11-03.md",

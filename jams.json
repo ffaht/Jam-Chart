@@ -1947,6 +1947,13 @@
   },
   {
     "date": "2025-11-03",
+    "song": "Dream Jam",
+    "timing": "20:14",
+    "venue": "Pappy and Harriet's",
+    "notes": "\nColorful, splatter paint groove that builds with an All My Friends-y sound.\n"
+  },
+  {
+    "date": "2025-11-03",
     "song": "Ginger Stardust",
     "timing": "20:56",
     "venue": "Pappy and Harriet's",
@@ -1961,9 +1968,62 @@
   },
   {
     "date": "2025-11-03",
+    "song": "In the Eyes of Thieves",
+    "timing": "20:51",
+    "venue": "Pappy and Harriet's",
+    "highlighted": true,
+    "notes": "\nHazy, ambient atmosphere backing a grand piano solo morphs into an Ibizan sprinkler of a groove that projects swaying, closed-eye jump rope visuals on rotating walls and shapes before it hits the main theme. \n"
+  },
+  {
+    "date": "2025-11-03",
+    "song": "Swingtown",
+    "timing": "16:15",
+    "venue": "Pappy and Harriet's",
+    "notes": "\nConsistently fun grooving throughout.\n"
+  },
+  {
+    "date": "2025-11-03",
     "song": "Walls",
     "timing": "16:46",
     "venue": "Pappy and Harriet's",
     "notes": "\nEntrancing, semi-aquatic grooving with some impressive guitar work from Brian.\n"
+  },
+  {
+    "date": "2025-11-04",
+    "song": "Galisteo Way",
+    "timing": "19:35",
+    "venue": "Belly Up",
+    "highlighted": true,
+    "notes": "Rolls into a Mu-Tron-laden stream that bubbles with an electronic shimmer before blooming into a huge peak."
+  },
+  {
+    "date": "2025-11-04",
+    "song": "Neutrino",
+    "timing": "21:25",
+    "venue": "Belly Up",
+    "highlighted": true,
+    "notes": "Pendulum funk that briefly derails before catching another groove and bursting into a major peak, finishing out with a few minutes of Echoes-y playing that gets fiery."
+  },
+  {
+    "date": "2025-11-04",
+    "song": "Plush",
+    "timing": "20:10",
+    "venue": "Belly Up",
+    "notes": "\nThe usual rave with swirling lights overhead takes a turn into bright territory, peaks nicely, then flutters into a buildup toward -> Galisteo Way.\n"
+  },
+  {
+    "date": "2025-11-04",
+    "song": "Pursuit of Trance",
+    "timing": "26:25",
+    "venue": "Belly Up",
+    "highlighted": true,
+    "notes": "\nAn incredibly spirited and impressive run through the song itself leads to a determined, celebratory jam that settles into a funky grove before eventually dropping away.\n"
+  },
+  {
+    "date": "2025-11-04",
+    "song": "Weasel",
+    "timing": "18:01",
+    "venue": "Belly Up",
+    "notes": "\nHard-hitting electro calms into an alien campfire before circling back to close.\n"
   }
 ]
