@@ -14761,14 +14761,26 @@
     "date": "2025-11-06"
   },
   "2025-11-05": {
-    "url": "https://spaffnerds.com/shows/2025-11-05",
+    "date": "2025-11-05",
     "venue": "The Venice West",
     "city": "Venice",
     "state": "CA",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-11-05"
+    "tour": "2025 Fall",
+    "show_number": "13",
+    "rating": "7.7",
+    "chucks_dream": "Break the Beach",
+    "sets": {
+      "Set 1": "Spunkadelic (15), **Windmill** (32) -> High Beams (4), The Evil (8)",
+      "Chuck's Dream": "Break the Beach",
+      "Set 2": "Duncan's Uncle (24), Parody (3), Soggy Froggy (17) -> Frog Gossip (7), Ain't That Wrong (15)",
+      "Encore": "Salamander Song (10)"
+    },
+    "notes": [
+      "*This was the 13th show of the 2025 Fall Tour, the first night of a two-night stand at The Venice West, and the band's first appearance in Venice. The encore was preceded by a **Salamander Song** tease from Cory.*\n\n*\"They say time is undefeated. Do they know I am, too?\"*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-11-05.md",
+    "url": "https://spaffnerds.com/shows/2025-11-05"
   },
   "2025-11-04": {
     "date": "2025-11-04",
