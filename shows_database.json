@@ -14741,14 +14741,26 @@
     "date": "2025-11-08"
   },
   "2025-11-07": {
-    "url": "https://spaffnerds.com/shows/2025-11-07",
+    "date": "2025-11-07",
     "venue": "The Orpheum Theater",
     "city": "Flagstaff",
     "state": "AZ",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-11-07"
+    "tour": "2025 Fall",
+    "show_number": "15",
+    "rating": "8.5",
+    "chucks_dream": "Walter",
+    "sets": {
+      "Set 1": "Broken Wing (28) -> **Legend of Zelda** (6) -> Shelter in Place (22) -> **Broken Wing** (4) -> Shu Ba Da Du Ma Ma Ma Ma (7)",
+      "Chuck's Dream": "Walter",
+      "Set 2": "America (13), **Darkness Singularity** (17), **Tainted Love** (13), Dissociation Assist (3), Double Time (15)",
+      "Encore": "Sweet (6) > The Reprise (1) -> West L.A. Fadeaway (3) -> The Reprise (9)"
+    },
+    "notes": [
+      "*This was the 15th show of the 2025 Fall Tour and the band's first appearance in Flagstaff since 3/1/23 (Orpheum), ending a **275 show gap**. This show featured the first **West L.A. Fadeaway** since 9/20/23 (Knoxville, TN), ending a **208 show gap**. **Legend of Zelda** contained an Echoes tease from Cory. The second **Broken Wing** contained **Funkadelic** teases from Shon and a **Mind's Unchained** tease from Brian. **Double Time** contained a Long Tall Glasses tease from Brian. The encore was preceded by a **Sweet** tease from Brian. The second **Reprise** contained an Echoes tease from Cory.*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-11-07.md",
+    "url": "https://spaffnerds.com/shows/2025-11-07"
   },
   "2025-11-06": {
     "date": "2025-11-06",
@@ -14766,7 +14778,7 @@
       "Encore": "Levilan Shores (5) > The Impression That I Get (4)"
     },
     "notes": [
-      "*This was the 14th show of the 2025 Fall Tour and the second night of a two-night stand at The Venice West. This show featured the Spafford debut of **Overkill** (Men at Work). **Back in L.A.** contained several **Enjoy the Silence** teases from Cory.*\n\n*Out in the Sun*\n*I left my baby in the Sun*\n\nHad to have been such a killer time in person. Really nice setlist, with the first set going off with a major nod to <s>jer</s> LA, opening with the first ever jammed **Back in L.A.**, which goes Ohtani deep into a blocky jungle, a **Hollywood** that sprouts some rich funk, and a debut in **Overkill**, which... fits..? Second set kept it going with a very nice **Remedy**, a highlight in **Gotta Save Fred** (when is this not a highlight?), and a 30 minute **Dirtbath** to close things out."
+      "*This was the 14th show of the 2025 Fall Tour and the second night of a two-night stand at The Venice West. This show featured the Spafford debut of **Overkill** (Men at Work). **Back in L.A.** contained several **Enjoy the Silence** teases from Cory. **The Remedy** featured Shon playing Rob Derhak's (moe.) bass* \n\n*Out in the Sun*\n*I left my baby in the Sun*\n\nHad to have been such a killer time in person. Really nice setlist, with the first set going off with a major nod to <s>jer</s> LA, opening with the first ever jammed **Back in L.A.**, which goes Ohtani deep into a blocky jungle, a **Hollywood** that sprouts some rich funk, and a debut in **Overkill**, which... fits..? Second set kept it going with a very nice **Remedy**, a highlight in **Gotta Save Fred** (when is this not a highlight?), and a 30 minute **Dirtbath** to close things out."
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-11-06.md",
