@@ -14731,14 +14731,27 @@
     "url": "https://spaffnerds.com/shows/2025-10-24"
   },
   "2025-11-08": {
-    "url": "https://spaffnerds.com/shows/2025-11-08",
+    "date": "2025-11-08",
     "venue": "Marquee Theatre",
     "city": "Tempe",
     "state": "AZ",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-11-08"
+    "tour": "2025 Fall",
+    "show_number": "15",
+    "rating": "8.0",
+    "chucks_dream": "Headed to Smile",
+    "sets": {
+      "Set 1": "Runaway (5), Ginger Stardust (25) -> Mind's Unchained (10) -> The Imperial March (2) -> Mind's Unchained (6), Anyone (13)",
+      "Chuck's Dream": "Headed to Smile",
+      "Set 2": "Fake the Fate (20) > The Postman (19), Phoenix (4), Electric Taco Stand (10), Enjoy the Silence (13)",
+      "Set 3": "Money for Nothing (17) -> Neutrino (16) -> Weasel (7) -> Palisades (7) -> Weasel (10), Armageddon (2)",
+      "Encore": "Motel 6 (17)"
+    },
+    "notes": [
+      "*This was the 16th and final show of the first leg of the 2025 Fall Tour. The first **Mind's Unchained** contained **Imperial March** teases from Brian and Shon. The first **Mind's Unchained** and **The Imperial March** featured Cory on saxophone. **Money for Nothing** contained a Cars (Gary Numan) tease from Shon. The encore was preceded by crew and band introductions and thanks, an **Armageddon** quote from Brian, and a Lean on Me (Bill Withers) tease from Cory.*\n\n*\"It appears you're near the door to all that is more.\"*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-11-08.md",
+    "url": "https://spaffnerds.com/shows/2025-11-08"
   },
   "2025-11-07": {
     "date": "2025-11-07",
