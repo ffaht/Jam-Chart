@@ -1132,12 +1132,6 @@ function setupSongClicksAndTooltips(jamEntries, containerSelector = null) {
           }
         }
       });
-
-      // Desktop hover tooltips
-      if (!isTouchDevice && isJamCharted && matchingEntry) {
-        songElement.addEventListener("mouseenter", () => showTooltip(songElement, matchingEntry));
-        songElement.addEventListener("mouseleave", removeTooltip);
-      }
     });
   }, 0);
 }
@@ -1238,9 +1232,9 @@ function showSetlistForDate(date) {
     <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; max-width: 700px; margin: 0 auto;">
       <div style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
         <h1 style="color: var(--yellow); font-size: 1.8rem; margin-bottom: 0.5rem; text-align: left;">${displayDate}</h1>
-       <div style="font-size: 1.1rem; margin-bottom: 0.3rem; text-align: left;"><span class="clickable-song" data-venue="${show.venue}">${show.venue}</span></div>
-<div style="color: var(--muted-color); font-size: 0.95rem; text-align: left; margin-bottom: 0.3rem;"><span class="clickable-song" data-city="${show.city}">${show.city}</span>, <span class="clickable-song" data-state="${show.state}">${show.state}</span></div>
-       ${show.tour || show.show_number ? `<div style="color: var(--muted-color); font-size: 0.9rem; text-align: left;">${show.tour ? `<span class="clickable-song" data-tour="${show.tour}">${show.tour}</span>` : ''}${show.tour && show.show_number ? ' • ' : ''}${show.show_number ? `Show #${show.show_number}` : ''}</div>` : ''}
+       <div style="font-size: 1.1rem; margin-bottom: 0.3rem; text-align: left;"><span class="clickable-venue" data-venue="${show.venue}" style="cursor: pointer; color: var(--text-color);">${show.venue}</span></div>
+<div style="color: var(--muted-color); font-size: 0.95rem; text-align: left; margin-bottom: 0.3rem;"><span class="clickable-city" data-city="${show.city}" style="cursor: pointer; color: var(--text-color);">${show.city}</span>, <span class="clickable-state" data-state="${show.state}" style="cursor: pointer; color: var(--text-color);">${show.state}</span></div>
+       ${show.tour || show.show_number ? `<div style="color: var(--muted-color); font-size: 0.9rem; text-align: left;">${show.tour ? `<span class="clickable-tour" data-tour="${show.tour}" style="cursor: pointer; color: var(--muted-color);">${show.tour}</span>` : ''}${show.tour && show.show_number ? ' • ' : ''}${show.show_number ? `Show #${show.show_number}` : ''}</div>` : ''}
         ${cleanRating && cleanRating !== 'tags:' ? `<div style="font-size: 0.95rem; margin-top: 0.5rem;">★ ${cleanRating}</div>` : ''}
       </div>
       
@@ -1563,7 +1557,7 @@ setTimeout(() => {
   // Handle venue, city, state, tour clicks
   console.log('Setting up venue/city/state/tour clicks...');
   
-  document.querySelectorAll('#page-setlist [data-venue]').forEach(el => {
+  document.querySelectorAll('#page-setlist .clickable-venue').forEach(el => {
     console.log('Found venue element:', el.getAttribute('data-venue'));
     el.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -1573,7 +1567,7 @@ setTimeout(() => {
     });
   });
 
-  document.querySelectorAll('#page-setlist [data-city]').forEach(el => {
+  document.querySelectorAll('#page-setlist .clickable-city').forEach(el => {
     el.addEventListener('click', function(e) {
       e.stopPropagation();
       const city = this.getAttribute('data-city');
@@ -1582,7 +1576,7 @@ setTimeout(() => {
     });
   });
 
-  document.querySelectorAll('#page-setlist [data-state]').forEach(el => {
+  document.querySelectorAll('#page-setlist .clickable-state').forEach(el => {
     el.addEventListener('click', function(e) {
       e.stopPropagation();
       const state = this.getAttribute('data-state');
@@ -1591,7 +1585,7 @@ setTimeout(() => {
     });
   });
 
-  document.querySelectorAll('#page-setlist [data-tour]').forEach(el => {
+  document.querySelectorAll('#page-setlist .clickable-tour').forEach(el => {
     el.addEventListener('click', function(e) {
       e.stopPropagation();
       const tour = this.getAttribute('data-tour');
@@ -1648,6 +1642,7 @@ let dbSortState = {
 };
 let currentSongDetail = null;
 let songDetailRows = [];
+let currentLocationSort = { column: 'date', direction: 'desc' };
 
 function switchPage(page) {
   document.querySelectorAll('.page-tab').forEach(btn => btn.classList.remove('active'));
@@ -1961,7 +1956,8 @@ function renderDbLocations() {
     if (!venueStats[venue]) {
       venueStats[venue] = {
         venue: venue,
-        location: locationKey,
+        city: city,
+        state: state,
         shows: [],
         firstShow: date,
         lastShow: date
@@ -1988,8 +1984,8 @@ function renderDbLocations() {
       va = a[1].venue.toLowerCase();
       vb = b[1].venue.toLowerCase();
     } else if (sort.column === 'location') {
-      va = a[1].location.toLowerCase();
-      vb = b[1].location.toLowerCase();
+      va = (a[1].city + ', ' + a[1].state).toLowerCase();
+      vb = (b[1].city + ', ' + b[1].state).toLowerCase();
     } else if (sort.column === 'shows') {
       va = a[1].shows.length;
       vb = b[1].shows.length;
@@ -2007,15 +2003,42 @@ function renderDbLocations() {
   sortedVenues.forEach(([venueName, data]) => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td><span class="clickable-filter" data-venue="${data.venue}">${data.venue}</span></td>
-      <td><span class="clickable-filter" data-location="${data.location}">${data.location}</span></td>
+      <td><span class="clickable-venue" data-venue="${data.venue}" style="cursor: pointer; color: var(--yellow);">${data.venue}</span></td>
+      <td><span class="clickable-city" data-city="${data.city}" style="cursor: pointer; color: var(--yellow);">${data.city}</span>, <span class="clickable-state" data-state="${data.state}" style="cursor: pointer; color: var(--yellow);">${data.state}</span></td>
       <td>${data.shows.length}</td>
-      <td><span class="clickable-filter date-link" data-date="${data.firstShow}">${data.firstShow}</span></td>
-      <td><span class="clickable-filter date-link" data-date="${data.lastShow}">${data.lastShow}</span></td>
+      <td><span class="date-link" data-date="${data.firstShow}" style="cursor: pointer; color: var(--text-color);">${data.firstShow}</span></td>
+      <td><span class="date-link" data-date="${data.lastShow}" style="cursor: pointer; color: var(--text-color);">${data.lastShow}</span></td>
     `;
     dbLocationRows.push({ element: tr, venue: venueName, data });
     tbody.appendChild(tr);
   });
+  
+  // Add click handlers for the location table
+  setTimeout(() => {
+    document.querySelectorAll('.clickable-venue').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const venue = this.getAttribute('data-venue');
+        showLocationShows('venue', venue);
+      });
+    });
+
+    document.querySelectorAll('.clickable-city').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const city = this.getAttribute('data-city');
+        showLocationShows('city', city);
+      });
+    });
+
+    document.querySelectorAll('.clickable-state').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const state = this.getAttribute('data-state');
+        showLocationShows('state', state);
+      });
+    });
+  }, 0);
 }
 
 function sortDbLocations(column) {
@@ -2066,7 +2089,8 @@ function filterDbLocations() {
   dbLocationRows
     .filter(row => !search || 
       row.data.venue.toLowerCase().includes(search) ||
-      row.data.location.toLowerCase().includes(search))
+      row.data.city.toLowerCase().includes(search) ||
+      row.data.state.toLowerCase().includes(search))
     .forEach(row => tbody.appendChild(row.element));
 }
 
@@ -2234,86 +2258,55 @@ function showLocationShows(type, value) {
   console.log('=== showLocationShows DEBUG ===');
   console.log('Type:', type);
   console.log('Value:', value);
-  console.log('Total dbDates:', dbDates.length);
-  console.log('Sample dbDates:', dbDates.slice(0, 5));
   
-  if (type === 'cityState') {
-    const [city, state] = value.split(',').map(s => s.trim());
+  // Find shows based on location type
+  if (type === 'venue') {
     shows = dbDates.filter(date => {
       const show = dbShows[date];
-      if (state) {
-        return show.city === city && show.state === state;
-      } else {
-        return show.city === value || `${show.city}, ${show.state}` === value;
-      }
-    });
-    title = `Shows in ${value}`;
-  } else if (type === 'venue') {
-    console.log('Filtering by venue...');
-    shows = dbDates.filter(date => {
-      const show = dbShows[date];
-      const venueMatch = show.venue === value;
-      
-      // Debug first few matches
-      if (shows.length < 3) {
-        console.log(`Date: ${date}, Venue: "${show.venue}", Match: ${venueMatch}`);
-      }
-      
-      return venueMatch;
+      return show.venue === value;
     });
     title = `Shows at ${value}`;
-    console.log('Found', shows.length, 'shows for venue:', value);
-    
-    // If no matches, let's see what venues exist
-    if (shows.length === 0) {
-      console.log('No matches found. Checking all venues...');
-      const allVenues = new Set();
-      dbDates.forEach(date => {
-        allVenues.add(dbShows[date].venue);
-      });
-      console.log('All unique venues:', Array.from(allVenues).sort());
-      
-      // Try partial match
-      const partialMatches = dbDates.filter(date => {
-        const show = dbShows[date];
-        return show.venue && show.venue.toLowerCase().includes(value.toLowerCase());
-      });
-      console.log('Partial matches:', partialMatches.length);
-      if (partialMatches.length > 0) {
-        console.log('Sample partial match venues:', partialMatches.slice(0, 3).map(d => dbShows[d].venue));
-      }
-    }
   } else if (type === 'city') {
     shows = dbDates.filter(date => {
       const show = dbShows[date];
       return show.city === value;
     });
     title = `Shows in ${value}`;
-    console.log('Found', shows.length, 'shows for city:', value);
   } else if (type === 'state') {
     shows = dbDates.filter(date => {
       const show = dbShows[date];
       return show.state === value;
     });
     title = `Shows in ${value}`;
-    console.log('Found', shows.length, 'shows for state:', value);
   }
+  
+  console.log(`Found ${shows.length} shows for ${type}: ${value}`);
   
   if (shows.length === 0) {
     console.error('❌ No shows found for:', type, value);
-  } else {
-    console.log('✅ Found shows:', shows.slice(0, 5));
+    alert(`No shows found for ${type}: ${value}`);
+    return;
   }
   
+  // Update header info
   document.getElementById('song-detail-title').textContent = title;
   document.getElementById('song-detail-count').textContent = shows.length;
   document.getElementById('song-detail-first').textContent = shows[0] || '-';
   document.getElementById('song-detail-last').textContent = shows[shows.length - 1] || '-';
-  document.getElementById('song-detail-gap').textContent = '-';
   
+  // Calculate current gap (shows since last appearance)
+  const lastShowDate = shows[shows.length - 1];
+  const lastShowIndex = dbDates.indexOf(lastShowDate);
+  const currentGap = lastShowIndex !== -1 ? dbDates.length - 1 - lastShowIndex : '-';
+  document.getElementById('song-detail-gap').textContent = currentGap;
+  
+  // Clear the new song search input
   document.getElementById('song-detail-new-search').value = '';
   
-  renderLocationShowsTable(shows, title);
+  // Render location shows table with proper gap calculation
+  renderLocationShowsTable(shows, title, type, value);
+  
+  // Switch to song detail tab
   switchDbTab('song-detail');
 }
 
@@ -2346,7 +2339,7 @@ function showTourShows(tourName) {
   switchDbTab('song-detail');
 }
 
-function renderLocationShowsTable(shows, title) {
+function renderLocationShowsTable(shows, title, type, value) {
   const tbody = document.getElementById('song-detail-tbody');
   tbody.innerHTML = '';
   
@@ -2360,8 +2353,6 @@ function renderLocationShowsTable(shows, title) {
   
   console.log('Rendering location shows table for:', title);
   console.log('Total shows:', sortedShows.length);
-  console.log('First show:', sortedShows[0]);
-  console.log('Last show:', sortedShows[sortedShows.length - 1]);
   
   sortedShows.forEach((date, index) => {
     const show = dbShows[date];
@@ -2369,11 +2360,12 @@ function renderLocationShowsTable(shows, title) {
     
     // Calculate gap from previous show AT THIS LOCATION
     let gap = '-';
+    let gapDays = '-';
+    
     if (index === 0) {
       // First show at this location - calculate gap from beginning of all shows
       const currentIndex = dbDates.indexOf(date);
       gap = currentIndex >= 0 ? currentIndex : 0;
-      console.log(`First show at location: ${date}, gap from beginning: ${gap}`);
     } else {
       // Calculate gap from previous show at this location
       const prevDate = sortedShows[index - 1];
@@ -2382,9 +2374,12 @@ function renderLocationShowsTable(shows, title) {
       
       if (currentIndex !== -1 && prevIndex !== -1) {
         gap = currentIndex - prevIndex - 1;
-        console.log(`Show ${date}: current index ${currentIndex}, prev index ${prevIndex}, gap: ${gap}`);
-      } else {
-        console.log(`Could not find indices for ${date} or ${prevDate}`);
+        
+        // Calculate days gap
+        const currentDate = new Date(date);
+        const prevDateObj = new Date(prevDate);
+        const timeDiff = currentDate - prevDateObj;
+        gapDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
       }
     }
     
@@ -2396,26 +2391,15 @@ function renderLocationShowsTable(shows, title) {
       totalSongs += songs.length;
     });
     
-    // Count jam chart entries for this show
-    const jamEntries = allJams.filter(jam => {
-      const jamDbDate = jam.dbDate || (jam.date.includes('-') && jam.date.split('-')[0].length === 4 
-        ? jam.date 
-        : (() => {
-            const [m, d, y] = jam.date.split('-');
-            return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
-          })());
-      return jamDbDate === date;
-    });
-    
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td><span class="date-link" data-date="${date}" style="cursor: pointer; color: var(--text-color);">${date}</span></td>
-      <td><span class="clickable-filter" data-venue="${show.venue}">${show.venue || 'Unknown'}</span></td>
-      <td><span class="clickable-location" data-city="${show.city}" style="cursor: pointer; color: var(--yellow);">${show.city || 'Unknown'}</span>, <span class="clickable-location" data-state="${show.state}" style="cursor: pointer; color: var(--yellow);">${show.state || ''}</span></td>
+      <td><span class="clickable-venue" data-venue="${show.venue}" style="cursor: pointer; color: var(--yellow);">${show.venue || 'Unknown'}</span></td>
+      <td><span class="clickable-city" data-city="${show.city}" style="cursor: pointer; color: var(--yellow);">${show.city || 'Unknown'}</span></td>
+      <td><span class="clickable-state" data-state="${show.state}" style="cursor: pointer; color: var(--yellow);">${show.state || ''}</span></td>
       <td>${gap}</td>
       <td>${totalSongs}</td>
-      <td>${jamEntries.length}</td>
-      <td>${show.tour ? `<span class="clickable-filter" data-tour="${show.tour}">${show.tour}</span>` : '-'}</td>
+      <td>${show.tour ? `<span class="clickable-tour" data-tour="${show.tour}" style="cursor: pointer; color: var(--yellow);">${show.tour}</span>` : '-'}</td>
       <td>${show.show_number || '-'}</td>
     `;
     
@@ -2427,121 +2411,18 @@ function renderLocationShowsTable(shows, title) {
   thead.innerHTML = `
     <th onclick="sortLocationShows('date')">Date <span id="location-shows-date-sort">▼</span></th>
     <th onclick="sortLocationShows('venue')">Venue <span id="location-shows-venue-sort"></span></th>
-    <th onclick="sortLocationShows('location')">Location <span id="location-shows-location-sort"></span></th>
-    <th onclick="sortLocationShows('gap')">Gap <span id="location-shows-gap-sort"></span></th>
+    <th onclick="sortLocationShows('city')">City <span id="location-shows-city-sort"></span></th>
+    <th onclick="sortLocationShows('state')">State <span id="location-shows-state-sort"></span></th>
+    <th onclick="sortLocationShows('gap')">Show Gap <span id="location-shows-gap-sort"></span></th>
     <th onclick="sortLocationShows('songs')">Total Songs <span id="location-shows-songs-sort"></span></th>
-    <th onclick="sortLocationShows('jams')">Jam Entries <span id="location-shows-jams-sort"></span></th>
     <th onclick="sortLocationShows('tour')">Tour <span id="location-shows-tour-sort"></span></th>
     <th onclick="sortLocationShows('showNumber')">Show # <span id="location-shows-showNumber-sort"></span></th>
   `;
   
-  // Set up click handlers
-setTimeout(() => {
-  document.querySelectorAll('[data-venue]').forEach(el => {
-    el.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const venue = this.getAttribute('data-venue');
-      console.log('Venue clicked from location table:', venue);
-      showLocationShows('venue', venue);
-    });
-  });
-
-  document.querySelectorAll('.clickable-location[data-city]').forEach(el => {
-    el.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const city = this.getAttribute('data-city');
-      console.log('City clicked from location table:', city);
-      showLocationShows('city', city);
-    });
-  });
-
-  document.querySelectorAll('.clickable-location[data-state]').forEach(el => {
-    el.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const state = this.getAttribute('data-state');
-      console.log('State clicked from location table:', state);
-      showLocationShows('state', state);
-    });
-  });
-
-  document.querySelectorAll('[data-tour]').forEach(el => {
-    el.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const tour = this.getAttribute('data-tour');
-      if (tour && tour !== '-') {
-        console.log('Tour clicked from location table:', tour);
-        showTourShows(tour);
-      }
-    });
-  });
-
-  document.querySelectorAll('.date-link').forEach(el => {
-    el.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const date = this.getAttribute('data-date');
-      console.log('Date clicked from location table:', date);
-      showSetlistForDate(date);
-    });
-  });
-}, 0);
-
-function sortLocationShows(column) {
-  const tbody = document.getElementById('song-detail-tbody');
-  const rows = Array.from(tbody.querySelectorAll('tr'));
-  
-  rows.sort((a, b) => {
-    let aValue, bValue;
-    
-    switch (column) {
-      case 'date':
-        aValue = new Date(a.cells[0].textContent);
-        bValue = new Date(b.cells[0].textContent);
-        break;
-      case 'venue':
-        aValue = a.cells[1].textContent.toLowerCase();
-        bValue = b.cells[1].textContent.toLowerCase();
-        break;
-      case 'location':
-        aValue = a.cells[2].textContent.toLowerCase();
-        bValue = b.cells[2].textContent.toLowerCase();
-        break;
-      case 'songs':
-        aValue = parseInt(a.cells[3].textContent) || 0;
-        bValue = parseInt(b.cells[3].textContent) || 0;
-        break;
-      case 'jams':
-        aValue = parseInt(a.cells[4].textContent) || 0;
-        bValue = parseInt(b.cells[4].textContent) || 0;
-        break;
-      case 'tour':
-        aValue = a.cells[5].textContent.toLowerCase();
-        bValue = b.cells[5].textContent.toLowerCase();
-        break;
-      case 'showNumber':
-        aValue = parseInt(a.cells[6].textContent) || 0;
-        bValue = parseInt(b.cells[6].textContent) || 0;
-        break;
-    }
-    
-    if (typeof aValue === 'number') {
-      return aValue - bValue;
-    } else {
-      return aValue.localeCompare(bValue);
-    }
-  });
-  
-  // Clear and re-append sorted rows
-  tbody.innerHTML = '';
-  rows.forEach(row => tbody.appendChild(row));
-  
-  // Update sort indicators
-  document.querySelectorAll('#db-song-detail thead th span').forEach(span => span.textContent = '');
-  const indicator = document.getElementById('location-shows-' + column + '-sort');
-  if (indicator) indicator.textContent = '▼';
-
-  // Set up click handlers for dynamically created elements
+  // Set up click handlers for the dynamically created elements
   setTimeout(() => {
-    document.querySelectorAll('[data-venue]').forEach(el => {
+    // Venue clicks
+    document.querySelectorAll('.clickable-venue').forEach(el => {
       el.addEventListener('click', function(e) {
         e.stopPropagation();
         const venue = this.getAttribute('data-venue');
@@ -2549,7 +2430,8 @@ function sortLocationShows(column) {
       });
     });
 
-    document.querySelectorAll('[data-city]').forEach(el => {
+    // City clicks
+    document.querySelectorAll('.clickable-city').forEach(el => {
       el.addEventListener('click', function(e) {
         e.stopPropagation();
         const city = this.getAttribute('data-city');
@@ -2557,7 +2439,170 @@ function sortLocationShows(column) {
       });
     });
 
-    document.querySelectorAll('[data-state]').forEach(el => {
+    // State clicks
+    document.querySelectorAll('.clickable-state').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const state = this.getAttribute('data-state');
+        showLocationShows('state', state);
+      });
+    });
+
+    // Tour clicks
+    document.querySelectorAll('.clickable-tour').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const tour = this.getAttribute('data-tour');
+        if (tour && tour !== '-') {
+          showTourShows(tour);
+        }
+      });
+    });
+
+    // Date clicks
+    document.querySelectorAll('.date-link').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const date = this.getAttribute('data-date');
+        showSetlistForDate(date);
+      });
+    });
+  }, 0);
+}
+
+function sortLocationShows(column) {
+  const tbody = document.getElementById('song-detail-tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  
+  // Remove existing sort indicators
+  document.querySelectorAll('#db-song-detail thead th span').forEach(span => span.textContent = '');
+  
+  // Set new sort indicator
+  const indicator = document.getElementById('location-shows-' + column + '-sort');
+  if (indicator) {
+    // Toggle direction if clicking same column
+    if (currentLocationSort && currentLocationSort.column === column) {
+      currentLocationSort.direction = currentLocationSort.direction === 'asc' ? 'desc' : 'asc';
+    } else {
+      currentLocationSort = { column: column, direction: 'asc' };
+    }
+    indicator.textContent = currentLocationSort.direction === 'asc' ? '▲' : '▼';
+  }
+  
+  rows.sort((a, b) => {
+    const aValue = getCellValue(a, column);
+    const bValue = getCellValue(b, column);
+    
+    let result = 0;
+    
+    if (column === 'date' || column === 'gap' || column === 'songs' || column === 'showNumber') {
+      // Numeric sorting
+      const aNum = aValue === '-' ? -1 : parseInt(aValue) || 0;
+      const bNum = bValue === '-' ? -1 : parseInt(bValue) || 0;
+      result = aNum - bNum;
+    } else {
+      // String sorting
+      result = aValue.localeCompare(bValue);
+    }
+    
+    return currentLocationSort.direction === 'asc' ? result : -result;
+  });
+  
+  // Clear and re-append sorted rows
+  tbody.innerHTML = '';
+  rows.forEach(row => tbody.appendChild(row));
+}
+
+// Helper function to get cell value based on column
+function getCellValue(row, column) {
+  const cells = row.cells;
+  switch (column) {
+    case 'date':
+      return cells[0].textContent;
+    case 'venue':
+      return cells[1].textContent;
+    case 'city':
+      return cells[2].textContent;
+    case 'state':
+      return cells[3].textContent;
+    case 'gap':
+      return cells[4].textContent;
+    case 'songs':
+      return cells[5].textContent;
+    case 'tour':
+      return cells[6].textContent;
+    case 'showNumber':
+      return cells[7].textContent;
+    default:
+      return '';
+  }
+}
+
+function renderTourShowsTable(shows, tourName) {
+  const tbody = document.getElementById('song-detail-tbody');
+  tbody.innerHTML = '';
+  
+  if (shows.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted-color);">No shows found</td></tr>';
+    return;
+  }
+  
+  // Sort shows by date (newest first)
+  shows.sort((a, b) => new Date(b) - new Date(a));
+  
+  shows.forEach(date => {
+    const show = dbShows[date];
+    if (!show) return;
+    
+    // Count total songs in the show
+    let totalSongs = 0;
+    const sets = show.sets || {};
+    Object.values(sets).forEach(setContent => {
+      const songs = parseDbSetlist(setContent);
+      totalSongs += songs.length;
+    });
+    
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="date-link" data-date="${date}" style="cursor: pointer; color: var(--text-color);">${date}</span></td>
+      <td><span class="clickable-venue" data-venue="${show.venue}" style="cursor: pointer; color: var(--yellow);">${show.venue || 'Unknown'}</span></td>
+      <td><span class="clickable-city" data-city="${show.city}" style="cursor: pointer; color: var(--yellow);">${show.city || 'Unknown'}</span>, <span class="clickable-state" data-state="${show.state}" style="cursor: pointer; color: var(--yellow);">${show.state || ''}</span></td>
+      <td>${totalSongs}</td>
+      <td>${show.show_number || '-'}</td>
+    `;
+    
+    tbody.appendChild(tr);
+  });
+  
+  // Update the table headers for tour shows
+  const thead = document.querySelector('#db-song-detail thead tr');
+  thead.innerHTML = `
+    <th>Date</th>
+    <th>Venue</th>
+    <th>Location</th>
+    <th>Total Songs</th>
+    <th>Show #</th>
+  `;
+  
+  // Set up click handlers
+  setTimeout(() => {
+    document.querySelectorAll('.clickable-venue').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const venue = this.getAttribute('data-venue');
+        showLocationShows('venue', venue);
+      });
+    });
+
+    document.querySelectorAll('.clickable-city').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const city = this.getAttribute('data-city');
+        showLocationShows('city', city);
+      });
+    });
+
+    document.querySelectorAll('.clickable-state').forEach(el => {
       el.addEventListener('click', function(e) {
         e.stopPropagation();
         const state = this.getAttribute('data-state');
@@ -2589,7 +2634,11 @@ document.addEventListener('click', e => {
     const locationAttr = target.getAttribute('data-location');
     if (locationAttr) {
       console.log('Location clicked from stats:', locationAttr);
-      showLocationShows('cityState', locationAttr);
+      // For combined location, we need to split city and state
+      const [city, state] = locationAttr.split(',').map(s => s.trim());
+      if (city) {
+        showLocationShows('city', city);
+      }
       return;
     }
     
@@ -3039,193 +3088,6 @@ function showRandomSetlist() {
   showSetlistForDate(randomDate);
 }
 
-function showLocationShows(type, value) {
-  // Switch to stats page first
-  switchPageByName('stats');
-  
-  let shows = [];
-  let title = '';
-  
-  // Find shows based on location type
-  if (type === 'cityState') {
-    shows = dbDates.filter(date => {
-      const show = dbShows[date];
-      return `${show.city}, ${show.state}` === value;
-    });
-    title = `Shows in ${value}`;
-  } else if (type === 'venue') {
-    shows = dbDates.filter(date => {
-      const show = dbShows[date];
-      return show.venue === value;
-    });
-    title = `Shows at ${value}`;
-  }
-  
-  // Update header info
-  document.getElementById('song-detail-title').textContent = title;
-  document.getElementById('song-detail-count').textContent = shows.length;
-  document.getElementById('song-detail-first').textContent = shows[0] || '-';
-  document.getElementById('song-detail-last').textContent = shows[shows.length - 1] || '-';
-  document.getElementById('song-detail-gap').textContent = '-';
-  
-  // Clear the new song search input
-  document.getElementById('song-detail-new-search').value = '';
-  
-  // Render location shows table
-  renderLocationShowsTable(shows, title);
-  
-  // Switch to song detail tab
-  switchDbTab('song-detail');
-}
-
-function renderLocationShowsTable(shows, title) {
-  const tbody = document.getElementById('song-detail-tbody');
-  tbody.innerHTML = '';
-  
-  if (shows.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted-color);">No shows found</td></tr>';
-    return;
-  }
-  
-  // Sort shows by date (newest first)
-  shows.sort((a, b) => new Date(b) - new Date(a));
-  
-  shows.forEach(date => {
-    const show = dbShows[date];
-    if (!show) return;
-    
-    // Count total songs in the show
-    let totalSongs = 0;
-    const sets = show.sets || {};
-    Object.values(sets).forEach(setContent => {
-      const songs = parseDbSetlist(setContent);
-      totalSongs += songs.length;
-    });
-    
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td><span class="clickable-filter date-link" data-date="${date}" style="cursor: pointer; color: var(--text-color);">${date}</span></td>
-      <td><span class="clickable-filter">${show.venue || 'Unknown'}</span></td>
-      <td>${show.city || 'Unknown'}, ${show.state || ''}</td>
-      <td>${totalSongs}</td>
-      <td>${show.tour || '-'}</td>
-      <td>${show.show_number || '-'}</td>
-    `;
-    
-    tbody.appendChild(tr);
-  });
-  
-  // Update the table headers for location shows
-  const thead = document.querySelector('#db-song-detail thead tr');
-  thead.innerHTML = `
-    <th>Date</th>
-    <th>Venue</th>
-    <th>Location</th>
-    <th>Total Songs</th>
-    <th>Tour</th>
-    <th>Show #</th>
-  `;
-}
-
-function showLocationShows(type, value) {
-  // Switch to stats page first
-  switchPageByName('stats');
-  
-  let shows = [];
-  let title = '';
-  
-  // Find shows based on location type
-  if (type === 'cityState') {
-    shows = dbDates.filter(date => {
-      const show = dbShows[date];
-      return `${show.city}, ${show.state}` === value;
-    });
-    title = `Shows in ${value}`;
-  } else if (type === 'city') {
-  shows = dbDates.filter(date => {
-    const show = dbShows[date];
-    return show.city === value;
-  });
-  title = `Shows in ${value}`;
-  console.log('City search for:', value);
-  console.log('Found shows:', shows.length);
-  console.log('Sample show city:', dbShows[shows[0]]?.city);
-} else if (type === 'state') {
-  shows = dbDates.filter(date => {
-    const show = dbShows[date];
-    return show.state === value;
-  });
-  title = `Shows in ${value}`;
-  console.log('State search for:', value);
-  console.log('Found shows:', shows.length);
-  console.log('Sample show state:', dbShows[shows[0]]?.state);
-}
-  
-  // Update header info
-  document.getElementById('song-detail-title').textContent = title;
-  document.getElementById('song-detail-count').textContent = shows.length;
-  document.getElementById('song-detail-first').textContent = shows[0] || '-';
-  document.getElementById('song-detail-last').textContent = shows[shows.length - 1] || '-';
-  document.getElementById('song-detail-gap').textContent = '-';
-  
-  // Clear the new song search input
-  document.getElementById('song-detail-new-search').value = '';
-  
-  // Render location shows table
-  renderLocationShowsTable(shows, title);
-  
-  // Switch to song detail tab
-  switchDbTab('song-detail');
-}
-
-function renderLocationShowsTable(shows, title) {
-  const tbody = document.getElementById('song-detail-tbody');
-  tbody.innerHTML = '';
-  
-  if (shows.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted-color);">No shows found</td></tr>';
-    return;
-  }
-  
-  // Sort shows by date (newest first)
-  shows.sort((a, b) => new Date(b) - new Date(a));
-  
-  shows.forEach(date => {
-    const show = dbShows[date];
-    if (!show) return;
-    
-    // Count total songs in the show
-    let totalSongs = 0;
-    const sets = show.sets || {};
-    Object.values(sets).forEach(setContent => {
-      const songs = parseDbSetlist(setContent);
-      totalSongs += songs.length;
-    });
-    
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td><span class="clickable-filter date-link" data-date="${date}" style="cursor: pointer; color: var(--text-color);">${date}</span></td>
-      <td><span class="clickable-filter">${show.venue || 'Unknown'}</span></td>
-      <td>${show.city || 'Unknown'}, ${show.state || ''}</td>
-      <td>${totalSongs}</td>
-      <td>${show.tour || '-'}</td>
-      <td>${show.show_number || '-'}</td>
-    `;
-    
-    tbody.appendChild(tr);
-  });
-  
-  // Update the table headers for location shows
-  const thead = document.querySelector('#db-song-detail thead tr');
-  thead.innerHTML = `
-    <th>Date</th>
-    <th>Venue</th>
-    <th>Location</th>
-    <th>Total Songs</th>
-    <th>Tour</th>
-    <th>Show #</th>
-  `;
-}
 document.addEventListener('DOMContentLoaded', function() {
   // Define loadShowsDatabase function
   function loadShowsDatabase() {
@@ -3282,7 +3144,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const state = show.state || "";
       const locationKey = `${city}, ${state}`.trim();
 
-      // track this show by full key (so we don’t lose multi-shows)
+      // track this show by full key (so we don't lose multi-shows)
       dbDates.push(fullKey);
 
       // Locations table still groups by base date
@@ -3539,9 +3401,9 @@ function showObsidianSetlistByDate(date) {
     <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; max-width: 700px; margin: 0 auto;">
       <div style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
         <h1 style="color: var(--yellow); font-size: 1.8rem; margin-bottom: 0.5rem; text-align: left;">${displayDate}</h1>
-        <div style="font-size: 1.1rem; margin-bottom: 0.3rem; text-align: left;"><span class="clickable-song" data-venue="${show.venue}">${show.venue}</span></div>
-<div style="color: var(--muted-color); font-size: 0.95rem; text-align: left; margin-bottom: 0.3rem;"><span class="clickable-song" data-city="${show.city}">${show.city}</span>, <span class="clickable-song" data-state="${show.state}">${show.state}</span></div>
-        ${show.tour || show.show_number ? `<div style="color: var(--muted-color); font-size: 0.9rem; text-align: left;">${show.tour ? `<span class="clickable-song" data-tour="${show.tour}">${show.tour}</span>` : ''}${show.tour && show.show_number ? ' • ' : ''}${show.show_number ? `Show #${show.show_number}` : ''}</div>` : ''}
+        <div style="font-size: 1.1rem; margin-bottom: 0.3rem; text-align: left;"><span class="clickable-venue" data-venue="${show.venue}" style="cursor: pointer; color: var(--text-color);">${show.venue}</span></div>
+<div style="color: var(--muted-color); font-size: 0.95rem; text-align: left; margin-bottom: 0.3rem;"><span class="clickable-city" data-city="${show.city}" style="cursor: pointer; color: var(--text-color);">${show.city}</span>, <span class="clickable-state" data-state="${show.state}" style="cursor: pointer; color: var(--text-color);">${show.state}</span></div>
+        ${show.tour || show.show_number ? `<div style="color: var(--muted-color); font-size: 0.9rem; text-align: left;">${show.tour ? `<span class="clickable-tour" data-tour="${show.tour}" style="cursor: pointer; color: var(--muted-color);">${show.tour}</span>` : ''}${show.tour && show.show_number ? ' • ' : ''}${show.show_number ? `Show #${show.show_number}` : ''}</div>` : ''}
         ${cleanRating && cleanRating !== 'tags:' ? `<div style="font-size: 0.95rem; margin-top: 0.5rem;">★ ${cleanRating}</div>` : ''}
       </div>
       
@@ -3763,7 +3625,7 @@ setTimeout(() => {
   // Handle venue, city, state, tour clicks
   console.log('Setting up venue/city/state/tour clicks for Obsidian setlist...');
   
-  document.querySelectorAll('#latest-setlist-container [data-venue]').forEach(el => {
+  document.querySelectorAll('#latest-setlist-container .clickable-venue').forEach(el => {
     console.log('Found venue element:', el.getAttribute('data-venue'));
     el.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -3773,7 +3635,7 @@ setTimeout(() => {
     });
   });
 
-  document.querySelectorAll('#latest-setlist-container [data-city]').forEach(el => {
+  document.querySelectorAll('#latest-setlist-container .clickable-city').forEach(el => {
     el.addEventListener('click', function(e) {
       e.stopPropagation();
       const city = this.getAttribute('data-city');
@@ -3782,7 +3644,7 @@ setTimeout(() => {
     });
   });
 
-  document.querySelectorAll('#latest-setlist-container [data-state]').forEach(el => {
+  document.querySelectorAll('#latest-setlist-container .clickable-state').forEach(el => {
     el.addEventListener('click', function(e) {
       e.stopPropagation();
       const state = this.getAttribute('data-state');
@@ -3791,7 +3653,7 @@ setTimeout(() => {
     });
   });
 
-  document.querySelectorAll('#latest-setlist-container [data-tour]').forEach(el => {
+  document.querySelectorAll('#latest-setlist-container .clickable-tour').forEach(el => {
     el.addEventListener('click', function(e) {
       e.stopPropagation();
       const tour = this.getAttribute('data-tour');
@@ -3816,6 +3678,7 @@ function showRandomObsidianSetlist() {
   const randomDate = obsidianDates[Math.floor(Math.random() * obsidianDates.length)];
   showObsidianSetlistByDate(randomDate);
 }
+
 </script>
 </body>
 </html>
