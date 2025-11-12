@@ -1263,22 +1263,26 @@
     "date": "2025-02-14"
   },
   "2025-02-13": {
-    "url": "https://spaffnerds.com/shows/2025-02-13",
+    "date": "2025-02-13",
     "venue": "Old Town Pub",
     "city": "Steamboat Springs",
     "state": "CO",
+    "tour": "2025 Spaffski",
+    "show_number": "1",
+    "rating": "7.5",
+    "chucks_dream": "Moon Lady",
     "sets": {
-      "Set 1": "All My Friends > Bee Jam > Motel 6,, Windmill > Frog Gossip",
-      "Set 2": "Chuck's Dream,, Neutrino > Sham Time [ 1 ],, On Fire [ 2 ],, Broken Wing > Mind's Unchained",
-      "Encore": "Peaches [ 3 ]"
+      "Set 1": "All My Friends (2) -> Bee Jam (14) -> Motel 6 (8), Windmill (33) -> Frog Gossip (6)",
+      "Chuck's Dream": "Moon Lady",
+      "Set 2": "Neutrino (19) -> Sham Time (6), On Fire (17), Broken Wing (18) -> Mind's Unchained (11)",
+      "Encore": "Peaches (3)"
     },
     "notes": [
-      "[ 1 ]: Eddie Harris",
-      "[ 2 ]: JJ Grey & Mofro",
-      "[ 3 ]: President of the United States of America"
+      "*This was the first show of the 2025 Spaffski run and the first night of a three-night run at the Old Town Pub. **Windmill** contained a **Fake the Fate** tease from Brian. **Neutrino** contained a **Fake the Fate** tease. **On Fire** contained Old Enough to Party (McLovin) samples from Cory.*"
     ],
-    "source": "spaffnerds",
-    "date": "2025-02-13"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-02-13.md",
+    "url": "https://spaffnerds.com/shows/2025-02-13"
   },
   "2025-01-26": {
     "date": "2025-01-26",
