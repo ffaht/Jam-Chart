@@ -1245,22 +1245,26 @@
     "date": "2025-02-15"
   },
   "2025-02-14": {
-    "url": "https://spaffnerds.com/shows/2025-02-14",
+    "date": "2025-02-14",
     "venue": "Old Town Pub",
     "city": "Steamboat Springs",
     "state": "CO",
+    "tour": "2025 Spaffski",
+    "show_number": "2",
+    "rating": "8.0",
+    "chucks_dream": "Cut",
     "sets": {
-      "Set 1": "Shelter In Place > America,, The Postman",
-      "Set 2": "Chuck's Dream [ 1 ],, Pursuit Of Madness [ 2 ] > The Reprise,, I Wouldn't Want To Be Like You [ 3 ],, Gotta Save Fred > Cantaloupe Island",
-      "Encore": "Tongue N' Groove"
+      "Set 1": "Shelter in Place (22) -> America (11), The Postman (22)",
+      "Chuck's Dream": "Cut",
+      "Set 2": "Pursuit of Trance (21) -> The Reprise (11), I Wouldn't Want to Be Like You (3), Gotta Save Fred (18) -> Cantaloupe Island (10)",
+      "Encore": "Tongue N' Groove (10)"
     },
     "notes": [
-      "[ 1 ]: Cut",
-      "[ 2 ]: Trance version",
-      "[ 3 ]: The Alan Parsons Project"
+      "*This was the first show of the 2025 Spaffski run and the second night of a four-night run at the Old Town Pub. This show featured the first **Tongue N' Groove** encore since 11/15/22 (Pensacola, FL), ending a **235 show gap**. **America** contained an **Enjoy the Silence** tease from Cory. **Pursuit of Trance** contained Old Enough to Party (McLovin) samples and **Funkadelic** teases.*"
     ],
-    "source": "spaffnerds",
-    "date": "2025-02-14"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-02-14.md",
+    "url": "https://spaffnerds.com/shows/2025-02-14"
   },
   "2025-02-13": {
     "date": "2025-02-13",
@@ -1278,7 +1282,7 @@
       "Encore": "Peaches (3)"
     },
     "notes": [
-      "*This was the first show of the 2025 Spaffski run and the first night of a three-night run at the Old Town Pub. **Windmill** contained a **Fake the Fate** tease from Brian. **Neutrino** contained a **Fake the Fate** tease. **On Fire** contained Old Enough to Party (McLovin) samples from Cory.*"
+      "*This was the first show of the 2025 Spaffski run and the first night of a four-night run at the Old Town Pub. **Windmill** contained a **Fake the Fate** tease from Brian. **Neutrino** contained a **Fake the Fate** tease. **On Fire** contained Old Enough to Party (McLovin) samples from Cory.*"
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Setlists\\2025-02-13.md",
