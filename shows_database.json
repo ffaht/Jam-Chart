@@ -1233,13 +1233,16 @@
     "state": "CO",
     "tour": "2025 SpaffSki",
     "show_number": "3",
-    "rating": "",
-    "chucks_dream": "rating:",
+    "rating": "7.7",
+    "chucks_dream": "Pitter Patter",
     "sets": {
-      "Set 1": "Double Time (13), Plush (15) -> Darkness Singularity (15), Diana (5), Salamander Song (10)"
+      "Set 1": "**Double Time** (13), Plush (15) -> Darkness Singularity (15), Diana (5), Salamander Song (10)",
+      "Chuck's Dream": "Pitter Patter",
+      "Set 2": "Electric Taco Stand (20), Walls (16) -> The Other One (5) -> Walls (18) -> Weasel (11)",
+      "Encore": "The Remedy (14)"
     },
     "notes": [
-      "*This was the third show of the 2025 SpaffSki run and the third night of a four-night run at the Old Town Pub. **Plush**'s lyrics were changed to \"is it snowing in your bedroom?\" and contained a **Walls** tease from Cory.*"
+      "*This was the third show of the 2025 SpaffSki run and the third night of a four-night run at the Old Town Pub. **Plush**'s lyrics were changed to \"is it snowing in your bedroom?\" and contained a **Walls** tease from Cory. The first **Walls** contained a Made for Wesley tease from Brian. The encore was preceded by several teases of **The Remedy** from Cory.*"
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-02-15.md",
