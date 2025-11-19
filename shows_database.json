@@ -1175,22 +1175,26 @@
     "date": "2025-03-01"
   },
   "2025-02-28": {
-    "url": "https://spaffnerds.com/shows/2025-02-28",
+    "date": "2025-02-28",
     "venue": "The Public House",
     "city": "Crested Butte",
     "state": "CO",
+    "tour": "2025 SpaffSki",
+    "show_number": "6",
+    "rating": "tags:",
+    "chucks_dream": "Beneath the Surface",
     "sets": {
-      "Set 1": "Fake The Fate,, Todd's Tots,, Crazy,, Mind's Unchained",
-      "Set 2": "Chuck's Dream [ 1 ],, The Postman,, Gotta Save Fred,, Anyone [ 2 ],, Motel 6",
-      "Encore": "Run Like Hell [ 3 ]"
+      "Set 1": "Fake the Fate (20) -> Todd's Tots (19), Crazy (6), Mind's Unchained (16)",
+      "Chuck's Dream": "Beneath the Surface",
+      "Set 2": "The Postman (28), Gotta Save Fred (15) -> Anyone (13), Motel 6 (7)",
+      "Encore": "Run Like Hell (15)"
     },
     "notes": [
-      "[ 1 ]: Between The Surface",
-      "[ 2 ]: Demi Lovato",
-      "[ 3 ]: Pink Floyd"
+      "*This was the sixth show of the 2025 SpaffSki run and the second night of a four-night run at The Public House. **Fake the Fate** contained a Lose Yourself to Dance (Daft Punk) tease from Cory. **The Postman** contained **Enjoy the Silence**, Inspector Gadget, and **The Waltz** teases from Cory. **Gotta Save Fred** contained a **Motel 6** tease from Brian and a **Motel 6** fake out.*"
     ],
-    "source": "spaffnerds",
-    "date": "2025-02-28"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-02-28.md",
+    "url": "https://spaffnerds.com/shows/2025-02-28"
   },
   "2025-02-27": {
     "date": "2025-02-27",
