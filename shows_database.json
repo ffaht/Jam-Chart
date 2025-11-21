@@ -1158,21 +1158,26 @@
     "date": "2025-03-02"
   },
   "2025-03-01": {
-    "url": "https://spaffnerds.com/shows/2025-03-01",
+    "date": "2025-03-01",
     "venue": "The Public House",
     "city": "Crested Butte",
     "state": "CO",
+    "tour": "2025 SpaffSki",
+    "show_number": "7",
+    "rating": "tags:",
+    "chucks_dream": "Sounds Like the Radio",
     "sets": {
-      "Set 1": "Take Your Mama [ 1 ],, Double Time,, Machine Elves,, Duncan's Uncle,, Galisteo Way",
-      "Set 2": "Electric Taco Stand > Palisades > Electric Taco Stand,, Kiss Off [ 2 ],, Weasel > Alternate Ending > Weasel",
-      "Encore": "Neutrino"
+      "Set 1": "Take Your Mama (4), **Double Time** (?), Machine Elves (2), **Duncan's Uncle** (23) > Galisteo Way (16)",
+      "Chuck's Dream": "Sounds Like the Radio",
+      "Set 2": "Electric Taco Stand (13) -> Palisades (8) > Electric Taco Stand (11), Kiss Off (3), Weasel (10) -> Alternate Ending (11) -> Weasel (7)",
+      "Encore": "Neutrino (13)"
     },
     "notes": [
-      "[ 1 ]: Scissor Sisters",
-      "[ 2 ]: Violent Femmes"
+      "*This was the seventh show of the 2025 SpaffSki run and the third night of a four-night run at The Public House. Take Your Mama's lyrics were changed to \"looking over dress.\"*"
     ],
-    "source": "spaffnerds",
-    "date": "2025-03-01"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-03-01.md",
+    "url": "https://spaffnerds.com/shows/2025-03-01"
   },
   "2025-02-28": {
     "date": "2025-02-28",
@@ -14887,5 +14892,35 @@
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-11-03.md",
     "url": "https://spaffnerds.com/shows/2025-11-03"
+  },
+  "2025-11-22": {
+    "url": "https://spaffnerds.com/shows/2025-11-22",
+    "venue": "The Caribou Room",
+    "city": "Nederland",
+    "state": "CO",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-11-22"
+  },
+  "2025-11-21": {
+    "url": "https://spaffnerds.com/shows/2025-11-21",
+    "venue": "Summit",
+    "city": "Denver",
+    "state": "CO",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-11-21"
+  },
+  "2025-11-20": {
+    "url": "https://spaffnerds.com/shows/2025-11-20",
+    "venue": "The Lariat",
+    "city": "Buena Vista",
+    "state": "CO",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-11-20"
   }
 }
