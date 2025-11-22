@@ -14904,14 +14904,23 @@
     "date": "2025-11-22"
   },
   "2025-11-21": {
-    "url": "https://spaffnerds.com/shows/2025-11-21",
-    "venue": "Summit",
+    "date": "2025-11-21",
+    "venue": "Summit Music Hall",
     "city": "Denver",
     "state": "CO",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-11-21"
+    "tour": "2025 Fall",
+    "show_number": "18",
+    "rating": "",
+    "chucks_dream": "rating:",
+    "sets": {
+      "Set 1": "**Night After Night** (11), Mind's Unchained (17), **War of Man** (25) -> Armageddon (2)"
+    },
+    "notes": [
+      "*This was the 18th show of the 2025 Fall Tour and the band's first appearance in Denver since 11/23/24 (Cervantes'), ending a **100 show gap**. The Jauntee was the opening act. **Slip and Squander** contained a Feliz Navidad (José Feliciano) from Cory. *"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-11-21.md",
+    "url": "https://spaffnerds.com/shows/2025-11-21"
   },
   "2025-11-20": {
     "date": "2025-11-20",
