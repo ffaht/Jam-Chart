@@ -14766,7 +14766,7 @@
     "city": "Tempe",
     "state": "AZ",
     "tour": "2025 Fall",
-    "show_number": "15",
+    "show_number": "16",
     "rating": "8.0",
     "chucks_dream": "Headed to Smile",
     "sets": {
@@ -14914,13 +14914,25 @@
     "date": "2025-11-21"
   },
   "2025-11-20": {
-    "url": "https://spaffnerds.com/shows/2025-11-20",
+    "date": "2025-11-20",
     "venue": "The Lariat",
     "city": "Buena Vista",
     "state": "CO",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-11-20"
+    "tour": "2025 Fall",
+    "show_number": "17",
+    "rating": "",
+    "chucks_dream": "rating:",
+    "sets": {
+      "Set 1": "**Comfortable** (28) -> Soggy Froggy (12) -> Windmill (21)",
+      "Chuck's Dream": "It Could Be Any Day Now",
+      "Set 2": "All My Friends (2) -> **Bee Jam** (29) -> **Broken Wing** (27) -> Stratus (10), Ain't That Wrong (17)",
+      "Encore": "Todd's Tots (19)"
+    },
+    "notes": [
+      "*This was the 17th show of the 2025 Fall Tour and the band's first appearance in Buena Vista. Before the show, Brian caught a fish. **Comfortable** contained several Get Real and I'm King of the Trees samples from Cory. **Soggy Froggy** contained a Discipline (King Crimson) tease from Brian. **Bee Jam** contained All Along the Watchtower (Bob Dylan) teases from Cory. **Broken Wing** contained an **In the Eyes of Thieves** tease from Cory.*\n\n*seat creaks* *\"You know who it is. Guys, give it up. It's Brian Moss on the guitar.\"*\n\n*\"That was pretty good, man. That was a good one. More of that tomorrow night.\"*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-11-20.md",
+    "url": "https://spaffnerds.com/shows/2025-11-20"
   }
 }
