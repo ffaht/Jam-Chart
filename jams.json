@@ -2527,10 +2527,39 @@
   },
   {
     "date": "2025-11-22",
+    "song": "Electric Taco Stand",
+    "timing": "16:24",
+    "venue": "The Caribou Room",
+    "notes": "\nAbout as good as Type I gets.\n"
+  },
+  {
+    "date": "2025-11-22",
+    "song": "Neutrino",
+    "timing": "20:28",
+    "venue": "The Caribou Room",
+    "highlighted": true,
+    "notes": "\nImages of an intergalactic detection gang on TRAPPIST-1e rolling up to a nondescript landscape and using spectral imaging and radioscopic surveys to scan for signs of life until they penetrate the surface and a massive translucent animatronic whale breaches upward, transforming the terrain into a cosmic ocean of fluttering matrices that float their way toward the shoreline and -> Salamander Song.\n"
+  },
+  {
+    "date": "2025-11-22",
+    "song": "Shelter in Place",
+    "timing": "22:23",
+    "venue": "The Caribou Room",
+    "notes": "\nPendulums of oceans swinging and colliding before merging into a dancey, smooth, nu-jazz groove that blooms into -> Spunkadelic.\n"
+  },
+  {
+    "date": "2025-11-22",
     "song": "Spunkadelic",
     "timing": "14:10",
     "venue": "The Caribou Room",
     "highlighted": true,
     "notes": "\nSupremely funky work with a customary ending.\n"
+  },
+  {
+    "date": "2025-11-22",
+    "song": "The Postman",
+    "timing": "23:32",
+    "venue": "The Caribou Room",
+    "notes": "\nAmbient swells give way to slick funk that turns into hard boogie with a big ending.\n"
   }
 ]

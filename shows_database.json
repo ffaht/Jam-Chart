@@ -14900,14 +14900,16 @@
     "state": "CO",
     "tour": "2025 Fall",
     "show_number": "19",
-    "rating": "",
-    "chucks_dream": "rating:",
+    "rating": "tags:",
+    "chucks_dream": "Keep",
     "sets": {
       "Set 1": "Fake the Fate (5), Shelter in Place (22) -> Spunkadelic (14), Low (5), Walls (19)",
-      "Chuck's Dream": "Keep"
+      "Chuck's Dream": "Keep",
+      "Set 2": "Electric Taco Stand (16), Neutrino (20) -> Salamander Song (9), The Remedy (15), Another Day in Paradise (3), The Postman (23)",
+      "Encore": "Cantaloupe Island (10)"
     },
     "notes": [
-      "*This was the 19th show of the 2025 Fall Tour and the band's first appearance in Nederland since 2/24/23 (Caribou Room), ending a 281 show gap. This was the band's 1000th show. **Fake the Fate** featured a new ending. **Shelter in Place** contained an Echoes tease from Cory. **Spunkadelic** contained an Around the World (Daft Punk) tease from Cory, a Shakedown Street (Grateful Dead) tease from Cory and Brian, a Fishing for Fishies (King Gizzard and the Lizard Wizard) tease from Nick, and a **Funkadelic** tease from Brian.*"
+      "*This was the 19th show of the 2025 Fall Tour and the band's first appearance in Nederland since 2/24/23 (Caribou Room), ending a 281 show gap. This was the band's 1000th show. Dave Watts and Friends was the opening act. **Fake the Fate** featured a new ending. **Shelter in Place** contained an Echoes tease from Cory. **Spunkadelic** contained an Around the World (Daft Punk) tease from Cory, Shakedown Street (Grateful Dead) teases from Cory and Brian, a Fishing for Fishies (King Gizzard and the Lizard Wizard) tease from Nick, and a **Funkadelic** tease from Brian. **Cantaloupe Island** was performed in a House style.*\n\n*\"Play in Minnesota, bro!\"*\n\n*\"Huh?\"*\n\n*\"Play in Minnesota!\"* \n\n*\"Play in Minnesota? I think we are, aren't we? No? Okay. You might know better than me.\"*"
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-11-22.md",
