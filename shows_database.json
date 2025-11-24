@@ -14894,14 +14894,24 @@
     "url": "https://spaffnerds.com/shows/2025-11-03"
   },
   "2025-11-22": {
-    "url": "https://spaffnerds.com/shows/2025-11-22",
+    "date": "2025-11-22",
     "venue": "The Caribou Room",
     "city": "Nederland",
     "state": "CO",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-11-22"
+    "tour": "2025 Fall",
+    "show_number": "19",
+    "rating": "",
+    "chucks_dream": "rating:",
+    "sets": {
+      "Set 1": "Fake the Fate (5), Shelter in Place (22) -> Spunkadelic (14), Low (5), Walls (19)",
+      "Chuck's Dream": "Keep"
+    },
+    "notes": [
+      "*This was the 19th show of the 2025 Fall Tour and the band's first appearance in Nederland since 2/24/23 (Caribou Room), ending a 281 show gap. This was the band's 1000th show. **Fake the Fate** featured a new ending. **Shelter in Place** contained an Echoes tease from Cory. **Spunkadelic** contained an Around the World (Daft Punk) tease from Cory, a Shakedown Street (Grateful Dead) tease from Cory and Brian, a Fishing for Fishies (King Gizzard and the Lizard Wizard) tease from Nick, and a **Funkadelic** tease from Brian.*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-11-22.md",
+    "url": "https://spaffnerds.com/shows/2025-11-22"
   },
   "2025-11-21": {
     "date": "2025-11-21",
@@ -14910,13 +14920,16 @@
     "state": "CO",
     "tour": "2025 Fall",
     "show_number": "18",
-    "rating": "",
-    "chucks_dream": "rating:",
+    "rating": "7.6",
+    "chucks_dream": "Ripped Wrap",
     "sets": {
-      "Set 1": "**Night After Night** (11), Mind's Unchained (17), **War of Man** (25) -> Armageddon (2)"
+      "Set 1": "**Night After Night** (11), Mind's Unchained (17), **War of Man** (25) -> Armageddon (2)",
+      "Chuck's Dream": "Ripped Wrap",
+      "Set 2": "Darkness Singularity (18), Pursuit of Trance (15) -> Run Like Hell (19), Weasel (11) -> Legend of Zelda (1) -> Weasel (11), Double Time (13)",
+      "Encore": "Tainted Love (12)"
     },
     "notes": [
-      "*This was the 18th show of the 2025 Fall Tour and the band's first appearance in Denver since 11/23/24 (Cervantes'), ending a **100 show gap**. The Jauntee was the opening act. **Slip and Squander** contained a Feliz Navidad (José Feliciano) from Cory. *"
+      "*This was the 18th show of the 2025 Fall Tour and the band's first appearance in Denver since 11/23/24 (Cervantes'), ending a **100 show gap**. The Jauntee was the opening act. **Slip and Squander** contained a Feliz Navidad (José Feliciano) from Cory. **Pursuit of Trance** contained several **Plush** teases from Nick and an Electric Avenue (Eddy Grant) tease from Cory.*\n\n*\"You may call him 'The Wizard,' 'The Mad Scientist,' 'The Frog.' What else you got?\"*\n\n*\"The Mechanic.\"*\n\n*\"The Mechanic? I've seen you on cars, dude.\"*\n\n*\"I think that one's cool. Sorry, go ahead.\"*\n\n*\"The Mechanic? Someone actually called you a mechanic?\"*\n\n*“Yeah, earlier today. They’re probably still there, so now I’m getting nervous talking about it. I’ll tell you later.”*"
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-11-21.md",
