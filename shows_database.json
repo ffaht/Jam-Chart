@@ -1139,23 +1139,26 @@
     "date": "2025-03-12"
   },
   "2025-03-02": {
-    "url": "https://spaffnerds.com/shows/2025-03-02",
+    "date": "2025-03-02",
     "venue": "The Public House",
     "city": "Crested Butte",
     "state": "CO",
+    "tour": "2025 SpaffSki",
+    "show_number": "8",
+    "rating": "",
+    "chucks_dream": "rating:",
     "sets": {
-      "Set 1": "The Hard Way [ 1 ],, Ginger Stardust,, The Way You Do The Things You Do [ 2 ],, Windmill,, Be Strange",
-      "Set 2": "Chuck's Dream,, Back in L.A. [ 3 ],, Swingtown [ 4 ],, Ain't That Wrong,, Jealous Guy [ 5 ],, Frog Gossip,, Salamander Song,, The Reprise"
+      "Set 1": "The Hard Way (6) -> Ginger Stardust (4), The Way You Do the Things You Do (22) -> Windmill (18), Be Strange (6)",
+      "Chuck's Dream": "Diving Board",
+      "Set 2": "Back in L.A. (4), Swingtown (14) -> Ain't That Wrong (13), Jealous Guy (5), Frog Gossip (5), Salamander Song (17) > The Reprise (12)",
+      "Encore": "America (6)"
     },
     "notes": [
-      "[ 1 ]: Last Time Played - 10/22/19",
-      "[ 2 ]: The Temptations, With: Wade Koeman on Guitar",
-      "[ 3 ]: First Time Played",
-      "[ 4 ]: Steve Miller Band, First Time Played",
-      "[ 5 ]: John Lennon"
+      "*This was the eighth and final show of the 2025 SpaffSki run and the fourth and final night of a four-night run at The Public House. This show featured the Spafford debuts of **Swingtown** (Steve Miller) and **Jealous Guy** (John Lennon). This show featured the first **Hard Way** since 10/22/19 (St. Louis, MO), ending a **388 show gap**, which was also the first show opener since 3/20/19 (Bend, OR), ending a **425 show gap**. **The Way You Do the Things You Do** featured Wade Koeman on guitar.*"
     ],
-    "source": "spaffnerds",
-    "date": "2025-03-02"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-03-02.md",
+    "url": "https://spaffnerds.com/shows/2025-03-02"
   },
   "2025-03-01": {
     "date": "2025-03-01",
@@ -1173,7 +1176,7 @@
       "Encore": "Neutrino (13)"
     },
     "notes": [
-      "*This was the seventh show of the 2025 SpaffSki run and the third night of a four-night run at The Public House. Take Your Mama's lyrics were changed to \"looking over dress.\"*"
+      "*This was the seventh show of the 2025 SpaffSki run and the third night of a four-night run at The Public House. **Take Your Mama**'s lyrics were changed to \"looking over dress.\" **Double Time**'s length was unconfirmed as the recording cut off. The first **Electric Taco Stand** contained a **Palisades** tease from Nick. The second **Electric Taco Stand** contained a Cars (Gary Numan) tease from Brian.*"
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-03-01.md",
@@ -14909,7 +14912,7 @@
       "Encore": "Cantaloupe Island (10)"
     },
     "notes": [
-      "*This was the 19th show of the 2025 Fall Tour and the band's first appearance in Nederland since 2/24/23 (Caribou Room), ending a 281 show gap. This was the band's 1000th show. Dave Watts and Friends was the opening act. **Fake the Fate** featured a new ending. **Shelter in Place** contained an Echoes tease from Cory. **Spunkadelic** contained an Around the World (Daft Punk) tease from Cory, Shakedown Street (Grateful Dead) teases from Cory and Brian, a Fishing for Fishies (King Gizzard and the Lizard Wizard) tease from Nick, and a **Funkadelic** tease from Brian. **Cantaloupe Island** was performed in a House style.*\n\n*\"Play in Minnesota, bro!\"*\n\n*\"Huh?\"*\n\n*\"Play in Minnesota!\"* \n\n*\"Play in Minnesota? I think we are, aren't we? No? Okay. You might know better than me.\"*"
+      "*This was the 19th show of the 2025 Fall Tour and the band's first appearance in Nederland since 2/24/23 (Caribou Room), ending a **281 show gap**. This was the band's **1000th show**. Dave Watts and Friends was the opening act. **Fake the Fate** featured a new ending. **Shelter in Place** contained an Echoes tease from Cory. **Spunkadelic** contained an Around the World (Daft Punk) tease from Cory, Shakedown Street (Grateful Dead) teases from Cory and Brian, a Fishing for Fishies (King Gizzard and the Lizard Wizard) tease from Nick, and a **Funkadelic** tease from Brian. **Cantaloupe Island** was performed in a House style.*\n\n*\"Play in Minnesota, bro!\"*\n\n*\"Huh?\"*\n\n*\"Play in Minnesota!\"* \n\n*\"Play in Minnesota? I think we are, aren't we? No? Okay. You might know better than me.\"*"
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-11-22.md",
