@@ -1123,20 +1123,23 @@
     "date": "2025-03-13"
   },
   "2025-03-12": {
-    "url": "https://spaffnerds.com/shows/2025-03-12",
+    "date": "2025-03-12",
     "venue": "Broad Brook Opera House",
     "city": "East Windsor",
     "state": "CT",
+    "tour": "2025 Spring",
+    "show_number": "1",
+    "rating": "tags:",
+    "chucks_dream": "-",
     "sets": {
-      "Set 1": "Fake The Fate > Hollywood > In The Eyes Of Thieves",
-      "Set 2": "Pursuit Of Madness > The Postman,, Neutrino > Sham Time [ 1 ]",
-      "Encore": "Levilan Shores"
+      "Set 1": "**Fake the Fate** (27) -> Hollywood (18), In the Eyes of Thieves (16)"
     },
     "notes": [
-      "[ 1 ]: Eddie Harris"
+      "*This was the first show of the 2025 Spring Tour and the first night of a two-night stand at Broad Brook. Fake the Fate contained a Mustard on That Beat, Hoe (DJ Mustard) tease from Shon, a **Night After Night** tease from Brian, and a Horses (Maggie Rogers) tease from Brian.*"
     ],
-    "source": "spaffnerds",
-    "date": "2025-03-12"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-03-12.md",
+    "url": "https://spaffnerds.com/shows/2025-03-12"
   },
   "2025-03-02": {
     "date": "2025-03-02",
