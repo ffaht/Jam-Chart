@@ -1135,7 +1135,7 @@
       "Set 1": "**Fake the Fate** (27) -> Hollywood (18), In the Eyes of Thieves (16)"
     },
     "notes": [
-      "*This was the first show of the 2025 Spring Tour and the first night of a two-night stand at Broad Brook. Fake the Fate contained a Mustard on That Beat, Hoe (DJ Mustard) tease from Shon, a **Night After Night** tease from Brian, and a Horses (Maggie Rogers) tease from Brian.*"
+      "*This was the first show of the 2025 Spring Tour and the first night of a two-night stand at Broad Brook. **Fake the Fate** contained a Mustard on That Beat, Hoe (DJ Mustard) tease from Shon, a **Night After Night** tease from Brian, and a Horses (Maggie Rogers) tease from Brian.*"
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-03-12.md",
@@ -14964,5 +14964,65 @@
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-11-20.md",
     "url": "https://spaffnerds.com/shows/2025-11-20"
+  },
+  "2025-12-02": {
+    "date": "2025-12-02",
+    "venue": "The Royal Grove",
+    "city": "Lincoln",
+    "state": "NE",
+    "tour": "2025 Fall",
+    "show_number": "20",
+    "rating": "tags:",
+    "chucks_dream": "Time Tapped",
+    "sets": {
+      "Set 1": "Gold Glittered Hat (23) -> On Fire (17), Gotta Save Fred (13) > In the Eyes of Thieves (14)",
+      "Chuck's Dream": "Time Tapped"
+    },
+    "notes": [
+      "*This was the 20th show of the 2025 Fall Tour and the band's first appearance in Lincoln since 9/24/16 (Bodega's Alley), ending a **751 show gap**. **Hollywood** contained several Norwegian Wood teases from Brian.*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-12-02.md",
+    "url": ""
+  },
+  "2025-12-06": {
+    "url": "https://spaffnerds.com/shows/2025-12-06",
+    "venue": "Space",
+    "city": "Evanston",
+    "state": "IL",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-12-06"
+  },
+  "2025-12-05": {
+    "url": "https://spaffnerds.com/shows/2025-12-05",
+    "venue": "Kenny's Westside",
+    "city": "Peoria",
+    "state": "IL",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-12-05"
+  },
+  "2025-12-04": {
+    "url": "https://spaffnerds.com/shows/2025-12-04",
+    "venue": "Old Rock House",
+    "city": "St. Louis",
+    "state": "MO",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-12-04"
+  },
+  "2025-12-03": {
+    "url": "https://spaffnerds.com/shows/2025-12-03",
+    "venue": "Knuckleheads",
+    "city": "Kansas City",
+    "state": "MO",
+    "sets": {},
+    "notes": [],
+    "source": "spaffnerds",
+    "date": "2025-12-03"
   }
 }
