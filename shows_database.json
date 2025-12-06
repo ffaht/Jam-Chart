@@ -14981,7 +14981,7 @@
       "Encore": "Back in L.A. (4)"
     },
     "notes": [
-      "*This was the 20th show of the 2025 Fall Tour and the band's first appearance in Lincoln since 9/24/16 (Bodega's Alley), ending a **751 show gap**. **Hollywood** contained several Norwegian Wood teases from Brian. The encore was preceded by a full-band jam on \"Give Us The Fire,\" referencing Jesse, the lighting director's use of fire effects throughout the night.*"
+      "*This was the 20th show of the 2025 Fall Tour and the band's first appearance in Lincoln since 9/24/16 (Bodega's Alley), ending a **751 show gap**. **Hollywood** contained several Norwegian Wood teases from Brian. The encore was preceded by a full-band jam on \"Give Us the Fire,\" referencing Jesse, the lighting director's use of fire effects throughout the night.*"
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-12-02.md",
@@ -15018,13 +15018,24 @@
     "date": "2025-12-04"
   },
   "2025-12-03": {
-    "url": "https://spaffnerds.com/shows/2025-12-03",
-    "venue": "Knuckleheads",
+    "date": "2025-12-03",
+    "venue": "Knucklehead's",
     "city": "Kansas City",
     "state": "MO",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-12-03"
+    "tour": "2025 Fall",
+    "show_number": "21",
+    "rating": "",
+    "chucks_dream": "rating:",
+    "sets": {
+      "Set 1": "Be Strange (6) > Pursuit of Madness (25) -> Windmill (22), Mind's Unchained (18)",
+      "Set 2": "Soggy Froggy (16) -> All My Friends (2) -> Bee Jam (14) -> Shelter in Place (15) -> Darkness Singularity (13)",
+      "Encore": "High Beams (6)"
+    },
+    "notes": [
+      "*This was the 21st show of the 2025 Fall Tour and the band's first appearance in Kansas City. **Bee Jam** contained a **Shelter in Place** tease from Shon. **Shelter in Place** contained several Echoes teases and a This is My Route to God (Ram Dass) sample from Cory. The encore was preceded by Shon introducing another band member for the first time ever.*\n\n*\"Are we in Kansas? We're not in Kansas, right? There's two Kansas Cities, right? No? One, maybe two?\"*\n\n*\"YOU'RE FULL OF SHIT!\"*\n\n*\"I don't know. We're going to St. Louis tomorrow, right?\"*\n\n*[major booing]*\n\n*\"Boo. Is that good? I don't know, they're shouting shit. I'm not a football guy, so if it's a football thing I got nothing.\"*\n\n*\"I think that's good.\"*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-12-03.md",
+    "url": "https://spaffnerds.com/shows/2025-12-03"
   }
 }
