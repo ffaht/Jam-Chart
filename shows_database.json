@@ -15075,13 +15075,25 @@
     "url": "https://spaffnerds.com/shows/2025-12-03"
   },
   "2025-12-07": {
-    "url": "https://spaffnerds.com/shows/2025-12-07",
+    "date": "2025-12-07",
     "venue": "Bell's Eccentric Cafe",
     "city": "Kalamazoo",
     "state": "MI",
-    "sets": {},
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-12-07"
+    "tour": "2025 Fall",
+    "show_number": "25",
+    "rating": "",
+    "chucks_dream": "rating:",
+    "sets": {
+      "Set 1": "Todd's Tots (22), I Wouldn't Want to Be Like You (3), Duncan's Uncle (27), Settled In (7)",
+      "Chuck's Dream": "Sang So Differently",
+      "Set 2": "Pursuit of Trance (25) -> Tequila (5), Lucky Man (17) -> Weasel (15), Galisteo Way (22)",
+      "Encore": "To The Nest (9) -> Simple Mysteries (7)"
+    },
+    "notes": [
+      "*This was the 25th and final show of the 2025 Fall Tour and the band's first appearance in Kalamazoo since 1/24/24 (Bell's), ending a **181 show gap**. This show featured the first **Lucky Man** since 12/9/23 (Ardmore, PA), ending a **192 show gap**. The encore was preceded by crew introductions and thanks and band introductions, each of which featured playing from Cory, a Shave and a Haircut tease from Cory, and a **Simple Mysteries** tease from Cory.*\n\n*So I'll wrap myself inside my bed*\n*And I'll wrap myself* \n*Inside my blanket*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-12-07.md",
+    "url": "https://spaffnerds.com/shows/2025-12-07"
   }
 }
