@@ -1085,32 +1085,45 @@
     "date": "2025-03-16"
   },
   "2025-03-15": {
-    "url": "https://spaffnerds.com/shows/2025-03-15",
+    "date": "2025-03-15",
     "venue": "Aura",
     "city": "Portland",
     "state": "ME",
+    "tour": "2025 Spring",
+    "show_number": "4",
+    "rating": "",
+    "chucks_dream": "rating:",
     "sets": {
-      "Set 1": "All My Friends > Bee Jam > Darkness Singularity,, Gold Glittered Hat > Virtual Bean Dip",
-      "Set 2": "Chuck's Dream,, Neutrino > Down Under,, The Postman,, Enjoy The Silence",
-      "Encore": "Legend,, Walls"
+      "Set 1": "All My Friends (2) -> Bee Jam (17) -> Darkness Singularity (15), Gold Glittered Hat (17) -> Virtual Bean Dip (8)"
     },
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-03-15"
+    "notes": [
+      "**"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-03-15.md",
+    "url": "https://spaffnerds.com/shows/2025-03-15"
   },
   "2025-03-14": {
-    "url": "https://spaffnerds.com/shows/2025-03-14",
+    "date": "2025-03-14",
     "venue": "Putnam Place",
     "city": "Saratoga Springs",
     "state": "NY",
+    "tour": "2025 Spring",
+    "show_number": "3",
+    "rating": "",
+    "chucks_dream": "rating:",
     "sets": {
-      "Set 1": "America > Windmill,, Peaches > Motel 6",
-      "Set 2": "Chuck's Dream,, Plush > Electric Taco Stand > Dis Go In 5? > Electric Taco Stand,, Dirtbath",
-      "Encore": "The Reprise"
+      "Set 1": "America (15), Windmill (18), Peaches (19) -> Motel 6 (8)",
+      "Chuck's Dream": "Dappled Sleep",
+      "Set 2": "Plush (24) -> Electric Taco Stand (10) -> Dis Go In 5? (7) > Electric Taco Stand (8), Dirtbath (25)",
+      "Encore": "The Reprise (12)"
     },
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-03-14"
+    "notes": [
+      "*This was the third show of the 2025 Spring Tour and the band's first appearance in Saratoga Springs since 5/4/23 (Putnam Place), ending a **183 show gap**. **Plush** contained several full-band **Electric Taco Stand** teases.*\n\n*\"Do you remember I was you and you were me?\"*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-03-14.md",
+    "url": "https://spaffnerds.com/shows/2025-03-14"
   },
   "2025-03-13": {
     "date": "2025-03-13",
