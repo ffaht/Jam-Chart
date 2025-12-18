@@ -1071,18 +1071,25 @@
     "date": "2025-03-18"
   },
   "2025-03-16": {
-    "url": "https://spaffnerds.com/shows/2025-03-16",
-    "venue": "Pickle Barrel",
+    "date": "2025-03-16",
+    "venue": "Pickle Barrel Pub",
     "city": "Killington",
     "state": "VT",
+    "tour": "2025 Spring",
+    "show_number": "5",
+    "rating": "tags:",
+    "chucks_dream": "-",
     "sets": {
-      "Set 1": "Mind's Unchained,, Back in L.A.,, Funkadelic,, Be Strange,, Duncan's Uncle",
-      "Set 2": "Double Time,, Frog Gossip,, On Fire,, Broken Wing > Weasel",
-      "Encore": "Can't Find My Vape"
+      "Set 1": "Mind's Unchained (16), Back in L.A. (4), Funkadelic (20), Be Strange (6), Duncan's Uncle (19)",
+      "Set 2": "Double Time (13), Frog Gossip (7), On Fire (17), Broken Wing (18) -> Weasel (13)",
+      "Encore": "Can't Find My Vape (6)"
     },
-    "notes": [],
-    "source": "spaffnerds",
-    "date": "2025-03-16"
+    "notes": [
+      "*This was the fifth show of the 2025 Spring Tour and the band's first appearance in Killington. **Duncan's Uncle** contained **Night After Night** teases from Cory.*"
+    ],
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-03-16.md",
+    "url": "https://spaffnerds.com/shows/2025-03-16"
   },
   "2025-03-15": {
     "date": "2025-03-15",
@@ -1094,10 +1101,13 @@
     "rating": "",
     "chucks_dream": "rating:",
     "sets": {
-      "Set 1": "All My Friends (2) -> Bee Jam (17) -> Darkness Singularity (15), Gold Glittered Hat (17) -> Virtual Bean Dip (8)"
+      "Set 1": "All My Friends (2) -> Bee Jam (17) -> Darkness Singularity (15), Gold Glittered Hat (17) -> Virtual Bean Dip (8)",
+      "Chuck's Dream": "Almost to Packing",
+      "Set 2": "Neutrino (14) -> Down Under (14), The Postman (22), Enjoy the Silence (10)",
+      "Encore": "Legend (8), Walls (13)"
     },
     "notes": [
-      "**"
+      "*This was the fourth show of the 2025 Spring Tour and the band's first appearance in Portland since 1/12/24 (Aura), ending a **110 show gap**. **Gold Glittered Hat** featured Cory on saxophone.*"
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-03-15.md",
