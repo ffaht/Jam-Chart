@@ -1053,22 +1053,25 @@
     "date": "2025-03-19"
   },
   "2025-03-18": {
-    "url": "https://spaffnerds.com/shows/2025-03-18",
+    "date": "2025-03-18",
     "venue": "Buffalo Iron Works",
     "city": "Buffalo",
     "state": "NY",
+    "tour": "2025 Spring",
+    "show_number": "6",
+    "rating": "",
+    "chucks_dream": "rating:",
     "sets": {
-      "Set 1": "Night After Night,, Take Your Mama [ 1 ],, Red's Jam > The Waltz,, Crazy",
-      "Set 2": "Chuck's Dream [ 2 ],, Shelter In Place > Darkness Singularity,, Ginger Stardust > Fraggle Rock > Salamander Song",
-      "Encore": "I Wouldn't Want To Be Like You [ 3 ]"
+      "Set 1": "Night After Night (16), Take Your Mama (5), Red's Jam (18) -> The Waltz (14), Crazy (7)",
+      "Set 2": "Shelter in Place (24) -> Darkness Singularity (14), Ginger Stardust (14) -> Fraggle Rock (5) -> Salamander Song (10)",
+      "Encore": "I Wouldn't Want to Be Like You (4)"
     },
     "notes": [
-      "[ 1 ]: Scissor Sisters",
-      "[ 2 ]: Single File",
-      "[ 3 ]: The Alan Parsons Project"
+      "*This was the sixth show of the 2025 Spring Tour. **Take Your Mama**'s lyrics were changed to \"looking over, dressed wearing buckets of stale cologne.\" **Ginger Stardust** contained a **Funkadelic** tease from Brian.*"
     ],
-    "source": "spaffnerds",
-    "date": "2025-03-18"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-03-18.md",
+    "url": "https://spaffnerds.com/shows/2025-03-18"
   },
   "2025-03-16": {
     "date": "2025-03-16",
@@ -1216,7 +1219,7 @@
       "Encore": "Neutrino (13)"
     },
     "notes": [
-      "*This was the seventh show of the 2025 SpaffSki run and the third night of a four-night run at The Public House. **Take Your Mama**'s lyrics were changed to \"looking over dress.\" **Double Time**'s length was unconfirmed as the recording cut off. The first **Electric Taco Stand** contained a **Palisades** tease from Nick. The second **Electric Taco Stand** contained a Cars (Gary Numan) tease from Brian.*"
+      "*This was the seventh show of the 2025 SpaffSki run and the third night of a four-night run at The Public House. **Take Your Mama**'s lyrics were changed to \"looking over, dressed wearing buckets of stale cologne.\" **Double Time**'s length was unconfirmed as the recording cut off. The first **Electric Taco Stand** contained a **Palisades** tease from Nick. The second **Electric Taco Stand** contained a Cars (Gary Numan) tease from Brian.*"
     ],
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-03-01.md",
