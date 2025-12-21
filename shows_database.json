@@ -923,21 +923,25 @@
     "date": "2025-04-16"
   },
   "2025-04-15": {
-    "url": "https://spaffnerds.com/shows/2025-04-15",
+    "date": "2025-04-15",
     "venue": "The Broadberry",
     "city": "Richmond",
     "state": "VA",
+    "tour": "2025 Spring",
+    "show_number": "14",
+    "rating": "",
+    "chucks_dream": "rating:",
     "sets": {
-      "Set 1": "Bee Jam > All My Friends,, Crazy",
-      "Set 2": "The Way You Do The Things You Do [ 1 ] > Todd's Tots,, Gold Glittered Hat,, In The Eyes Of Thieves",
-      "Encore": "Cantaloupe Island [ 2 ]"
+      "Set 1": "Bee Jam (55) -> All My Friends (2) -> Crazy (6)",
+      "Set 2": "The Way You Do the Things You Do (22), Todd's Tots (18), Gold Glittered Hat (16), In the Eyes of Thieves (17)",
+      "Encore": "Cantaloupe Island (9)"
     },
     "notes": [
-      "[ 1 ]: The Temptations",
-      "[ 2 ]: Herbie Hancock, House Version"
+      "*This was the 14th show of the 2025 Spring Tour and the band's first appearance in Richmond since 3/20/24 (Broadberry), ending a **100 show gap**. This show featured the first **Bee Jam** opener since 10/29/19 (Santa Fe, NM), ending a **398 show gap**, which was 55 minutes long and contained several My Name is McLovin (McLovin) samples from Cory, a Long Tall Glasses tease from Cory, full-band teases of The Other One, and a full-band **All My Friends** tease.*"
     ],
-    "source": "spaffnerds",
-    "date": "2025-04-15"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-04-15.md",
+    "url": "https://spaffnerds.com/shows/2025-04-15"
   },
   "2025-04-05": {
     "url": "https://spaffnerds.com/shows/2025-04-05",
@@ -15135,5 +15139,19 @@
     "source": "obsidian",
     "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-12-07.md",
     "url": "https://spaffnerds.com/shows/2025-12-07"
+  },
+  "2025-12-19": {
+    "url": "https://spaffnerds.com/shows/2025-12-19",
+    "venue": "The Capitol Theatre",
+    "city": "Port Chester",
+    "state": "NY",
+    "sets": {
+      "Set 1": "Back in L.A.,, Neutrino > Anyone [ 1 ],, The Postman,, Salamander Song,, Armageddon"
+    },
+    "notes": [
+      "[ 1 ]: Demi Lovato"
+    ],
+    "source": "spaffnerds",
+    "date": "2025-12-19"
   }
 }
