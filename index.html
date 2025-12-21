@@ -82,12 +82,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   transition: opacity 0.2s ease;
 }
 
-.jam-song {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
 .jam-song-tooltip.show {
   opacity: 1;
 }
@@ -437,9 +431,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 let allJams = [];
 let currentSort = {column:'date',direction:'desc'};
 const tableBody = document.getElementById('jam-table-body');
-let currentTooltip = null;
-let longPressTimer = null;
-let longPressTriggered = false;
 
 // Add normalizeSongName function here, before it's used in processShowsDatabase
 function normalizeSongName(s) {
@@ -926,11 +917,6 @@ function makeAllSongsClickable(rawSetString, jamEntries) {
   // Clean markdown FIRST before processing
   const cleanedString = cleanMarkdown(rawSetString);
   
-  // Check if this is a Chuck's Dream section and return it as plain text
-  if (cleanedString.toLowerCase().includes("chuck's dream")) {
-    return cleanedString;
-  }
-  
   // Pre-process: Build a list of all songs in order with their normalized names
   const tokens = cleanedString.split(/(\s*->\s*|\s*>\s*|\s*,\s*)/g);
   const songList = [];
@@ -1042,14 +1028,14 @@ function makeAllSongsClickable(rawSetString, jamEntries) {
   return output;
 }
 
+// Replace the tooltip setup code in both setupSongClicksAndTooltips and the setlist display functions
+// This version adds proper mobile touch handling
+
 function setupSongClicksAndTooltips(jamEntries, containerSelector = null) {
   setTimeout(() => {
-    const container = containerSelector
-      ? document.getElementById(containerSelector)
-      : document;
-
-    const isTouchDevice =
-      "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    let currentTooltip = null;
+    const container = containerSelector ? document.getElementById(containerSelector) : document;
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
     const removeTooltip = () => {
       if (currentTooltip) {
@@ -1060,7 +1046,6 @@ function setupSongClicksAndTooltips(jamEntries, containerSelector = null) {
 
     const showTooltip = (songElement, jamEntry) => {
       removeTooltip();
-
       const tooltip = document.createElement("div");
       tooltip.className = "jam-song-tooltip show";
       tooltip.dataset.song = songElement.dataset.song;
@@ -1069,126 +1054,72 @@ function setupSongClicksAndTooltips(jamEntries, containerSelector = null) {
         ${jamEntry.timing ? `<div class="jam-song-tooltip-timing">${jamEntry.timing}</div>` : ""}
         ${jamEntry.notes ? `<div class="jam-song-tooltip-notes">${jamEntry.notes}</div>` : ""}
       `;
-
       document.body.appendChild(tooltip);
 
       const rect = songElement.getBoundingClientRect();
       const tw = tooltip.offsetWidth;
       const th = tooltip.offsetHeight;
-
       let top = rect.bottom + 8;
       let left = rect.left + rect.width / 2 - tw / 2;
-
       if (left < 8) left = 8;
       if (left + tw > window.innerWidth - 8) left = window.innerWidth - tw - 8;
       if (top + th > window.innerHeight - 8) top = rect.top - th - 8;
 
       tooltip.style.top = `${top}px`;
       tooltip.style.left = `${left}px`;
-
       currentTooltip = tooltip;
     };
 
-    // Close tooltip on outside interaction
+    // Close tooltip on any outside tap/click
     document.addEventListener("click", e => {
-      if (
-        !e.target.closest(".jam-song") &&
-        !e.target.closest(".jam-song-tooltip")
-      ) {
+      if (!e.target.closest(".jam-song") && !e.target.closest(".jam-song-tooltip")) {
         removeTooltip();
       }
     });
+    document.addEventListener("touchstart", e => {
+      if (!e.target.closest(".jam-song") && !e.target.closest(".jam-song-tooltip")) {
+        removeTooltip();
+      }
+    }, { passive: true });
 
-    document.addEventListener(
-      "touchstart",
-      e => {
-        if (
-          !e.target.closest(".jam-song") &&
-          !e.target.closest(".jam-song-tooltip")
-        ) {
-          removeTooltip();
-        }
-      },
-      { passive: true }
-    );
-
-    // Attach handlers to each song
+    // Apply to all clickable songs
     container.querySelectorAll(".clickable-song").forEach(songElement => {
       const songName = songElement.dataset.song?.trim();
       const isJamCharted = songElement.dataset.jam === "true";
-
-      if (!songName) return;
-
       const matchingEntry = isJamCharted
-        ? jamEntries.find(
-            j => normalizeSongName(j.song) === normalizeSongName(songName)
-          )
+        ? jamEntries.find(j => normalizeSongName(j.song) === normalizeSongName(songName))
         : null;
 
-      // Base styles
+      // basic style
       songElement.style.cursor = "pointer";
+      songElement.style.color = isJamCharted ? "var(--yellow)" : "var(--text-color)";
       songElement.style.userSelect = "none";
       songElement.style.webkitTapHighlightColor = "transparent";
 
-      /* ===========================
-         MOBILE — LONG PRESS ONLY
-         =========================== */
-      if (isTouchDevice && isJamCharted && matchingEntry) {
-        songElement.addEventListener(
-  "touchstart",
-  () => {
-    longPressTriggered = false;
-    longPressTimer = setTimeout(() => {
-      longPressTriggered = true;
-      showTooltip(songElement, matchingEntry);
-    }, 500);
-  },
-  { passive: true }
-);
-
-
-        songElement.addEventListener("touchend", () => {
-          clearTimeout(longPressTimer);
-        });
-
-        songElement.addEventListener("touchmove", () => {
-          clearTimeout(longPressTimer);
-        });
-
-        // Suppress navigation if long-press fired
-       songElement.addEventListener("click", e => {
-  if (longPressTriggered) {
-    // Long-press = tooltip only
-    e.preventDefault();
-    e.stopPropagation();
-    longPressTriggered = false;
-    return;
-  }
-
-  // Short tap = navigate to jam chart
-  switchPageByName("jams");
-  document.getElementById("search-input").value = songName;
-  renderFilteredJams();
-});
-
-
-        return; // ⛔️ do NOT bind desktop click behavior
-      }
-
-      /* ===========================
-         DESKTOP + NON-JAM SONGS
-         =========================== */
+      // Click handler (works for desktop + mobile)
       songElement.addEventListener("click", e => {
         e.stopPropagation();
 
+        // MOBILE SPECIAL: if jam charted & has tooltip, show it instead of navigating
+        if (isTouchDevice && isJamCharted && matchingEntry) {
+          // toggle
+          if (currentTooltip && currentTooltip.dataset.song === songElement.dataset.song) {
+            removeTooltip();
+          } else {
+            showTooltip(songElement, matchingEntry);
+          }
+          return;
+        }
+
+        // Otherwise — original click behavior
         if (isJamCharted) {
           switchPageByName("jams");
           document.getElementById("search-input").value = songName;
           renderFilteredJams();
         } else {
-          const normalized = normalizeSongName(songName);
-          if (dbSongs[normalized]) {
-            showSongDetail(normalized);
+          const normalizedName = normalizeSongName(songName);
+          if (dbSongs[normalizedName]) {
+            showSongDetail(normalizedName);
           } else {
             switchPageByName("stats");
             document.getElementById("db-song-search").value = songName;
@@ -1196,17 +1127,6 @@ function setupSongClicksAndTooltips(jamEntries, containerSelector = null) {
           }
         }
       });
-
-      // Desktop hover tooltip
-      if (!isTouchDevice && isJamCharted && matchingEntry) {
-        songElement.addEventListener("mouseenter", () => {
-          showTooltip(songElement, matchingEntry);
-        });
-
-        songElement.addEventListener("mouseleave", () => {
-          removeTooltip();
-        });
-      }
     });
   }, 0);
 }
