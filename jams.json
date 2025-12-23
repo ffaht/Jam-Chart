@@ -770,6 +770,13 @@
   },
   {
     "date": "2025-03-19",
+    "song": "Motel 6",
+    "timing": "19:10",
+    "venue": "Beachland Ballroom",
+    "notes": "\nAn early \u201990s home exercise soundtrack takes a turn -> The Other One.\n"
+  },
+  {
+    "date": "2025-03-19",
     "song": "Pursuit of Trance",
     "timing": "31:15",
     "venue": "Beachland Ballroom",
@@ -2176,7 +2183,7 @@
     "timing": "7:06",
     "venue": "Shrine Social Club",
     "highlighted": true,
-    "notes": "\nMicro jam packed with peaks.\n"
+    "notes": "\nMicro-jam packed with peaks.\n"
   },
   {
     "date": "2025-10-25",
