@@ -1023,21 +1023,25 @@
     "date": "2025-03-21"
   },
   "2025-03-20": {
-    "url": "https://spaffnerds.com/shows/2025-03-20",
+    "date": "2025-03-20",
     "venue": "Mr. Smalls",
     "city": "Millvale",
     "state": "PA",
+    "tour": "2025 Spring",
+    "show_number": "8",
+    "rating": "",
+    "chucks_dream": "rating:",
     "sets": {
-      "Set 1": "Smooth, Relax, Down,, Dream Jam > Double Time,, In The Eyes Of Thieves,, The Evil",
-      "Set 2": "Chuck's Dream,, Windmill > Anyone [ 1 ],, Gotta Save Fred > Run Like Hell [ 2 ]",
-      "Encore": "The Hard Way"
+      "Set 1": "Smooth, Relax, Down (4), Dream Jam (24) -> Double Time (15), In the Eyes of Thieves (16), The Evil (6)",
+      "Set 2": "Windmill (38) -> Anyone (14), Gotta Save Fred (9), Run Like Hell (12)",
+      "Encore": "The Hard Way (8)"
     },
     "notes": [
-      "[ 1 ]: Demi Lovato",
-      "[ 2 ]: Pink Floyd"
+      "*This was the eighth show of the 2025 Spring Tour and the band's first appearance in Millvale. This show featured the first **The Evil** since 1/21/23 (Washington, D.C.), ending a **231 show gap**, and the first Smooth, Relax, Down opener since 4/8/23 (Birmingham, AL), ending a **197 show gap**. **Windmill** contained a Long Tall Glasses tease from Brian.*"
     ],
-    "source": "spaffnerds",
-    "date": "2025-03-20"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-03-20.md",
+    "url": "https://spaffnerds.com/shows/2025-03-20"
   },
   "2025-03-19": {
     "date": "2025-03-19",
@@ -15146,17 +15150,22 @@
     "url": "https://spaffnerds.com/shows/2025-12-07"
   },
   "2025-12-19": {
-    "url": "https://spaffnerds.com/shows/2025-12-19",
-    "venue": "The Capitol Theatre",
+    "date": "2025-12-19",
+    "venue": "Unknown Venue",
     "city": "Port Chester",
     "state": "NY",
+    "tour": "-",
+    "show_number": "venue: The Capitol Theatre",
+    "rating": "tags:",
+    "chucks_dream": "-",
     "sets": {
-      "Set 1": "Back in L.A.,, Neutrino > Anyone [ 1 ],, The Postman,, Salamander Song,, Armageddon"
+      "Set 1": "Back in L.A. (4), Neutrino (15) -> Anyone (12), The Postman (16), Salamander Song (8), Armageddon (2)"
     },
     "notes": [
-      "[ 1 ]: Demi Lovato"
+      "*This was a standalone, one-set show opening for Pigeons Playing Ping Pong and the band's first appearance in Port Chester. **Neutrino** contained a This Is My Route to God (Ram Dass) sample from Cory.*"
     ],
-    "source": "spaffnerds",
-    "date": "2025-12-19"
+    "source": "obsidian",
+    "obsidian_file": "E:\\Obsidian Review Vault\\Reviews\\Spafford\\Setlists\\2025-12-19.md",
+    "url": "https://spaffnerds.com/shows/2025-12-19"
   }
 }

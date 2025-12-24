@@ -784,6 +784,28 @@
     "notes": "\nA superb outing for the song itself opens into concentrated, bright playing that each member, especially Brian, swirls around and weaves through with precision and energy before slipping into a low-key, lightly entrancing groove that rocks back up to a celebratory peak.\n"
   },
   {
+    "date": "2025-03-20",
+    "song": "Double Time",
+    "timing": "15:08",
+    "venue": "Mr. Smalls",
+    "notes": "\nBouncing, springy New Wave.\n"
+  },
+  {
+    "date": "2025-03-20",
+    "song": "Dream Jam",
+    "timing": "24:04",
+    "venue": "Mr. Smalls",
+    "notes": "\nCool, bluesy grooving that speeds through Pop Reggae before exploding into a peak.\n"
+  },
+  {
+    "date": "2025-03-20",
+    "song": "Windmill",
+    "timing": "38:28",
+    "venue": "Mr. Smalls",
+    "highlighted": true,
+    "notes": "\nThe first jam features some Evil-ish (The Evil!) playing from Brian and Cory before sliding into a second jam ripped straight out of The Postman, with a few minutes of grooving that ramps up and then fades toward Anyone at its tail end.\n"
+  },
+  {
     "date": "2025-04-15",
     "song": "Bee Jam",
     "timing": "55:58",
@@ -3017,5 +3039,20 @@
     "timing": "14:41",
     "venue": "Bell's Eccentric Cafe",
     "notes": "\nWinamp visualizer\u2013style groove that pulses and swirls.\n"
+  },
+  {
+    "date": "2025-12-19",
+    "song": "Anyone",
+    "timing": "12:31",
+    "venue": "The Capitol Theatre",
+    "notes": "\nGlossy, polished sophisti-pop.\n"
+  },
+  {
+    "date": "2025-12-19",
+    "song": "Neutrino",
+    "timing": "15:54",
+    "venue": "The Capitol Theatre",
+    "highlighted": true,
+    "notes": "\nFunky jump rope builds unexpectedly quickly and blooms into a progressively electronic flower that pollinates a city before bursting and breathing slowly into Anyone.\n"
   }
 ]
